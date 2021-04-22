@@ -103,7 +103,9 @@ void EventLoop::loop() {
 }
 
 void EventLoop::quit() {
+  LOG_TRACE<<"before quit = true";
   quit_ = true;
+  LOG_TRACE<<"after quit = true";
   if (!isInLoopThread())
 	wakeup();
 }
@@ -200,6 +202,7 @@ void EventLoop::doPendingFunctors() {
   for (const auto &functor:functors)
 	functor();
   callingPendingFunctors_ = false;
+  LOG_TRACE<<"PendingFunctors done";
 }
 
 void EventLoop::printActiveChannels() const {

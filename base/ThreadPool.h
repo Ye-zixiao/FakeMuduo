@@ -18,7 +18,7 @@
 
 namespace fm {
 
-class ThreadPool : public noncopyable {
+class ThreadPool : private noncopyable {
  public:
   using Task = std::function<void()>;
   using ThreadPtr = std::unique_ptr<std::thread>;
@@ -47,8 +47,7 @@ class ThreadPool : public noncopyable {
   std::condition_variable notFull_;
   std::queue<Task> queue_;
   std::vector<ThreadPtr> threads_;
-  // can be replaced by atomic_bool?
-  bool running_;
+  bool running_; // 是否能够用原子操作替代？或者说有这个必要吗？
   size_t maxSize_;
 };
 

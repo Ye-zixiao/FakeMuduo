@@ -53,6 +53,12 @@ inline bool operator==(const TimeStamp &lhs, const TimeStamp &rhs) {
   return lhs.microSecondsSinceEpoch() == rhs.microSecondsSinceEpoch();
 }
 
+// timeDiff的另一种提供方式
+inline double operator-(const TimeStamp &lhs, const TimeStamp &rhs) {
+  int64_t diff = lhs.microSecondsSinceEpoch() - rhs.microSecondsSinceEpoch();
+  return static_cast<double>(diff) / TimeStamp::kMicroSecondsPerSecond;
+}
+
 // 返回相差多少秒
 inline double timeDiff(const TimeStamp &lhs, const TimeStamp &rhs) {
   int64_t diff = lhs.microSecondsSinceEpoch() - rhs.microSecondsSinceEpoch();

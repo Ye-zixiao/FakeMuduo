@@ -20,50 +20,46 @@ using namespace fm::net;
 
 class EchoServer {
  public:
-  EchoServer(EventLoop *loop, const InetAddress &listenAddr, std::string name)
-	  : tcp_server_(loop, listenAddr, name) {
-	tcp_server_.setConnectionCallback(std::bind(&EchoServer::onConnection, this, _1));
-	tcp_server_.setMessageCallback(std::bind(&EchoServer::onMessage, this, _1, _2, _3));
+  EchoServer(EventLoop *loop, const InetAddress &addr, const string &str)
+	  : loop_(loop), server_(loop, addr, str) {
+	server_.setConnectionCallback(
+		std::bind(&EchoServer::onConnection, this, _1));
+	server_.setMessageCallback(
+		std::bind(&EchoServer::onMessage, this, _1, _2, _3));
   }
 
-  void setThreadNum(int numThreads) {
-	tcp_server_.setThreadNum(numThreads);
-  }
+  void setThreadsNum(int threads) { server_.setThreadNum(threads); }
+  void start() { server_.start(); }
 
-  void start() {
-	tcp_server_.start();
-  }
-
+ private:
   void onMessage(const TcpConnectionPtr &conn, Buffer *buffer, TimeStamp now) {
-	std::string msg(buffer->retrieveAllAsString());
-	LOG_INFO << "get " << msg.size() << " bytes data from client {"
-			 << conn->peerAddr().toIpPortStr() << "}: " << msg;
+	string msg(buffer->retrieveAllAsString());
 	conn->send(msg);
   }
 
   void onConnection(const TcpConnectionPtr &conn) {
 	if (conn->isConnected()) {
-	  LOG_INFO << "client {" << conn->peerAddr().toIpPortStr()
-			   << "} is connected!";
+	  LOG_INFO << "a new client is connected";
 	} else {
-	  LOG_INFO << "client {" << conn->peerAddr().toIpPortStr()
-			   << "} is disconnected!";
+	  LOG_INFO << "a client is leave";
+//      loop_->quit();
 	}
   }
 
  private:
-  TcpServer tcp_server_;
+  EventLoop *loop_;
+  TcpServer server_;
 };
 
 int main() {
   Logger::setLogLevel(Logger::TRACE);
-  InetAddress listenAddr(12000);
-  EventLoop loop;
 
-  EchoServer echo_server(&loop, listenAddr, "EchoServer");
-  echo_server.setThreadNum(4);
+  EventLoop loop;
+  InetAddress localAddress(12000);
+  EchoServer echo_server(&loop, localAddress, "EchoServer");
+  echo_server.setThreadsNum(2);
   echo_server.start();
   loop.loop();
-  
+
   return 0;
 }

@@ -70,6 +70,7 @@ class EventLoop : private noncopyable {
 
   std::atomic_bool looping_;
   std::atomic_bool quit_;
+//bool quit_;
   std::atomic_bool eventHandling_;
   std::atomic_bool callingPendingFunctors_;
 

@@ -4,13 +4,12 @@
 
 #include "SocketsOps.h"
 
-#include "../base/Logging.h"
-#include "Endian.h"
-
 #include <sys/uio.h>
 #include <unistd.h>
 #include <cerrno>
-#include <cassert>
+
+#include "../base/Logging.h"
+#include "Endian.h"
 
 using namespace fm::net;
 

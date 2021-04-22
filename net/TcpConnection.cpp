@@ -218,6 +218,7 @@ void TcpConnection::connectDestroyed() {
    * 	通道所注册的sub-Reacotr所在的I/O线程来完成
    * */
 
+  // 一般来说这个if语句内部的东西并不会被执行
   if (state_ == kConnected) {
 	setState(kDisconnected);
 	channel_->disableAll();
@@ -273,11 +274,10 @@ void TcpConnection::handleClose() {
   setState(kDisconnected);
   channel_->disableAll();
 
-  // 问题可能出现在这里
   TcpConnectionPtr guardThis(shared_from_this());
-  connectionCallback_(guardThis); // 在上面的connectDestroyed()中与此次的回调是否重复？
+  connectionCallback_(guardThis);  // 调用用户注册的onConnection回调函数
 
-  closeCallback_(guardThis);
+  closeCallback_(guardThis); // 调用TcpServer中的removeConnection()方法
 }
 
 void TcpConnection::handleError() {

@@ -12,13 +12,10 @@
 
 namespace fm {
 
-constexpr int kSmallBuffer = 4096;
-constexpr int kLargeBuffer = 4096 * 1024;
-
 template<int SIZE>
 class FixedBuffer : private noncopyable {
  public:
-  FixedBuffer() : curr_(data_) {}
+  FixedBuffer() : data_{}, curr_(data_) {}
 
   void append(const char *buf, int len) {
 	if (avail() > len) {
@@ -28,15 +25,12 @@ class FixedBuffer : private noncopyable {
   }
 
   void reset() { curr_ = data_; }
-
   void bzero() { memset(data_, 0, sizeof(data_)); }
 
   const char *data() const { return data_; }
-
   char *current() { return curr_; }
 
   int length() const { return static_cast<int>(curr_ - data_); }
-
   int avail() const { return static_cast<int>(end() - curr_); }
 
   std::string toString() const { return std::string(data_, length()); }
@@ -44,32 +38,29 @@ class FixedBuffer : private noncopyable {
  private:
   const char *end() const { return data_ + sizeof(data_); }
 
-  char data_[SIZE]{};
+  char data_[SIZE];
   char *curr_;
 };
 
 class LogStream : private noncopyable {
  public:
-  using self = LogStream;
+  static constexpr int kSmallBuffer = 4096;
+  static constexpr int kLargeBuffer = 4096 * 1024;
+
   using Buffer = FixedBuffer<kSmallBuffer>;
+  using self = LogStream;
+
+  void append(const char *str, int len) { buffer_.append(str, len); }
 
   // fix it: 是否可以完全用模板的方式替代？
   self &operator<<(short s) { return numericConvertToStr(s); }
-
   self &operator<<(unsigned short us) { return numericConvertToStr(us); }
-
   self &operator<<(int i) { return numericConvertToStr(i); }
-
   self &operator<<(unsigned int ui) { return numericConvertToStr(ui); }
-
   self &operator<<(long l) { return numericConvertToStr(l); }
-
   self &operator<<(unsigned long ul) { return numericConvertToStr(ul); }
-
   self &operator<<(long long ll) { return numericConvertToStr(ll); }
-
   self &operator<<(float f) { return *this << static_cast<double>(f); }
-
   self &operator<<(double d) { return numericConvertToStr(d); }
 
   self &operator<<(bool v) {
@@ -101,10 +92,7 @@ class LogStream : private noncopyable {
 	return *this;
   }
 
-  void append(const char *str, int len) { buffer_.append(str, len); }
-
   const Buffer &buffer() const { return buffer_; }
-
   void resetBuffer() { buffer_.reset(); }
 
  private:
