@@ -70,11 +70,10 @@ class EventLoop : private noncopyable {
 
   std::atomic_bool looping_;
   std::atomic_bool quit_;
-//bool quit_;
   std::atomic_bool eventHandling_;
   std::atomic_bool callingPendingFunctors_;
 
-  int64_t iteration_; // for what?
+  int64_t iteration_;
   const pid_t threadId_;
   TimeStamp pollReturnTime_;
 

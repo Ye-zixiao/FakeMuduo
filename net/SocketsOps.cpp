@@ -11,17 +11,24 @@
 #include "../base/Logging.h"
 #include "Endian.h"
 
+/***
+ *  这里特别提醒一句：
+ *  从sockaddr_in和sockaddr_in6的结构字段上看，因此前者是可以复用后者，
+ *  即：无论是IPv4地址还是IPv6的地址都使用IPv6的套接字地址结构体进行保存。
+ *  而下面的很多函数也正是如此处理之！
+ */
+
 using namespace fm::net;
 
 int sockets::createNonblockingSocketOrDie(sa_family_t family) {
-  int sockfd = ::socket(family, SOCK_STREAM | SOCK_NONBLOCK | SOCK_CLOEXEC, IPPROTO_TCP);
+  int sockfd = ::socket(family, SOCK_STREAM | SOCK_NONBLOCK |
+	  SOCK_CLOEXEC, IPPROTO_TCP);
   if (sockfd < 0)
 	LOG_SYSFATAL << "sockets::createNonblockingSocketOrDie";
   return sockfd;
 }
 
 int sockets::connect(int sockfd, const struct sockaddr *addr) {
-  // 特意设置为sockaddr_in6的大小
   return ::connect(sockfd, addr, sizeof(struct sockaddr_in6));
 }
 
@@ -133,6 +140,22 @@ void sockets::fromIpPortStr(const char *ip, uint16_t port, struct sockaddr_in6 *
 	LOG_SYSERR << "sockets::fromIpPortStr";
 }
 
+struct sockaddr_in6 sockets::getLocalAddr(int sockfd) {
+  struct sockaddr_in6 localAddr{};
+  auto addrlen = static_cast<socklen_t>(sizeof(localAddr));
+  if (::getsockname(sockfd, sockaddr_cast(&localAddr), &addrlen) < 0)
+	LOG_SYSERR << "sockets::getLocalAddr";
+  return localAddr;
+}
+
+struct sockaddr_in6 sockets::getPeerAddr(int sockfd) {
+  struct sockaddr_in6 peerAddr{};
+  auto addrlen = static_cast<socklen_t>(sizeof(peerAddr));
+  if (::getpeername(sockfd, sockaddr_cast(&peerAddr), &addrlen) < 0)
+	LOG_SYSERR << "sockets::getPeerAddr";
+  return peerAddr;
+}
+
 int sockets::getSocketError(int sockfd) {
   int optval;
   auto optlen = static_cast<socklen_t>(sizeof(optval));
@@ -171,20 +194,4 @@ struct sockaddr_in *sockets::sockaddr_in_cast(struct sockaddr *addr) {
 
 struct sockaddr_in6 *sockets::sockaddr_in6_cast(struct sockaddr *addr) {
   return static_cast<struct sockaddr_in6 *>(static_cast<void *>(addr));
-}
-
-struct sockaddr_in6 sockets::getLocalAddr(int sockfd) {
-  struct sockaddr_in6 localAddr{};
-  auto addrlen = static_cast<socklen_t>(sizeof(localAddr));
-  if (::getsockname(sockfd, sockaddr_cast(&localAddr), &addrlen) < 0)
-	LOG_SYSERR << "sockets::getLocalAddr";
-  return localAddr;
-}
-
-struct sockaddr_in6 sockets::getPeerAddr(int sockfd) {
-  struct sockaddr_in6 peerAddr{};
-  auto addrlen = static_cast<socklen_t>(sizeof(peerAddr));
-  if (::getpeername(sockfd, sockaddr_cast(&peerAddr), &addrlen) < 0)
-	LOG_SYSERR << "sockets::getPeerAddr";
-  return peerAddr;
 }

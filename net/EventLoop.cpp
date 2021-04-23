@@ -4,11 +4,11 @@
 
 #include "EventLoop.h"
 
+#include <sys/eventfd.h>
+#include <unistd.h>
 #include <algorithm>
 #include <csignal>
 #include <cassert>
-#include <sys/eventfd.h>
-#include <unistd.h>
 
 #include "../base/Logging.h"
 #include "Channel.h"
@@ -54,20 +54,19 @@ EventLoop::EventLoop()
 	  wakeupChannel_(new Channel(this, wakeupFd_)),
 	  currentActiveChannel_(nullptr) {
   LOG_DEBUG << "created " << this << " in thread " << threadId_;
+  // 检查当前线程是否已经运行了事件循环，若是直接终止进程
   if (loopInThisThread_ts) {
 	LOG_FATAL << "Another EventLoop " << loopInThisThread_ts
 			  << " exits in this thread " << threadId_;
   } else {
 	loopInThisThread_ts = this;
   }
+  // 将唤醒频道注册到事件循环中
   wakeupChannel_->setReadCallback(std::bind(&EventLoop::handleRead, this));
   wakeupChannel_->enableReading();
 }
 
 EventLoop::~EventLoop() {
-  LOG_DEBUG << "EventLoop " << this << " of thread " << threadId_
-			<< " destructs in thread " << gettid();
-  // 那么其他的通道是怎么处理的？
   wakeupChannel_->disableAll();
   wakeupChannel_->remove();
   ::close(wakeupFd_);
@@ -83,11 +82,13 @@ void EventLoop::loop() {
 
   while (!quit_) {
 	activeChannels_.clear();
+	// 通过Poller中的epoll_wait()或poll()等待激活事件的通知
 	pollReturnTime_ = poller_->poll(&activeChannels_, kPollTimeMs);
 	++iteration_;
 	if (Logger::logLevel() <= Logger::TRACE)
 	  printActiveChannels();
 
+	// 开始处理激活频道上的回调函数
 	eventHandling_ = true;
 	for (auto &channel:activeChannels_) {
 	  currentActiveChannel_ = channel;
@@ -95,6 +96,8 @@ void EventLoop::loop() {
 	}
 	currentActiveChannel_ = nullptr;
 	eventHandling_ = false;
+
+	// 特别处理事件循环自己的唤醒频道上的可读事件
 	doPendingFunctors();
   }
 
@@ -103,20 +106,15 @@ void EventLoop::loop() {
 }
 
 void EventLoop::quit() {
-  LOG_TRACE<<"before quit = true";
   quit_ = true;
-  LOG_TRACE<<"after quit = true";
   if (!isInLoopThread())
 	wakeup();
 }
 
 void EventLoop::runInLoop(Functor cb) {
-  LOG_TRACE<<"gettid() = "<<gettid()<<", threadId_: "<<threadId_;
   if (isInLoopThread()) {
-    LOG_TRACE<<"cb()";
 	cb();
-  }
-  else
+  } else
 	queueInLoop(std::move(cb));
 }
 
@@ -139,9 +137,10 @@ void EventLoop::removeChannel(Channel *channel) {
   assert(channel->ownerLoop() == this);
   assertInLoopThread();
   if (eventHandling_) {
-	// for what?
+	// 当前事件处理器的频道想移除自己或者触发可用频道没有自己，那么直接终止进程
 	assert(currentActiveChannel_ == channel ||
-		std::find(activeChannels_.begin(), activeChannels_.end(), channel) == activeChannels_.end());
+		std::find(activeChannels_.begin(), activeChannels_.end(), channel)
+			== activeChannels_.end());
   }
   poller_->removeChannel(channel);
 }
@@ -202,7 +201,7 @@ void EventLoop::doPendingFunctors() {
   for (const auto &functor:functors)
 	functor();
   callingPendingFunctors_ = false;
-  LOG_TRACE<<"PendingFunctors done";
+  LOG_TRACE << "PendingFunctors done";
 }
 
 void EventLoop::printActiveChannels() const {

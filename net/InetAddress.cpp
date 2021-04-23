@@ -4,13 +4,11 @@
 
 #include "InetAddress.h"
 
-#include "../base/Logging.h"
-#include "SocketsOps.h"
-#include "Endian.h"
-
-#include <netinet/in.h>
 #include <netdb.h>
 #include <cassert>
+
+#include "../base/Logging.h"
+#include "Endian.h"
 
 using namespace fm;
 using namespace fm::net;

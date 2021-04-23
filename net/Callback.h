@@ -32,13 +32,11 @@ using HighWaterMarkCallback = std::function<void(const TcpConnectionPtr &, size_
 
 // MessageCallback比较特殊，是用户注册最常用的回调函数
 using MessageCallback = std::function<void(const TcpConnectionPtr &,
-										   Buffer *,
-										   TimeStamp)>;
+										   Buffer *, TimeStamp)>;
 
 void defaultConnectionCallback(const TcpConnectionPtr &conn);
 void defaultMessageCallback(const TcpConnectionPtr &conn,
-							Buffer *buffer,
-							TimeStamp receivedTime);
+							Buffer *buffer, TimeStamp receivedTime);
 
 } // namespace net
 

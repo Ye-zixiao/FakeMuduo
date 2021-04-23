@@ -8,6 +8,7 @@
 
 #include "../base/Logging.h"
 #include "SocketsOps.h"
+#include "InetAddress.h"
 
 using namespace fm;
 using namespace fm::net;

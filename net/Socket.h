@@ -6,11 +6,12 @@
 #define FAKEMUDUO_NET_SOCKET_H_
 
 #include "../base/noncoapyable.h"
-#include "InetAddress.h"
 
 namespace fm {
 
 namespace net {
+
+class InetAddress;
 
 class Socket : private noncopyable {
  public:

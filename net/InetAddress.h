@@ -20,11 +20,8 @@ class InetAddress : public copyable {
   explicit InetAddress(uint16_t port = 0, bool loopBackOnly = false, bool ipv6 = false);
   explicit InetAddress(std::string ip, uint16_t port, bool ipv6 = false);
 
-  explicit InetAddress(const struct sockaddr_in &addr4)
-	  : addr_(addr4) {}
-
-  explicit InetAddress(const struct sockaddr_in6 &addr6)
-	  : addr6_(addr6) {}
+  explicit InetAddress(const struct sockaddr_in &addr4) : addr_(addr4) {}
+  explicit InetAddress(const struct sockaddr_in6 &addr6) : addr6_(addr6) {}
 
   uint16_t port() const;
   sa_family_t family() const { return addr_.sin_family; }
@@ -32,12 +29,13 @@ class InetAddress : public copyable {
   std::string toIpStr() const;
   std::string toIpPortStr() const;
 
-  const struct sockaddr *getSockAddr() const { return sockets::sockaddr_cast(&addr6_); }
   void setSockAddrInet6(const struct sockaddr_in6 &addr6) { addr6_ = addr6; }
+  const struct sockaddr *getSockAddr() const { return sockets::sockaddr_cast(&addr6_); }
 
   uint16_t portNetEdian() const { return addr_.sin_port; }
   uint32_t ipv4NetEdian() const;
 
+  // 不推荐使用
   static bool resolve(std::string hostname, InetAddress *result);
 
  private:
