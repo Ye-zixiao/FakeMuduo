@@ -7,7 +7,6 @@
 
 #include <unordered_map>
 #include <vector>
-//#include <map>
 
 #include "../base/noncoapyable.h"
 #include "../base/TimeStamp.h"
@@ -32,14 +31,12 @@ class Poller : private noncopyable {
   virtual TimeStamp poll(ChannelList *activateChannels, int timeoutMs) = 0;
 
   virtual void updateChannel(Channel *channel) = 0;
-
   virtual void removeChannel(Channel *channel) = 0;
-
   virtual bool hasChannel(Channel *channel) const;
 
   static Poller *newDefaultPoller(EventLoop *loop);
 
-  void assertInLoopThread() const{ownerLoop_->assertInLoopThread();}
+  void assertInLoopThread() const { ownerLoop_->assertInLoopThread(); }
 
  protected:
   using ChannelMap = std::unordered_map<int, Channel *>;

@@ -98,5 +98,9 @@ void TcpServer::removeConnectionInLoop(const TcpConnectionPtr &conn) {
   size_t n = connections_.erase(conn->name());
   assert(n == 1);
   EventLoop *ioLoop = conn->getLoop();
+  // std::bind(&TcpConnection::connectDestroyed, conn)会在内部拷贝处一个
+  // 共享指针TcpConnectionPtr指向TcpConnection对象，只有当这个function在sub-Reactor
+  // 线程之中执行完毕之后才会是的TcpConnection对象自动析构销毁（引用计数从1变成0）
   ioLoop->queueInLoop(std::bind(&TcpConnection::connectDestroyed, conn));
+  LOG_TRACE << "conn use_count: " << conn.use_count(); // 2
 }

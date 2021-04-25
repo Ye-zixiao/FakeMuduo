@@ -7,12 +7,10 @@
 #include "../base/Logging.h"
 #include "Channel.h"
 #include "EventLoop.h"
-#include "SocketsOps.h"
 #include "Socket.h"
 
 #include <cerrno>
 #include <cassert>
-#include <utility>
 
 using namespace fm;
 using namespace fm::net;
@@ -55,6 +53,7 @@ TcpConnection::TcpConnection(EventLoop *loop,
 }
 
 TcpConnection::~TcpConnection() {
+  // 由于使用了智能指针，所以TcpConnection在析构的时候不需要太多的处理
   LOG_DEBUG << "TcpConnection:dtor[" << name_ << "] at " << this
 			<< " fd = " << channel_->fd() << " state = " << stateToString();
   assert(state_ == kDisconnected);
@@ -102,19 +101,24 @@ void TcpConnection::sendInLoop(const void *msg, size_t len) {
 	return;
   }
 
-  // 这个通道之前没有在写数据（即因为先前没有注册写事件），那么I/O线程就可以
-  // 安全的对TcpConnection中直接由用户调用的send()给定的数据进行发送
-  // I/O线程写不写数据是由应用程序编写者驱动的！
+  // 若当前TcpConnection相关的频道不关心可写事件或者输出缓冲区中没有数据，那么直接
+  // I/O线程执行套接字输出操作；否则将这个用户给定的数据放到输出缓冲区中，等下一次可写
+  // 事件触发的时候自动回调handleWrite()处理。
+  // 	为什么不直接写？因为该频道之所以先前关注可写感兴趣事件正说明该套接字内核缓冲区
+  // 空间不足嘛！若此时继续直接write(sockfd,...)也没什么用，所以还不如直接放到输出
+  // 缓冲区中，等待回调handleWrite()的时候自动处理。
   if (!channel_->isWriting() && outputBuffer_.readableBytes() == 0) {
 	nwrote = sockets::write(channel_->fd(), msg, len);
 	LOG_TRACE << "IOLoop write " << nwrote << " bytes to client";
 	if (nwrote >= 0) {
 	  remaining = len - nwrote;
 	  if (remaining == 0 && writeCompleteCallback_)
+		// 不直接这次出回调，而是放在doPendingFunctors()函数中处理
 		loop_->queueInLoop(std::bind(writeCompleteCallback_, shared_from_this()));
 	} else {
 	  nwrote = 0;
 	  if (errno != EWOULDBLOCK) {
+		// 那么问题来了，发生错误时TcpConnection这些对象怎么办？
 		LOG_SYSERR << "TcpConnection::sendInLoop";
 		if (errno == EPIPE || errno == ECONNRESET)
 		  faultError = true;
@@ -125,11 +129,15 @@ void TcpConnection::sendInLoop(const void *msg, size_t len) {
   assert(remaining <= len);
   if (!faultError && remaining > 0) {
 	size_t oldLen = outputBuffer_.readableBytes();
-	// for what?
-	if (oldLen + remaining)
+	// 输出缓冲区中的数据量超出了高水位线
+	if (oldLen + remaining >= highWaterMark_ &&
+		oldLen < highWaterMark_ &&
+		highWaterMarkCallback_)
 	  loop_->queueInLoop(std::bind(highWaterMarkCallback_,
 								   shared_from_this(),
 								   oldLen + remaining));
+
+	// 将剩下未发送的数据放到输出缓冲区中，待以后通过handleWrite()来完成发送
 	outputBuffer_.append(static_cast<const char *>(msg) + nwrote, remaining);
 	if (!channel_->isWriting())
 	  channel_->enableWriting();
@@ -175,6 +183,7 @@ void TcpConnection::setTcpNoDelay(bool on) {
 }
 
 void TcpConnection::startRead() {
+  // startRead()是提供给用户层编程者使用的，连接建立之初不会调用这个
   loop_->runInLoop(std::bind(&TcpConnection::startReadInLoop, this));
 }
 
@@ -203,6 +212,7 @@ void TcpConnection::connectEstablished() {
   assert(state_ == kConnecting);
   setState(kConnected);
   channel_->tie(shared_from_this());
+  // 连接建立之初就直接让EventLoop开启了对Tcp连接可读事件的注册
   channel_->enableReading();
 
   connectionCallback_(shared_from_this());
@@ -278,6 +288,7 @@ void TcpConnection::handleClose() {
   connectionCallback_(guardThis);  // 调用用户注册的onConnection回调函数
 
   closeCallback_(guardThis); // 调用TcpServer中的removeConnection()方法
+  LOG_TRACE << "handleClose guard use_count: " << guardThis.use_count(); // 4
 }
 
 void TcpConnection::handleError() {

@@ -5,11 +5,11 @@
 #ifndef FAKEMUDUO_NET_CHANNEL_H_
 #define FAKEMUDUO_NET_CHANNEL_H_
 
-#include "../base/noncoapyable.h"
-#include "../base/TimeStamp.h"
-
 #include <functional>
 #include <memory>
+
+#include "../base/noncoapyable.h"
+#include "../base/TimeStamp.h"
 
 namespace fm {
 
@@ -19,8 +19,8 @@ class EventLoop;
 
 class Channel : private noncopyable {
  public:
-  using EventCallback = std::function<void()>;
   // 可读事件的回调函数比较特殊，需要向用户的回调函数传递一个接收时间信息
+  using EventCallback = std::function<void()>;
   using ReadEventCallback = std::function<void(TimeStamp)>;
 
   Channel(EventLoop *loop, int fd);
@@ -41,6 +41,7 @@ class Channel : private noncopyable {
   void disableAll() { events_ = kNoneEvent, update(); }
   bool isReading() const { return events_ & kReadEvent; }
   bool isWriting() const { return events_ & kWriteEvent; }
+  bool isNoneEvent() const { return events_ == kNoneEvent; }
 
   std::string eventsToString() const { return eventsToString(fd_, events_); }
   std::string reventsToString() const { return eventsToString(fd_, revents_); }
@@ -58,8 +59,6 @@ class Channel : private noncopyable {
   void tie(const std::shared_ptr<void> &);
 
   void remove();
-
-  bool isNoneEvent() const { return events_ == kNoneEvent; }
 
  private:
   void update();

@@ -57,6 +57,7 @@ class TcpConnection : private noncopyable,
   void setHighWaterMarkCallback(const HighWaterMarkCallback &cb) { highWaterMarkCallback_ = cb; }
   void setCloseCallback(const CloseCallback &cb) { closeCallback_ = cb; }
 
+  // 调试使用
   Buffer *inputBuffer() { return &inputBuffer_; }
   Buffer *outputBuffer() { return &outputBuffer_; }
 
@@ -86,6 +87,8 @@ class TcpConnection : private noncopyable,
   StateE state_;
   bool reading_;
 
+  // channel_是一个独一指针，而Channel内部的实现却无不在将自己的原始指针
+  // 交给别的类使用，这样使用方式必须要求注意Channel的使用
   std::unique_ptr<Socket> socket_;
   std::unique_ptr<Channel> channel_;
   const InetAddress localAddr_;
@@ -107,6 +110,5 @@ using TcpConnectionPtr = std::shared_ptr<TcpConnection>;
 } // namespace net
 
 } // namespace fm
-
 
 #endif //FAKEMUDUO_NET_TCPCONNECTION_H_

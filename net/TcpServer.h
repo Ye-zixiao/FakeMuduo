@@ -54,7 +54,7 @@ class TcpServer : private noncopyable {
  private:
   using ConnectionMap = std::map<std::string, TcpConnectionPtr>;
 
-  EventLoop *loop_;                                  // main Reactor的事件循环
+  EventLoop *loop_;                                  // main-Reactor的事件循环
   const std::string ipPort_;
   const std::string name_;
   std::unique_ptr<Acceptor> acceptor_;               // 接收器Acceptor

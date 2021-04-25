@@ -41,6 +41,7 @@ TimeStamp EpollPoller::poll(ChannelList *activeChannels, int timeoutMs) {
 							   timeoutMs);
   int savedErrno = errno;
   TimeStamp curr(TimeStamp::now());
+
   if (numEvents > 0) {
 	LOG_TRACE << numEvents << " events happened";
 	fillActiveChannels(activeChannels, numEvents);
@@ -48,11 +49,9 @@ TimeStamp EpollPoller::poll(ChannelList *activeChannels, int timeoutMs) {
 	  events_.resize(events_.size() * 2);
   } else if (numEvents == 0) {
 	LOG_TRACE << "nothing happened";
-  } else {
-	if (savedErrno != EINTR) {
-	  errno = savedErrno;
-	  LOG_SYSERR << "EpollPoller::poll";
-	}
+  } else if (savedErrno != EINTR) {
+	errno = savedErrno;
+	LOG_SYSERR << "EpollPoller::poll";
   }
   return curr;
 }
@@ -63,9 +62,10 @@ void EpollPoller::updateChannel(Channel *channel) {
   // 对于EpollPoller而言，这个index表示通道的状态
   const int index = channel->index();
   const int fd = channel->fd();
-  LOG_TRACE << "fd = " << fd << " events = {" << channel->eventsToString()
-			<< "} index = " << index;
+  LOG_TRACE << "fd = " << fd << " events = {" <<
+			channel->eventsToString() << "} index = " << index;
 
+  // 为某一个频道注册、删除、更新修改感兴趣事件
   if (index == kNew || index == kDeleted) {
 	if (index == kNew) {
 	  assert(channels_.find(fd) == channels_.end());
@@ -107,7 +107,8 @@ void EpollPoller::removeChannel(Channel *channel) {
   channel->set_index(kNew);
 }
 
-void EpollPoller::fillActiveChannels(ChannelList *activeChannels, int numEvents) const {
+void EpollPoller::fillActiveChannels(ChannelList *activeChannels,
+									 int numEvents) const {
   assert(numEvents <= static_cast<int>(events_.size()));
   for (int i = 0; i < numEvents; ++i) {
 	auto *channel = static_cast<Channel *>(events_[i].data.ptr);
@@ -119,7 +120,7 @@ void EpollPoller::fillActiveChannels(ChannelList *activeChannels, int numEvents)
 void EpollPoller::update(Channel *channel, int operation) {
   struct epoll_event event{};
   event.events = channel->events();
-  event.data.ptr = channel;
+  event.data.ptr = channel; // 注意event.data中使用的ptr字段，保存频道指针
   int fd = channel->fd();
   LOG_TRACE << "epoll_ctl op = " << operationToString(operation)
 			<< " fd = " << fd << " event = { " << channel->eventsToString() << " }";

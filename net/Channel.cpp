@@ -37,8 +37,8 @@ Channel::~Channel() {
 }
 
 void Channel::tie(const std::shared_ptr<void> &obj) {
-  // 表示和某一个连接或者定时器或者事件通知器进行绑定了，
-  // 因而也表示此时的通道是有效的
+  // 只有当有一个TcpConnection与当前频道关联的时候才会使用
+  // tie()这个函数，此时Channel就可以弱引用TcpConnection
   tie_ = obj;
   tied_ = true;
 }
@@ -61,6 +61,7 @@ void Channel::handleEvent(TimeStamp receiveTime) {
 	guard = tie_.lock();
 	if (guard)
 	  handleEventWithGurad(receiveTime);
+	LOG_TRACE << "guard use_count: " << guard.use_count(); // 3
   } else {
 	handleEventWithGurad(receiveTime);
   }
