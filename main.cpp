@@ -57,7 +57,7 @@ int main() {
   EventLoop loop;
   InetAddress localAddress(12000);
   EchoServer echo_server(&loop, localAddress, "EchoServer");
-  echo_server.setThreadsNum(2);
+//  echo_server.setThreadsNum(2);
   echo_server.start();
   loop.loop();
 

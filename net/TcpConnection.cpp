@@ -92,7 +92,7 @@ void TcpConnection::sendInLoop(const std::string &msg) {
 }
 
 void TcpConnection::sendInLoop(const void *msg, size_t len) {
-  loop_->isInLoopThread();
+  loop_->assertInLoopThread();
   ssize_t nwrote = 0;
   size_t remaining = len;
   bool faultError = false;
@@ -288,7 +288,7 @@ void TcpConnection::handleClose() {
   connectionCallback_(guardThis);  // 调用用户注册的onConnection回调函数
 
   closeCallback_(guardThis); // 调用TcpServer中的removeConnection()方法
-  LOG_TRACE << "handleClose guard use_count: " << guardThis.use_count(); // 4
+  LOG_TRACE << " guard use_count: " << guardThis.use_count(); // 4
 }
 
 void TcpConnection::handleError() {

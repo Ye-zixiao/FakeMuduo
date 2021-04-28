@@ -11,13 +11,12 @@
 
 #include "../base/Logging.h"
 #include "InetAddress.h"
-#include "SocketsOps.h"
 #include "EventLoop.h"
 
 using namespace fm;
 using namespace fm::net;
 
-Acceptor::Acceptor(EventLoop *loop, const InetAddress &listenAddr, bool reuseport)
+Acceptor::Acceptor(EventLoop *loop, const InetAddress &listenAddr, bool reusePort)
 	: loop_(loop),
 	  acceptSocket_(sockets::createNonblockingSocketOrDie(listenAddr.family())),
 	  acceptChannel_(loop, acceptSocket_.fd()),
@@ -25,9 +24,9 @@ Acceptor::Acceptor(EventLoop *loop, const InetAddress &listenAddr, bool reusepor
 	  idleFd_(::open("/dev/null", O_RDONLY | O_CLOEXEC)) {
   assert(acceptSocket_.fd() >= 0);
   acceptSocket_.setReuseAddr(true);
-  acceptSocket_.setReusePort(reuseport);
+  acceptSocket_.setReusePort(reusePort);
   acceptSocket_.bindAddress(listenAddr);
-  acceptChannel_.setReadCallback(std::bind(&Acceptor::handlRead, this));
+  acceptChannel_.setReadCallback(std::bind(&Acceptor::handleRead, this));
 }
 
 Acceptor::~Acceptor() {
@@ -47,13 +46,14 @@ void Acceptor::listen() {
   acceptChannel_.enableReading();
 }
 
-void Acceptor::handlRead() {
+void Acceptor::handleRead() {
   loop_->assertInLoopThread();
   InetAddress peerAddr;
   int connfd = acceptSocket_.accept(&peerAddr);
   if (connfd >= 0) {
 	LOG_TRACE << "Acceptor accept a new connection, fd = " << connfd;
 	if (newConnectionCallback_)
+	  // 调用TcpServer的newConnection()成员函数
 	  newConnectionCallback_(connfd, peerAddr);
 	else
 	  ::close(connfd);

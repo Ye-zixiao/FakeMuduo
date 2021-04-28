@@ -47,7 +47,7 @@ void TcpServer::setThreadNum(int numThreads) {
 }
 
 void TcpServer::start() {
-  if (start_.exchange(true) == false) {
+  if (!start_.exchange(true)) {
 	threadPool_->start();
 
 	assert(!acceptor_->isListening());

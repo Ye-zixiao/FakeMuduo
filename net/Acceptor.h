@@ -23,7 +23,7 @@ class Acceptor : private noncopyable {
   // 新建连接套接字的回调函数的第一个参数是套接字描述符
   using NewConnectionCallback = std::function<void(int, const InetAddress &)>;
 
-  Acceptor(EventLoop *loop, const InetAddress &listenAddr, bool reuseport);
+  Acceptor(EventLoop *loop, const InetAddress &listenAddr, bool reusePort);
   ~Acceptor();
 
   void setNewConnectionCallback(const NewConnectionCallback &cb);
@@ -33,7 +33,7 @@ class Acceptor : private noncopyable {
   bool isListening() const { return listening_; }
 
  private:
-  void handlRead();
+  void handleRead();
 
  private:
   EventLoop *loop_;

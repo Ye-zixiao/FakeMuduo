@@ -5,7 +5,7 @@
 #ifndef FAKEMUDUO_NET_TCPSERVER_H_
 #define FAKEMUDUO_NET_TCPSERVER_H_
 
-#include <map>
+#include <unordered_map>
 #include <atomic>
 #include <string>
 #include <memory>
@@ -46,19 +46,17 @@ class TcpServer : private noncopyable {
 
  private:
   void newConnection(int sockfd, const InetAddress &peerAddr);
-
   void removeConnection(const TcpConnectionPtr &conn);
-
   void removeConnectionInLoop(const TcpConnectionPtr &conn);
 
  private:
-  using ConnectionMap = std::map<std::string, TcpConnectionPtr>;
+  using ConnectionMap = std::unordered_map<std::string, TcpConnectionPtr>;
 
   EventLoop *loop_;                                  // main-Reactor的事件循环
   const std::string ipPort_;
   const std::string name_;
   std::unique_ptr<Acceptor> acceptor_;               // 接收器Acceptor
-  std::shared_ptr<EventLoopThreadPool> threadPool_;  // sub-Reactor线程池
+  std::shared_ptr<EventLoopThreadPool> threadPool_;  // sub-Reactor线程池，其实可以定义为独一指针
 
   ConnectionCallback connectionCallback_;
   MessageCallback messageCallback_;

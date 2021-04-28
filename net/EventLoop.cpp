@@ -113,7 +113,6 @@ void EventLoop::quit() {
 
 void EventLoop::runInLoop(Functor cb) {
   if (isInLoopThread()) {
-    LOG_TRACE<<"delete in IOthread";
 	cb();
   } else
 	queueInLoop(std::move(cb));
