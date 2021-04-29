@@ -33,8 +33,9 @@ class EchoServer {
 
  private:
   void onMessage(const TcpConnectionPtr &conn, Buffer *buffer, TimeStamp now) {
-	string msg(buffer->retrieveAllAsString());
-	conn->send(msg);
+//	string msg(buffer->retrieveAllAsString());
+//	conn->send(msg);
+    buffer->retrieveAll();
   }
 
   void onConnection(const TcpConnectionPtr &conn) {
@@ -52,7 +53,7 @@ class EchoServer {
 };
 
 int main() {
-  Logger::setLogLevel(Logger::TRACE);
+//  Logger::setLogLevel(Logger::TRACE);
 
   EventLoop loop;
   InetAddress localAddress(12000);
