@@ -11,55 +11,61 @@
 #include "net/Channel.h"
 #include "net/Buffer.h"
 #include "net/TcpServer.h"
+#include "http/HttpServer.h"
+#include "http/HttpRequest.h"
+#include "http/HttpResponse.h"
 
 #include <functional>
+#include <iostream>
 
 using namespace std;
 using namespace fm;
 using namespace fm::net;
+using namespace fm::net::http;
 
-class EchoServer {
- public:
-  EchoServer(EventLoop *loop, const InetAddress &addr, const string &str)
-	  : loop_(loop), server_(loop, addr, str) {
-	server_.setConnectionCallback(
-		std::bind(&EchoServer::onConnection, this, _1));
-	server_.setMessageCallback(
-		std::bind(&EchoServer::onMessage, this, _1, _2, _3));
+unordered_map<string, string> files;
+
+void onRequest(const HttpRequest &request, HttpResponse *response) {
+//  cout << "Headers " << request.methodToString() << " " << request.path() << endl;
+//  for (const auto &header:request.headers()) {
+//    cout << header.first << ": " << header.second << endl;
+//  }
+  string path = request.path();
+  if (path.back() == '/') path.append("index.html");
+
+  response->setVersion(request.getVersion());
+  response->addHeader("Server", "FakeMuduo");
+
+  if (request.getMethod() == HttpRequest::kGet &&
+      files.find(path) != files.end()) {
+    response->setStatusCode(HttpResponse::k200OK);
+    response->setStatusMessage("OK");
+    response->setBody(files[path]);
+  } else {
+    response->setStatusCode(HttpResponse::k404NotFound);
+    response->setStatusMessage("Not Found");
+    response->setCloseConnection(true);
   }
-
-  void setThreadsNum(int threads) { server_.setThreadNum(threads); }
-  void start() { server_.start(); }
-
- private:
-  void onMessage(const TcpConnectionPtr &conn, Buffer *buffer, TimeStamp now) {
-//	string msg(buffer->retrieveAllAsString());
-//	conn->send(msg);
-    buffer->retrieveAll();
-  }
-
-  void onConnection(const TcpConnectionPtr &conn) {
-	if (conn->isConnected()) {
-	  LOG_INFO << "a new client is connected";
-	} else {
-	  LOG_INFO << "a client is leave";
-//      loop_->quit();
-	}
-  }
-
- private:
-  EventLoop *loop_;
-  TcpServer server_;
-};
+}
 
 int main() {
-//  Logger::setLogLevel(Logger::TRACE);
+  // 通过这种方式模仿文件缓存的方式，这样每一次我们就不需要为每一个请求重复性的打开文件
+  // 这个部分也许可以改成自动打开，或者指定配置文件的方式来完成。
+  files = {
+      {"/index.html", ""},
+      {"/xxx.jpg", ""},
+      {"/favicon.ico", ""}
+  };
+  for (auto &elem:files)
+    readSmallFile(ReadSmallFile::kBufferSize,
+                  "root" + elem.first, &elem.second);
 
   EventLoop loop;
-  InetAddress localAddress(12000);
-  EchoServer echo_server(&loop, localAddress, "EchoServer");
-//  echo_server.setThreadsNum(2);
-  echo_server.start();
+  InetAddress listenAddr(12000);
+  HttpServer server(&loop, listenAddr, "HttpServer");
+  server.setHttpCallback(onRequest);
+  server.setThreadNum(8);
+  server.start();
   loop.loop();
 
   return 0;

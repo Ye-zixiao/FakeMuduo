@@ -11,6 +11,7 @@
 #include "Buffer.h"
 
 #include <memory>
+#include <any>
 
 namespace fm {
 
@@ -21,13 +22,13 @@ class Socket;
 class EventLoop;
 
 class TcpConnection : private noncopyable,
-					  public std::enable_shared_from_this<TcpConnection> {
+                      public std::enable_shared_from_this<TcpConnection> {
  public:
   TcpConnection(EventLoop *loop,
-				std::string name,
-				int sockfd,
-				const InetAddress &localAddr,
-				const InetAddress &peerAddr);
+                std::string name,
+                int sockfd,
+                const InetAddress &localAddr,
+                const InetAddress &peerAddr);
 
   ~TcpConnection();
 
@@ -56,6 +57,10 @@ class TcpConnection : private noncopyable,
   void setWriteCompleteCallback(const WriteCompleteCallback &cb) { writeCompleteCallback_ = cb; }
   void setHighWaterMarkCallback(const HighWaterMarkCallback &cb) { highWaterMarkCallback_ = cb; }
   void setCloseCallback(const CloseCallback &cb) { closeCallback_ = cb; }
+
+  void setUserContext(const std::any &context) { userContext_ = context; }
+  const std::any &getUserContext() const { return userContext_; }
+  std::any *getMutableUserContext() { return &userContext_; }
 
   // 调试使用
   Buffer *inputBuffer() { return &inputBuffer_; }
@@ -103,6 +108,7 @@ class TcpConnection : private noncopyable,
   size_t highWaterMark_;
   Buffer inputBuffer_;
   Buffer outputBuffer_;
+  std::any userContext_;
 };
 
 using TcpConnectionPtr = std::shared_ptr<TcpConnection>;

@@ -9,37 +9,38 @@
 using namespace fm;
 
 LogFile::LogFile(std::string basename,
-				 off_t rollFileSizeMax,
-				 bool threadSafe,
-				 int flushInterval,
-				 int logLineMax)
-	: basename_(std::move(basename)),
-	  rollFileSizeMax_(rollFileSizeMax),
-	  flushInterval_(flushInterval),
-	  checkOfNLines(logLineMax),
-	  mutex_(threadSafe ? new std::mutex : nullptr),
-	  startOfLog_(0),
-	  lastRoll_(0),
-	  lastFlush_(0) {
+                 off_t rollFileSizeMax,
+                 bool threadSafe,
+                 int flushInterval,
+                 int logLineMax)
+    : basename_(std::move(basename)),
+      rollFileSizeMax_(rollFileSizeMax),
+      flushInterval_(flushInterval),
+      checkOfNLines(logLineMax),
+      mutex_(threadSafe ? new std::mutex : nullptr),
+      startOfLog_(0),
+      lastRoll_(0),
+      lastFlush_(0),
+      count_(0) {
   // 执行一次日志文件滚动更新，因为刚开始时日志文件还没有创建
   rollFile();
 }
 
 void LogFile::append(const char *logline, size_t len) {
   if (mutex_) {
-	std::lock_guard<std::mutex> lock(*mutex_);
-	append_unlocked(logline, len);
+    std::lock_guard<std::mutex> lock(*mutex_);
+    append_unlocked(logline, len);
   } else {
-	append_unlocked(logline, len);
+    append_unlocked(logline, len);
   }
 }
 
 void LogFile::flush() {
   if (mutex_) {
-	std::lock_guard<std::mutex> lock(*mutex_);
-	file_->flush();
+    std::lock_guard<std::mutex> lock(*mutex_);
+    file_->flush();
   } else {
-	file_->flush();
+    file_->flush();
   }
 }
 
@@ -47,20 +48,20 @@ void LogFile::append_unlocked(const char *logline, size_t len) {
   file_->append(logline, len);
 
   if (file_->writenBytes() > rollFileSizeMax_) {
-	rollFile();
+    rollFile();
   } else {
-	++count_;
-	if (count_ >= checkOfNLines) {
-	  count_ = 0;
-	  time_t now = ::time(nullptr);
-	  time_t currentPeriod = now / kRollPerSeconds_ * kRollPerSeconds_;
-	  if (currentPeriod != startOfLog_) {
-		rollFile();
-	  } else if (now - lastFlush_ > flushInterval_) {
-		lastFlush_ = now;
-		file_->flush();
-	  }
-	}
+    ++count_;
+    if (count_ >= checkOfNLines) {
+      count_ = 0;
+      time_t now = ::time(nullptr);
+      time_t currentPeriod = now / kRollPerSeconds_ * kRollPerSeconds_;
+      if (currentPeriod != startOfLog_) {
+        rollFile();
+      } else if (now - lastFlush_ > flushInterval_) {
+        lastFlush_ = now;
+        file_->flush();
+      }
+    }
   }
 }
 

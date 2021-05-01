@@ -85,14 +85,14 @@ void TcpServer::newConnection(int sockfd, const InetAddress &peerAddr) {
 }
 
 void TcpServer::removeConnection(const TcpConnectionPtr &conn) {
-  LOG_TRACE << "remove Connection " << conn->peerAddr().toIpPortStr();
+  LOG_INFO << "remove Connection " << conn->peerAddr().toIpPortStr();
   // 这个loop是main Reactor的事件循环
   loop_->runInLoop(std::bind(&TcpServer::removeConnectionInLoop, this, conn));
 }
 
 void TcpServer::removeConnectionInLoop(const TcpConnectionPtr &conn) {
   loop_->assertInLoopThread();
-  LOG_INFO << "TcpServer::removeConnectionInLoop [" << name_
+  LOG_TRACE << "TcpServer::removeConnectionInLoop [" << name_
 		   << "] - connection " << conn->name();
 
   size_t n = connections_.erase(conn->name());

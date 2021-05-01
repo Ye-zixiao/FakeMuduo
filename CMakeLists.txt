@@ -20,4 +20,5 @@ add_executable(FakeMuduo main.cpp base/BoundBlockingQueue.h
         net/Buffer.cpp net/Buffer.h net/Acceptor.cpp net/Acceptor.h
         net/TcpServer.cpp net/TcpServer.h net/EventLoopThread.cpp
         net/EventLoopThread.h net/EventLoopThreadPool.cpp net/EventLoopThreadPool.h
-        )
+        http/HttpRequest.h http/HttpRequest.cpp http/HttpResponse.cpp http/HttpResponse.h
+        http/HttpContext.cpp http/HttpContext.h http/HttpServer.cpp http/HttpServer.h http/HttpBase.h)

@@ -24,19 +24,16 @@ class ThreadPool : private noncopyable {
   using ThreadPtr = std::unique_ptr<std::thread>;
 
   ThreadPool(std::string str, size_t maxSize);
-
   ~ThreadPool();
 
   void start(int numThreads);
-
   void stop();
-
   void run(Task task);
 
   const std::string &name() const { return name_; }
 
  private:
-  void runInThread();
+  void runInThread(); // 工作线程所执行的例程
   Task take();
   bool isEmptyQueue();
 

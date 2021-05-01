@@ -10,7 +10,7 @@
 
 namespace fm {
 
-// 一个能够显示记录抛出异常调用过程下函数栈帧信息
+// 一个能够记录调用过程中的函数栈帧信息的异常
 class Exception : public std::exception {
  public:
   explicit Exception(std::string what);

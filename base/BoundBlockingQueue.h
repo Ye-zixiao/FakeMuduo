@@ -32,7 +32,6 @@ class BoundBlockingQueue : private noncopyable {
 	std::unique_lock<std::mutex> lock(mutex_);
 	while (queue_.size() >= maxSize_)
 	  notFull_.wait(lock);
-//	queue_.push(std::forward<T>(x));
 	queue_.push(std::move(x));
 	lock.unlock();
 	notEmpty_.notify_one();
