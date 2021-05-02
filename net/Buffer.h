@@ -5,16 +5,15 @@
 #ifndef FAKEMUDUO_NET_BUFFER_H_
 #define FAKEMUDUO_NET_BUFFER_H_
 
-#include "../base/copyable.h"
-#include "Endian.h"
-
 #include <algorithm>
 #include <vector>
 #include <cassert>
 #include <string>
 
-namespace fm {
+#include "../base/copyable.h"
+#include "Endian.h"
 
+namespace fm {
 namespace net {
 
 class Buffer : public copyable {
@@ -117,7 +116,6 @@ class Buffer : public copyable {
 };
 
 } // namespace net
-
 } // namespace fm
 
 #endif //FAKEMUDUO_NET_BUFFER_H_

@@ -14,7 +14,6 @@
 #include "Buffer.h"
 
 namespace fm {
-
 namespace net {
 
 class Channel;
@@ -115,7 +114,6 @@ class TcpConnection : private noncopyable,
 using TcpConnectionPtr = std::shared_ptr<TcpConnection>;
 
 } // namespace net
-
 } // namespace fm
 
 #endif //FAKEMUDUO_NET_TCPCONNECTION_H_

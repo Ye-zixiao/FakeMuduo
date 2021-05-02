@@ -12,7 +12,6 @@
 #include "../base/TimeStamp.h"
 
 namespace fm {
-
 namespace net {
 
 class EventLoop;
@@ -90,7 +89,6 @@ class Channel : private noncopyable {
 };
 
 } // namespace net
-
 } // namespace fm
 
 #endif //FAKEMUDUO_NET_CHANNEL_H_

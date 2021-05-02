@@ -39,7 +39,6 @@ void defaultMessageCallback(const TcpConnectionPtr &conn,
 							Buffer *buffer, TimeStamp receivedTime);
 
 } // namespace net
-
 } // namespace fm
 
 #endif //FAKEMUDUO_NET_CALLBACK_H_

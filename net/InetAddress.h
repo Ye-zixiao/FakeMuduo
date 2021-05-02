@@ -12,7 +12,6 @@
 #include "SocketsOps.h"
 
 namespace fm {
-
 namespace net {
 
 class InetAddress : public copyable {
@@ -48,7 +47,6 @@ class InetAddress : public copyable {
 };
 
 } // namespace net
-
 } // namespace fm
 
 

@@ -2,12 +2,12 @@
 // Created by Ye-zixiao on 2021/4/30.
 //
 
-#include <cstdio>
-
 #include "HttpResponse.h"
 
-#include "../Buffer.h"
+#include <cstdio>
+
 #include "../../base/Logging.h"
+#include "../Buffer.h"
 
 using namespace fm;
 using namespace fm::net;
@@ -21,8 +21,7 @@ void HttpResponse::addHeader(const std::string &field, const std::string &value)
   headers_[field] = value;
 }
 
-static inline
-const char *versionToStr(Version version) {
+static inline const char *versionToStr(Version version) {
   assert(version != kUnknownVersion);
   const char *verStr = "";
   switch (version) {

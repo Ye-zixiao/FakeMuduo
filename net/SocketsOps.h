@@ -8,9 +8,7 @@
 #include <arpa/inet.h>
 
 namespace fm {
-
 namespace net {
-
 namespace sockets {
 
 int createNonblockingSocketOrDie(sa_family_t family);
@@ -50,9 +48,7 @@ struct sockaddr_in6 *sockaddr_in6_cast(struct sockaddr *addr);
 
 
 } // namespace sockets
-
 } // namespace net
-
 } // namespace fm
 
 

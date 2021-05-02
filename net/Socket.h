@@ -8,7 +8,6 @@
 #include "../base/noncoapyable.h"
 
 namespace fm {
-
 namespace net {
 
 class InetAddress;
@@ -38,7 +37,6 @@ class Socket : private noncopyable {
 };
 
 } // namespace net
-
 } // namespace fm
 
 #endif //FAKEMUDUO_NET_SOCKET_H_

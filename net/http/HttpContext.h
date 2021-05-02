@@ -11,7 +11,6 @@
 #include "HttpRequest.h"
 
 namespace fm {
-
 namespace net {
 
 class Buffer;
@@ -46,9 +45,7 @@ class HttpContext : public copyable {
 };
 
 } // namespace http
-
 } // namespace net
-
 } // namespace fm
 
 #endif //FAKEMUDUO_HTTP_HTTPCONTEXT_H_

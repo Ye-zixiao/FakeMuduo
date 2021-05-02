@@ -12,7 +12,6 @@
 struct epoll_event;
 
 namespace fm {
-
 namespace net {
 
 class EpollPoller : public Poller {
@@ -41,7 +40,6 @@ class EpollPoller : public Poller {
 };
 
 } // namespace net
-
 } // namespace fm
 
 #endif //FAKEMUDUO_NET_POLLER_EPOLLPOLLER_H_

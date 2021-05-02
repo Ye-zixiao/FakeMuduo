@@ -12,7 +12,6 @@
 #include "HttpBase.h"
 
 namespace fm {
-
 namespace net {
 
 class Buffer;
@@ -22,12 +21,14 @@ namespace http {
 class HttpResponse : public copyable {
  public:
   enum HttpStatusCode {
-    kInvalidStatus,
+    kInvalidStatus = 0,
     k200OK = 200,
     k301MovedPermanently = 301,
     k400BadRequest = 400,
     k404NotFound = 404
   };
+
+  using HeaderMap = std::unordered_map<std::string, std::string>;
 
   explicit HttpResponse(bool close)
       : version_(kUnknownVersion),
@@ -49,21 +50,19 @@ class HttpResponse : public copyable {
 
   void setBody(const std::string &body) { body_ = body; }
 
-  void appendToBuffer(net::Buffer *outBuffer) const;
+  void appendToBuffer(Buffer *outBuffer) const;
 
  private:
   Version version_;
   HttpStatusCode statusCode_;
   std::string statusMessage_;
-  std::unordered_map<std::string, std::string> headers_;
+  HeaderMap headers_;
   bool closeConnection_;
   std::string body_;
 };
 
 } // namespace http
-
 } // namespace net
-
 } // namespace fm
 
 #endif //FAKEMUDUO_HTTP_HTTPRESPONSE_H_

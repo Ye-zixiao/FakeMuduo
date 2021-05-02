@@ -1,19 +1,7 @@
 // Author: Ye-zixiao
 // Date: 2020-04-07
 
-#include "base/ThreadPool.h"
-#include "base/Logging.h"
-#include "base/LogFile.h"
-#include "base/TimeStamp.h"
-#include "net/InetAddress.h"
-#include "net/Socket.h"
-#include "net/EventLoop.h"
-#include "net/Channel.h"
-#include "net/Buffer.h"
-#include "net/TcpServer.h"
-#include "net/http/HttpServer.h"
-#include "net/http/HttpRequest.h"
-#include "net/http/HttpResponse.h"
+#include "FakeMuduo.h"
 
 #include <functional>
 #include <iostream>
@@ -26,10 +14,11 @@ using namespace fm::net::http;
 unordered_map<string, string> files;
 
 void onRequest(const HttpRequest &request, HttpResponse *response) {
-//  cout << "Headers " << request.methodToString() << " " << request.path() << endl;
-//  for (const auto &header:request.headers()) {
-//    cout << header.first << ": " << header.second << endl;
-//  }
+  cout << "Headers " << request.methodToString() << " " << request.path() << endl;
+  for (const auto &header:request.headers()) {
+    cout << header.first << ": " << header.second << endl;
+  }
+
   string path = request.path();
   if (path.back() == '/') path.append("index.html");
 
@@ -48,24 +37,24 @@ void onRequest(const HttpRequest &request, HttpResponse *response) {
   }
 }
 
-int main() {
-  Logger::setLogLevel(Logger::TRACE);
-  // 通过这种方式模仿文件缓存，这样每一次就不需要为每一个请求重复性的打开文件。
-  // 当然该部分还可以改进，因为这种解决方案仅仅适合文件数少且小的情况
+int main(int argc, char *argv[]) {
   files = {
+      // 通过这种方式模仿文件缓存，这样每一次就不需要为每一个请求重复性的打开文件。
+      // 当然该部分还可以改进，因为这种解决方案仅仅适合文件数少且小的情况
       {"/index.html", ""},
       {"/xxx.jpg", ""},
       {"/favicon.ico", ""}
   };
-  for (auto &elem:files)
+  for (auto &elem:files) {
     readSmallFile(ReadSmallFile::kBufferSize,
                   "root" + elem.first, &elem.second);
+  }
 
   EventLoop loop;
   InetAddress listenAddr(12000);
   HttpServer server(&loop, listenAddr, "HttpServer");
   server.setHttpCallback(onRequest);
-  server.setThreadNum(6,2);
+  server.setThreadNum(8, 0);
   server.start();
   loop.loop();
 

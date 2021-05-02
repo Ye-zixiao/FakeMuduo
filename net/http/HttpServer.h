@@ -13,9 +13,7 @@
 #include "../TcpServer.h"
 
 namespace fm {
-
 namespace net {
-
 namespace http {
 
 class HttpRequest;
@@ -34,7 +32,6 @@ class HttpServer : private noncopyable {
 
   EventLoop *getLoop() const { return server_.getLoop(); }
 
-  // 对于业务逻辑层而言，只需要向HttpServer注册一个当请求到来时的处理函数即可实现一个最简单的http服务器
   void setHttpCallback(const HttpCallback &cb) { httpCallback_ = cb; }
 
   void setThreadNum(int numIOThreads, int numThreadPools = 6);
@@ -56,9 +53,7 @@ class HttpServer : private noncopyable {
 };
 
 } // namespace http
-
 } // namespace net
-
 } // namespace fm
 
 #endif //FAKEMUDUO_HTTP_HTTPSERVER_H_

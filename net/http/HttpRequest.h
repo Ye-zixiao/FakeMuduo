@@ -13,18 +13,16 @@
 #include "HttpBase.h"
 
 namespace fm {
-
 namespace net {
-
 namespace http {
 
 class HttpRequest : public copyable {
  public:
   enum Method { kInvalidMethod, kGet, kPost, kHead, kPut, kDelete };
 
-  HttpRequest()
-      : method_(kInvalidMethod),
-        version_(kUnknownVersion) {}
+  using HeaderMap = std::unordered_map<std::string, std::string>;
+
+  HttpRequest() : method_(kInvalidMethod), version_(kUnknownVersion) {}
 
   HttpRequest(const HttpRequest &rhs) = default;
   HttpRequest(HttpRequest &&rhs) noexcept;
@@ -49,7 +47,7 @@ class HttpRequest : public copyable {
 
   void addHeader(const char *start, const char *colon, const char *end);
   std::string getHeader(const std::string &field) const;
-  const std::unordered_map<std::string, std::string> &headers() const { return headers_; }
+  const HeaderMap &headers() const { return headers_; }
 
   void swap(HttpRequest &rhs);
   void clear();
@@ -60,13 +58,11 @@ class HttpRequest : public copyable {
   std::string path_;
   std::string query_;
   TimeStamp receivedTime_;
-  std::unordered_map<std::string, std::string> headers_;
+  HeaderMap headers_;
 };
 
 } // namespace http
-
 } // namespace net
-
 } // namespace fm
 
 #endif //FAKEMUDUO_HTTP_HTTPREQUEST_H_

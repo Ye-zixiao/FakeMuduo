@@ -12,7 +12,6 @@
 #include "../base/noncoapyable.h"
 
 namespace fm {
-
 namespace net {
 
 class EventLoop;
@@ -44,7 +43,6 @@ class EventLoopThreadPool : private noncopyable {
 };
 
 } // namespace net
-
 } // namespace fm
 
 #endif //FAKEMUDUO_NET_EVENTLOOPTHREADPOOL_H_

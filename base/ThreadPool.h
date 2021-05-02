@@ -26,11 +26,13 @@ class ThreadPool : private noncopyable {
   ThreadPool(std::string str, size_t maxSize);
   ~ThreadPool();
 
-  void start(int numThreads);
+  const std::string &name() const { return name_; }
+
+  void setThreadNum(int numThreads);
+
+  void start();
   void stop();
   void run(Task task);
-
-  const std::string &name() const { return name_; }
 
  private:
   void runInThread(); // 工作线程所执行的例程

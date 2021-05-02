@@ -13,7 +13,6 @@
 #include "EventLoop.h"
 
 namespace fm {
-
 namespace net {
 
 class Channel;
@@ -48,7 +47,6 @@ class Poller : private noncopyable {
 };
 
 } // namespace net
-
 } // namespace fm
 
 #endif //FAKEMUDUO_NET_POLLER_H_

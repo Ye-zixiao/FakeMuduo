@@ -6,6 +6,8 @@
 
 #include <unistd.h>
 
+#include <memory>
+
 using namespace fm;
 
 ThreadPool::ThreadPool(std::string str, size_t maxSize)
@@ -22,14 +24,25 @@ ThreadPool::~ThreadPool() {
   if (running_) stop();
 }
 
-void ThreadPool::start(int numThreads) {
-  running_ = true;
-  threads_.reserve(numThreads);
-  for (int i = 0; i < numThreads; ++i)
-    // 创建/启动线程，并以移动的方式加入到线程容器中
-    threads_.emplace_back(std::make_unique<std::thread>(
-        std::bind(&ThreadPool::runInThread, this)));
+void ThreadPool::setThreadNum(int numThreads) {
+  threads_.resize(numThreads);
 }
+
+void ThreadPool::start() {
+  running_=true;
+  for(auto&up:threads_)
+    // 创建并启动工作线程，然后将其独一指针加入到线程容器中
+    up = std::make_unique<std::thread>(&ThreadPool::runInThread,this);
+}
+
+//void ThreadPool::start(int numThreads) {
+//  running_ = true;
+//  threads_.reserve(numThreads);
+//  for (int i = 0; i < numThreads; ++i)
+//    // 创建/启动线程，并以移动的方式加入到线程容器中
+//    threads_.emplace_back(std::make_unique<std::thread>(
+//        std::bind(&ThreadPool::runInThread, this)));
+//}
 
 void ThreadPool::stop() {
   {

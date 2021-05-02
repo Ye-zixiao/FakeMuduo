@@ -16,7 +16,6 @@
 #include "Callback.h"
 
 namespace fm {
-
 namespace net {
 
 class Channel;
@@ -91,7 +90,6 @@ class EventLoop : private noncopyable {
 };
 
 } // namespace net
-
 } // namespace fm
 
 #endif //FAKEMUDUO_NET_EVENTLOOP_H_

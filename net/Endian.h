@@ -9,9 +9,7 @@
 #include <endian.h>
 
 namespace fm {
-
 namespace net {
-
 namespace sockets {
 
 inline uint64_t hostToNetwork64(uint64_t host64) {
@@ -39,9 +37,7 @@ inline uint16_t networkToHost16(uint16_t net16) {
 }
 
 } // namespace sockets
-
 } // namespace net
-
 } // namespace fm
 
 #endif //FAKEMUDUO_NET_ENDIAN_H_

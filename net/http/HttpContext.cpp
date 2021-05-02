@@ -33,7 +33,7 @@ bool HttpContext::parseRequest(Buffer *buffer, TimeStamp receivedTime) {
         }
         break;
       }
-        // 2、解析http首部字段
+      // 2、解析http首部字段
       case kParseHeaders: {
         const char *crlf = buffer->findCRLF();
         if (crlf) {
@@ -52,7 +52,7 @@ bool HttpContext::parseRequest(Buffer *buffer, TimeStamp receivedTime) {
         }
         break;
       }
-        // 3、解析http实体体部分
+      // 3、解析http实体体部分
       case kParseBody:
       default:break;
     }

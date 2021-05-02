@@ -58,7 +58,7 @@ void defaultFlush() {
 Logger::OutputFunc g_output = defaultOutput;
 Logger::FlushFunc g_flush = defaultFlush;
 
-} // namespace myweb
+} // namespace fm
 
 using namespace fm;
 
