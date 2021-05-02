@@ -5,13 +5,13 @@
 #ifndef FAKEMUDUO_NET_TCPCONNECTION_H_
 #define FAKEMUDUO_NET_TCPCONNECTION_H_
 
+#include <memory>
+#include <any>
+
 #include "../base/noncoapyable.h"
 #include "InetAddress.h"
 #include "Callback.h"
 #include "Buffer.h"
-
-#include <memory>
-#include <any>
 
 namespace fm {
 
@@ -59,6 +59,7 @@ class TcpConnection : private noncopyable,
   void setCloseCallback(const CloseCallback &cb) { closeCallback_ = cb; }
 
   void setUserContext(const std::any &context) { userContext_ = context; }
+  void setUserContext(std::any &&context) { userContext_ = std::move(context); }
   const std::any &getUserContext() const { return userContext_; }
   std::any *getMutableUserContext() { return &userContext_; }
 

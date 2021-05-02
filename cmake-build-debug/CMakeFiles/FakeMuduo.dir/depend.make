@@ -32,51 +32,6 @@ CMakeFiles/FakeMuduo.dir/base/TimeStamp.cpp.o: ../base/TimeStamp.cpp
 CMakeFiles/FakeMuduo.dir/base/TimeStamp.cpp.o: ../base/TimeStamp.h
 CMakeFiles/FakeMuduo.dir/base/TimeStamp.cpp.o: ../base/copyable.h
 
-CMakeFiles/FakeMuduo.dir/http/HttpContext.cpp.o: ../base/TimeStamp.h
-CMakeFiles/FakeMuduo.dir/http/HttpContext.cpp.o: ../base/copyable.h
-CMakeFiles/FakeMuduo.dir/http/HttpContext.cpp.o: ../http/HttpBase.h
-CMakeFiles/FakeMuduo.dir/http/HttpContext.cpp.o: ../http/HttpContext.cpp
-CMakeFiles/FakeMuduo.dir/http/HttpContext.cpp.o: ../http/HttpContext.h
-CMakeFiles/FakeMuduo.dir/http/HttpContext.cpp.o: ../http/HttpRequest.h
-CMakeFiles/FakeMuduo.dir/http/HttpContext.cpp.o: ../net/Buffer.h
-CMakeFiles/FakeMuduo.dir/http/HttpContext.cpp.o: ../net/Endian.h
-
-CMakeFiles/FakeMuduo.dir/http/HttpRequest.cpp.o: ../base/TimeStamp.h
-CMakeFiles/FakeMuduo.dir/http/HttpRequest.cpp.o: ../base/copyable.h
-CMakeFiles/FakeMuduo.dir/http/HttpRequest.cpp.o: ../http/HttpBase.h
-CMakeFiles/FakeMuduo.dir/http/HttpRequest.cpp.o: ../http/HttpRequest.cpp
-CMakeFiles/FakeMuduo.dir/http/HttpRequest.cpp.o: ../http/HttpRequest.h
-
-CMakeFiles/FakeMuduo.dir/http/HttpResponse.cpp.o: ../base/LogStream.h
-CMakeFiles/FakeMuduo.dir/http/HttpResponse.cpp.o: ../base/Logging.h
-CMakeFiles/FakeMuduo.dir/http/HttpResponse.cpp.o: ../base/TimeStamp.h
-CMakeFiles/FakeMuduo.dir/http/HttpResponse.cpp.o: ../base/copyable.h
-CMakeFiles/FakeMuduo.dir/http/HttpResponse.cpp.o: ../base/noncoapyable.h
-CMakeFiles/FakeMuduo.dir/http/HttpResponse.cpp.o: ../http/HttpBase.h
-CMakeFiles/FakeMuduo.dir/http/HttpResponse.cpp.o: ../http/HttpResponse.cpp
-CMakeFiles/FakeMuduo.dir/http/HttpResponse.cpp.o: ../http/HttpResponse.h
-CMakeFiles/FakeMuduo.dir/http/HttpResponse.cpp.o: ../net/Buffer.h
-CMakeFiles/FakeMuduo.dir/http/HttpResponse.cpp.o: ../net/Endian.h
-
-CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.o: ../base/LogStream.h
-CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.o: ../base/Logging.h
-CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.o: ../base/TimeStamp.h
-CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.o: ../base/copyable.h
-CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.o: ../base/noncoapyable.h
-CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.o: ../http/HttpBase.h
-CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.o: ../http/HttpContext.h
-CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.o: ../http/HttpRequest.h
-CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.o: ../http/HttpResponse.h
-CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.o: ../http/HttpServer.cpp
-CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.o: ../http/HttpServer.h
-CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.o: ../net/Buffer.h
-CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.o: ../net/Callback.h
-CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.o: ../net/Endian.h
-CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.o: ../net/InetAddress.h
-CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.o: ../net/SocketsOps.h
-CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.o: ../net/TcpConnection.h
-CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.o: ../net/TcpServer.h
-
 CMakeFiles/FakeMuduo.dir/main.cpp.o: ../base/FileUtil.h
 CMakeFiles/FakeMuduo.dir/main.cpp.o: ../base/LogFile.h
 CMakeFiles/FakeMuduo.dir/main.cpp.o: ../base/LogStream.h
@@ -85,10 +40,6 @@ CMakeFiles/FakeMuduo.dir/main.cpp.o: ../base/ThreadPool.h
 CMakeFiles/FakeMuduo.dir/main.cpp.o: ../base/TimeStamp.h
 CMakeFiles/FakeMuduo.dir/main.cpp.o: ../base/copyable.h
 CMakeFiles/FakeMuduo.dir/main.cpp.o: ../base/noncoapyable.h
-CMakeFiles/FakeMuduo.dir/main.cpp.o: ../http/HttpBase.h
-CMakeFiles/FakeMuduo.dir/main.cpp.o: ../http/HttpRequest.h
-CMakeFiles/FakeMuduo.dir/main.cpp.o: ../http/HttpResponse.h
-CMakeFiles/FakeMuduo.dir/main.cpp.o: ../http/HttpServer.h
 CMakeFiles/FakeMuduo.dir/main.cpp.o: ../main.cpp
 CMakeFiles/FakeMuduo.dir/main.cpp.o: ../net/Buffer.h
 CMakeFiles/FakeMuduo.dir/main.cpp.o: ../net/Callback.h
@@ -100,6 +51,10 @@ CMakeFiles/FakeMuduo.dir/main.cpp.o: ../net/Socket.h
 CMakeFiles/FakeMuduo.dir/main.cpp.o: ../net/SocketsOps.h
 CMakeFiles/FakeMuduo.dir/main.cpp.o: ../net/TcpConnection.h
 CMakeFiles/FakeMuduo.dir/main.cpp.o: ../net/TcpServer.h
+CMakeFiles/FakeMuduo.dir/main.cpp.o: ../net/http/HttpBase.h
+CMakeFiles/FakeMuduo.dir/main.cpp.o: ../net/http/HttpRequest.h
+CMakeFiles/FakeMuduo.dir/main.cpp.o: ../net/http/HttpResponse.h
+CMakeFiles/FakeMuduo.dir/main.cpp.o: ../net/http/HttpServer.h
 
 CMakeFiles/FakeMuduo.dir/net/Acceptor.cpp.o: ../base/LogStream.h
 CMakeFiles/FakeMuduo.dir/net/Acceptor.cpp.o: ../base/Logging.h
@@ -241,6 +196,52 @@ CMakeFiles/FakeMuduo.dir/net/TcpServer.cpp.o: ../net/SocketsOps.h
 CMakeFiles/FakeMuduo.dir/net/TcpServer.cpp.o: ../net/TcpConnection.h
 CMakeFiles/FakeMuduo.dir/net/TcpServer.cpp.o: ../net/TcpServer.cpp
 CMakeFiles/FakeMuduo.dir/net/TcpServer.cpp.o: ../net/TcpServer.h
+
+CMakeFiles/FakeMuduo.dir/net/http/HttpContext.cpp.o: ../base/TimeStamp.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpContext.cpp.o: ../base/copyable.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpContext.cpp.o: ../net/Buffer.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpContext.cpp.o: ../net/Endian.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpContext.cpp.o: ../net/http/HttpBase.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpContext.cpp.o: ../net/http/HttpContext.cpp
+CMakeFiles/FakeMuduo.dir/net/http/HttpContext.cpp.o: ../net/http/HttpContext.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpContext.cpp.o: ../net/http/HttpRequest.h
+
+CMakeFiles/FakeMuduo.dir/net/http/HttpRequest.cpp.o: ../base/TimeStamp.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpRequest.cpp.o: ../base/copyable.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpRequest.cpp.o: ../net/http/HttpBase.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpRequest.cpp.o: ../net/http/HttpRequest.cpp
+CMakeFiles/FakeMuduo.dir/net/http/HttpRequest.cpp.o: ../net/http/HttpRequest.h
+
+CMakeFiles/FakeMuduo.dir/net/http/HttpResponse.cpp.o: ../base/LogStream.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpResponse.cpp.o: ../base/Logging.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpResponse.cpp.o: ../base/TimeStamp.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpResponse.cpp.o: ../base/copyable.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpResponse.cpp.o: ../base/noncoapyable.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpResponse.cpp.o: ../net/Buffer.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpResponse.cpp.o: ../net/Endian.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpResponse.cpp.o: ../net/http/HttpBase.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpResponse.cpp.o: ../net/http/HttpResponse.cpp
+CMakeFiles/FakeMuduo.dir/net/http/HttpResponse.cpp.o: ../net/http/HttpResponse.h
+
+CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o: ../base/LogStream.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o: ../base/Logging.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o: ../base/ThreadPool.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o: ../base/TimeStamp.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o: ../base/copyable.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o: ../base/noncoapyable.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o: ../net/Buffer.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o: ../net/Callback.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o: ../net/Endian.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o: ../net/InetAddress.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o: ../net/SocketsOps.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o: ../net/TcpConnection.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o: ../net/TcpServer.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o: ../net/http/HttpBase.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o: ../net/http/HttpContext.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o: ../net/http/HttpRequest.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o: ../net/http/HttpResponse.h
+CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o: ../net/http/HttpServer.cpp
+CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o: ../net/http/HttpServer.h
 
 CMakeFiles/FakeMuduo.dir/net/poller/DefaultPoller.cpp.o: ../base/TimeStamp.h
 CMakeFiles/FakeMuduo.dir/net/poller/DefaultPoller.cpp.o: ../base/copyable.h

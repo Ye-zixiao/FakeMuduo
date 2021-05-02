@@ -285,114 +285,6 @@ base/TimeStamp.cpp.s:
 	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/base/TimeStamp.cpp.s
 .PHONY : base/TimeStamp.cpp.s
 
-http/HttpContext.o: http/HttpContext.cpp.o
-
-.PHONY : http/HttpContext.o
-
-# target to build an object file
-http/HttpContext.cpp.o:
-	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/http/HttpContext.cpp.o
-.PHONY : http/HttpContext.cpp.o
-
-http/HttpContext.i: http/HttpContext.cpp.i
-
-.PHONY : http/HttpContext.i
-
-# target to preprocess a source file
-http/HttpContext.cpp.i:
-	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/http/HttpContext.cpp.i
-.PHONY : http/HttpContext.cpp.i
-
-http/HttpContext.s: http/HttpContext.cpp.s
-
-.PHONY : http/HttpContext.s
-
-# target to generate assembly for a file
-http/HttpContext.cpp.s:
-	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/http/HttpContext.cpp.s
-.PHONY : http/HttpContext.cpp.s
-
-http/HttpRequest.o: http/HttpRequest.cpp.o
-
-.PHONY : http/HttpRequest.o
-
-# target to build an object file
-http/HttpRequest.cpp.o:
-	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/http/HttpRequest.cpp.o
-.PHONY : http/HttpRequest.cpp.o
-
-http/HttpRequest.i: http/HttpRequest.cpp.i
-
-.PHONY : http/HttpRequest.i
-
-# target to preprocess a source file
-http/HttpRequest.cpp.i:
-	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/http/HttpRequest.cpp.i
-.PHONY : http/HttpRequest.cpp.i
-
-http/HttpRequest.s: http/HttpRequest.cpp.s
-
-.PHONY : http/HttpRequest.s
-
-# target to generate assembly for a file
-http/HttpRequest.cpp.s:
-	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/http/HttpRequest.cpp.s
-.PHONY : http/HttpRequest.cpp.s
-
-http/HttpResponse.o: http/HttpResponse.cpp.o
-
-.PHONY : http/HttpResponse.o
-
-# target to build an object file
-http/HttpResponse.cpp.o:
-	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/http/HttpResponse.cpp.o
-.PHONY : http/HttpResponse.cpp.o
-
-http/HttpResponse.i: http/HttpResponse.cpp.i
-
-.PHONY : http/HttpResponse.i
-
-# target to preprocess a source file
-http/HttpResponse.cpp.i:
-	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/http/HttpResponse.cpp.i
-.PHONY : http/HttpResponse.cpp.i
-
-http/HttpResponse.s: http/HttpResponse.cpp.s
-
-.PHONY : http/HttpResponse.s
-
-# target to generate assembly for a file
-http/HttpResponse.cpp.s:
-	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/http/HttpResponse.cpp.s
-.PHONY : http/HttpResponse.cpp.s
-
-http/HttpServer.o: http/HttpServer.cpp.o
-
-.PHONY : http/HttpServer.o
-
-# target to build an object file
-http/HttpServer.cpp.o:
-	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.o
-.PHONY : http/HttpServer.cpp.o
-
-http/HttpServer.i: http/HttpServer.cpp.i
-
-.PHONY : http/HttpServer.i
-
-# target to preprocess a source file
-http/HttpServer.cpp.i:
-	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.i
-.PHONY : http/HttpServer.cpp.i
-
-http/HttpServer.s: http/HttpServer.cpp.s
-
-.PHONY : http/HttpServer.s
-
-# target to generate assembly for a file
-http/HttpServer.cpp.s:
-	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/http/HttpServer.cpp.s
-.PHONY : http/HttpServer.cpp.s
-
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -744,6 +636,114 @@ net/TcpServer.cpp.s:
 	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/net/TcpServer.cpp.s
 .PHONY : net/TcpServer.cpp.s
 
+net/http/HttpContext.o: net/http/HttpContext.cpp.o
+
+.PHONY : net/http/HttpContext.o
+
+# target to build an object file
+net/http/HttpContext.cpp.o:
+	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/net/http/HttpContext.cpp.o
+.PHONY : net/http/HttpContext.cpp.o
+
+net/http/HttpContext.i: net/http/HttpContext.cpp.i
+
+.PHONY : net/http/HttpContext.i
+
+# target to preprocess a source file
+net/http/HttpContext.cpp.i:
+	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/net/http/HttpContext.cpp.i
+.PHONY : net/http/HttpContext.cpp.i
+
+net/http/HttpContext.s: net/http/HttpContext.cpp.s
+
+.PHONY : net/http/HttpContext.s
+
+# target to generate assembly for a file
+net/http/HttpContext.cpp.s:
+	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/net/http/HttpContext.cpp.s
+.PHONY : net/http/HttpContext.cpp.s
+
+net/http/HttpRequest.o: net/http/HttpRequest.cpp.o
+
+.PHONY : net/http/HttpRequest.o
+
+# target to build an object file
+net/http/HttpRequest.cpp.o:
+	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/net/http/HttpRequest.cpp.o
+.PHONY : net/http/HttpRequest.cpp.o
+
+net/http/HttpRequest.i: net/http/HttpRequest.cpp.i
+
+.PHONY : net/http/HttpRequest.i
+
+# target to preprocess a source file
+net/http/HttpRequest.cpp.i:
+	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/net/http/HttpRequest.cpp.i
+.PHONY : net/http/HttpRequest.cpp.i
+
+net/http/HttpRequest.s: net/http/HttpRequest.cpp.s
+
+.PHONY : net/http/HttpRequest.s
+
+# target to generate assembly for a file
+net/http/HttpRequest.cpp.s:
+	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/net/http/HttpRequest.cpp.s
+.PHONY : net/http/HttpRequest.cpp.s
+
+net/http/HttpResponse.o: net/http/HttpResponse.cpp.o
+
+.PHONY : net/http/HttpResponse.o
+
+# target to build an object file
+net/http/HttpResponse.cpp.o:
+	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/net/http/HttpResponse.cpp.o
+.PHONY : net/http/HttpResponse.cpp.o
+
+net/http/HttpResponse.i: net/http/HttpResponse.cpp.i
+
+.PHONY : net/http/HttpResponse.i
+
+# target to preprocess a source file
+net/http/HttpResponse.cpp.i:
+	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/net/http/HttpResponse.cpp.i
+.PHONY : net/http/HttpResponse.cpp.i
+
+net/http/HttpResponse.s: net/http/HttpResponse.cpp.s
+
+.PHONY : net/http/HttpResponse.s
+
+# target to generate assembly for a file
+net/http/HttpResponse.cpp.s:
+	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/net/http/HttpResponse.cpp.s
+.PHONY : net/http/HttpResponse.cpp.s
+
+net/http/HttpServer.o: net/http/HttpServer.cpp.o
+
+.PHONY : net/http/HttpServer.o
+
+# target to build an object file
+net/http/HttpServer.cpp.o:
+	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.o
+.PHONY : net/http/HttpServer.cpp.o
+
+net/http/HttpServer.i: net/http/HttpServer.cpp.i
+
+.PHONY : net/http/HttpServer.i
+
+# target to preprocess a source file
+net/http/HttpServer.cpp.i:
+	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.i
+.PHONY : net/http/HttpServer.cpp.i
+
+net/http/HttpServer.s: net/http/HttpServer.cpp.s
+
+.PHONY : net/http/HttpServer.s
+
+# target to generate assembly for a file
+net/http/HttpServer.cpp.s:
+	$(MAKE) -f CMakeFiles/FakeMuduo.dir/build.make CMakeFiles/FakeMuduo.dir/net/http/HttpServer.cpp.s
+.PHONY : net/http/HttpServer.cpp.s
+
 net/poller/DefaultPoller.o: net/poller/DefaultPoller.cpp.o
 
 .PHONY : net/poller/DefaultPoller.o
@@ -825,18 +825,6 @@ help:
 	@echo "... base/TimeStamp.o"
 	@echo "... base/TimeStamp.i"
 	@echo "... base/TimeStamp.s"
-	@echo "... http/HttpContext.o"
-	@echo "... http/HttpContext.i"
-	@echo "... http/HttpContext.s"
-	@echo "... http/HttpRequest.o"
-	@echo "... http/HttpRequest.i"
-	@echo "... http/HttpRequest.s"
-	@echo "... http/HttpResponse.o"
-	@echo "... http/HttpResponse.i"
-	@echo "... http/HttpResponse.s"
-	@echo "... http/HttpServer.o"
-	@echo "... http/HttpServer.i"
-	@echo "... http/HttpServer.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -876,6 +864,18 @@ help:
 	@echo "... net/TcpServer.o"
 	@echo "... net/TcpServer.i"
 	@echo "... net/TcpServer.s"
+	@echo "... net/http/HttpContext.o"
+	@echo "... net/http/HttpContext.i"
+	@echo "... net/http/HttpContext.s"
+	@echo "... net/http/HttpRequest.o"
+	@echo "... net/http/HttpRequest.i"
+	@echo "... net/http/HttpRequest.s"
+	@echo "... net/http/HttpResponse.o"
+	@echo "... net/http/HttpResponse.i"
+	@echo "... net/http/HttpResponse.s"
+	@echo "... net/http/HttpServer.o"
+	@echo "... net/http/HttpServer.i"
+	@echo "... net/http/HttpServer.s"
 	@echo "... net/poller/DefaultPoller.o"
 	@echo "... net/poller/DefaultPoller.i"
 	@echo "... net/poller/DefaultPoller.s"

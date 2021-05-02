@@ -7,7 +7,7 @@
 
 #include <any>
 
-#include "../base/copyable.h"
+#include "../../base/copyable.h"
 #include "HttpRequest.h"
 
 namespace fm {
@@ -23,6 +23,10 @@ class HttpContext : public copyable {
   enum HttpRequestParseState { kParseRequestLine, kParseHeaders, kParseBody, kAllDone };
 
   HttpContext() : state_(kParseRequestLine), request_() {}
+  HttpContext(const HttpContext &rhs) = default;
+  HttpContext(HttpContext &&rhs) noexcept = default;
+  HttpContext &operator=(const HttpContext &rhs) = default;
+  HttpContext &operator=(HttpContext &&rhs) = default;
 
   bool parseRequest(Buffer *buffer, TimeStamp receivedTime);
 

@@ -6,7 +6,7 @@
 
 #include <algorithm>
 
-#include "../net/Buffer.h"
+#include "../Buffer.h"
 
 using namespace fm;
 using namespace fm::net;

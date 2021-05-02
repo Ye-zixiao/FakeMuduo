@@ -133,33 +133,6 @@
 		<Unit filename="/mnt/e/Desktop/FakeMuduo/base/noncoapyable.h">
 			<Option target="FakeMuduo"/>
 		</Unit>
-		<Unit filename="/mnt/e/Desktop/FakeMuduo/http/HttpBase.h">
-			<Option target="FakeMuduo"/>
-		</Unit>
-		<Unit filename="/mnt/e/Desktop/FakeMuduo/http/HttpContext.cpp">
-			<Option target="FakeMuduo"/>
-		</Unit>
-		<Unit filename="/mnt/e/Desktop/FakeMuduo/http/HttpContext.h">
-			<Option target="FakeMuduo"/>
-		</Unit>
-		<Unit filename="/mnt/e/Desktop/FakeMuduo/http/HttpRequest.cpp">
-			<Option target="FakeMuduo"/>
-		</Unit>
-		<Unit filename="/mnt/e/Desktop/FakeMuduo/http/HttpRequest.h">
-			<Option target="FakeMuduo"/>
-		</Unit>
-		<Unit filename="/mnt/e/Desktop/FakeMuduo/http/HttpResponse.cpp">
-			<Option target="FakeMuduo"/>
-		</Unit>
-		<Unit filename="/mnt/e/Desktop/FakeMuduo/http/HttpResponse.h">
-			<Option target="FakeMuduo"/>
-		</Unit>
-		<Unit filename="/mnt/e/Desktop/FakeMuduo/http/HttpServer.cpp">
-			<Option target="FakeMuduo"/>
-		</Unit>
-		<Unit filename="/mnt/e/Desktop/FakeMuduo/http/HttpServer.h">
-			<Option target="FakeMuduo"/>
-		</Unit>
 		<Unit filename="/mnt/e/Desktop/FakeMuduo/main.cpp">
 			<Option target="FakeMuduo"/>
 		</Unit>
@@ -239,6 +212,33 @@
 			<Option target="FakeMuduo"/>
 		</Unit>
 		<Unit filename="/mnt/e/Desktop/FakeMuduo/net/TcpServer.h">
+			<Option target="FakeMuduo"/>
+		</Unit>
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/net/http/HttpBase.h">
+			<Option target="FakeMuduo"/>
+		</Unit>
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/net/http/HttpContext.cpp">
+			<Option target="FakeMuduo"/>
+		</Unit>
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/net/http/HttpContext.h">
+			<Option target="FakeMuduo"/>
+		</Unit>
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/net/http/HttpRequest.cpp">
+			<Option target="FakeMuduo"/>
+		</Unit>
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/net/http/HttpRequest.h">
+			<Option target="FakeMuduo"/>
+		</Unit>
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/net/http/HttpResponse.cpp">
+			<Option target="FakeMuduo"/>
+		</Unit>
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/net/http/HttpResponse.h">
+			<Option target="FakeMuduo"/>
+		</Unit>
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/net/http/HttpServer.cpp">
+			<Option target="FakeMuduo"/>
+		</Unit>
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/net/http/HttpServer.h">
 			<Option target="FakeMuduo"/>
 		</Unit>
 		<Unit filename="/mnt/e/Desktop/FakeMuduo/net/poller/DefaultPoller.cpp">

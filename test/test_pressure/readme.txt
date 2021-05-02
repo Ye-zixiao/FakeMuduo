@@ -1,0 +1,1 @@
+HTTP服务器的基准性能压力测试推荐使用wrk：https://github.com/wg/wrk。

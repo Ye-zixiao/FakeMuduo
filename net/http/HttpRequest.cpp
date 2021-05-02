@@ -8,6 +8,29 @@ using namespace fm;
 using namespace fm::net;
 using namespace fm::net::http;
 
+HttpRequest::HttpRequest(HttpRequest &&rhs) noexcept
+    : method_(rhs.method_),
+      version_(rhs.version_),
+      path_(std::move(rhs.path_)),
+      query_(std::move(rhs.query_)),
+      receivedTime_(rhs.receivedTime_),
+      headers_(std::move(rhs.headers_)) {
+  rhs.method_ = kInvalidMethod;
+  rhs.version_ = kUnknownVersion;
+}
+
+HttpRequest &HttpRequest::operator=(HttpRequest &&rhs) noexcept {
+  method_ = rhs.method_;
+  rhs.method_ = kInvalidMethod;
+  version_ = rhs.version_;
+  rhs.version_ = kUnknownVersion;
+  path_ = std::move(rhs.path_);
+  query_ = std::move(rhs.query_);
+  receivedTime_ = rhs.receivedTime_;
+  headers_ = std::move(rhs.headers_);
+  return *this;
+}
+
 bool HttpRequest::setMethod(const char *start, const char *end) {
   std::string m(start, end);
   if (m == "GET") method_ = kGet;

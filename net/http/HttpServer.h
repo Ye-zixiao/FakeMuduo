@@ -7,9 +7,10 @@
 
 #include <functional>
 
-#include "../base/noncoapyable.h"
-#include "../net/Callback.h"
-#include "../net/TcpServer.h"
+#include "../../base/noncoapyable.h"
+#include "../../base/ThreadPool.h"
+#include "../Callback.h"
+#include "../TcpServer.h"
 
 namespace fm {
 
@@ -28,25 +29,29 @@ class HttpServer : private noncopyable {
   HttpServer(EventLoop *loop,
              const InetAddress &listenAddr,
              const std::string &name,
-             TcpServer::Option option = TcpServer::kNoReusePort);
+             TcpServer::Option option = TcpServer::kNoReusePort,
+             size_t threadPoolMaxSize = 10240);
 
   EventLoop *getLoop() const { return server_.getLoop(); }
 
-  // 对于业务逻辑层而言，只需要向HttpServer注册一个当请求到来时
-  // 的处理函数即可实现一个最简单的http服务器
+  // 对于业务逻辑层而言，只需要向HttpServer注册一个当请求到来时的处理函数即可实现一个最简单的http服务器
   void setHttpCallback(const HttpCallback &cb) { httpCallback_ = cb; }
 
-  void setThreadNum(int numThreads) { server_.setThreadNum(numThreads); }
+  void setThreadNum(int numIOThreads, int numThreadPools = 6);
 
   void start();
 
  private:
   void onConnection(const TcpConnectionPtr &conn);
+
   void onMessage(const TcpConnectionPtr &conn, Buffer *buffer, TimeStamp receivedTime);
-  void onRequest(const TcpConnectionPtr &conn, const HttpRequest &request);
+
+  void onRequestInThreadPool(const TcpConnectionPtr &conn, HttpRequest request);
+  void onRequest(const TcpConnectionPtr &conn, HttpRequest reqest);
 
  private:
   TcpServer server_;
+  ThreadPool threadPool_;
   HttpCallback httpCallback_;
 };
 

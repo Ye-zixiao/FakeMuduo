@@ -8,8 +8,8 @@
 #include <unordered_map>
 #include <string>
 
-#include "../base/copyable.h"
-#include "../base/TimeStamp.h"
+#include "../../base/copyable.h"
+#include "../../base/TimeStamp.h"
 #include "HttpBase.h"
 
 namespace fm {
@@ -22,7 +22,14 @@ class HttpRequest : public copyable {
  public:
   enum Method { kInvalidMethod, kGet, kPost, kHead, kPut, kDelete };
 
-  HttpRequest() : method_(kInvalidMethod), version_(kUnknownVersion) {}
+  HttpRequest()
+      : method_(kInvalidMethod),
+        version_(kUnknownVersion) {}
+
+  HttpRequest(const HttpRequest &rhs) = default;
+  HttpRequest(HttpRequest &&rhs) noexcept;
+  HttpRequest &operator=(const HttpRequest &rhs) = default;
+  HttpRequest &operator=(HttpRequest &&rhs) noexcept;
 
   bool setMethod(const char *start, const char *end);
   Method getMethod() const { return method_; }

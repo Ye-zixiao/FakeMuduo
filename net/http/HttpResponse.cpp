@@ -6,8 +6,8 @@
 
 #include "HttpResponse.h"
 
-#include "../net/Buffer.h"
-#include "../base/Logging.h"
+#include "../Buffer.h"
+#include "../../base/Logging.h"
 
 using namespace fm;
 using namespace fm::net;

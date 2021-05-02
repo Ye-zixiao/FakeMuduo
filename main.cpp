@@ -11,9 +11,9 @@
 #include "net/Channel.h"
 #include "net/Buffer.h"
 #include "net/TcpServer.h"
-#include "http/HttpServer.h"
-#include "http/HttpRequest.h"
-#include "http/HttpResponse.h"
+#include "net/http/HttpServer.h"
+#include "net/http/HttpRequest.h"
+#include "net/http/HttpResponse.h"
 
 #include <functional>
 #include <iostream>
@@ -49,8 +49,9 @@ void onRequest(const HttpRequest &request, HttpResponse *response) {
 }
 
 int main() {
-  // 通过这种方式模仿文件缓存的方式，这样每一次我们就不需要为每一个请求重复性的打开文件
-  // 这个部分也许可以改成自动打开，或者指定配置文件的方式来完成。
+  Logger::setLogLevel(Logger::TRACE);
+  // 通过这种方式模仿文件缓存，这样每一次就不需要为每一个请求重复性的打开文件。
+  // 当然该部分还可以改进，因为这种解决方案仅仅适合文件数少且小的情况
   files = {
       {"/index.html", ""},
       {"/xxx.jpg", ""},
@@ -64,7 +65,7 @@ int main() {
   InetAddress listenAddr(12000);
   HttpServer server(&loop, listenAddr, "HttpServer");
   server.setHttpCallback(onRequest);
-  server.setThreadNum(8);
+  server.setThreadNum(6,2);
   server.start();
   loop.loop();
 
