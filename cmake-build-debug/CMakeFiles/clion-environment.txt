@@ -1,4 +1,0 @@
-ToolSet: Ubuntu 20.04.2 LTS (local)@C:\Users\Ye-zixiao\AppData\Local\Microsoft\WindowsApps\ubuntu.exe
-Options: 
-
-Options:

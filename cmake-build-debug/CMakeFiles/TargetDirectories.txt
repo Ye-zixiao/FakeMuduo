@@ -1,9 +1,0 @@
-/mnt/e/Desktop/FakeMuduo/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/mnt/e/Desktop/FakeMuduo/cmake-build-debug/CMakeFiles/edit_cache.dir
-/mnt/e/Desktop/FakeMuduo/cmake-build-debug/CMakeFiles/FakeMuduo.dir
-/mnt/e/Desktop/FakeMuduo/cmake-build-debug/base/CMakeFiles/rebuild_cache.dir
-/mnt/e/Desktop/FakeMuduo/cmake-build-debug/base/CMakeFiles/edit_cache.dir
-/mnt/e/Desktop/FakeMuduo/cmake-build-debug/base/CMakeFiles/FakeMuduoBase.dir
-/mnt/e/Desktop/FakeMuduo/cmake-build-debug/net/CMakeFiles/rebuild_cache.dir
-/mnt/e/Desktop/FakeMuduo/cmake-build-debug/net/CMakeFiles/edit_cache.dir
-/mnt/e/Desktop/FakeMuduo/cmake-build-debug/net/CMakeFiles/FakeMuduoNet.dir

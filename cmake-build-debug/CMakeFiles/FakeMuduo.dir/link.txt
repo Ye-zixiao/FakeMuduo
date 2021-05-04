@@ -1,1 +1,0 @@
-/usr/bin/c++   -pthread -Wall -g   CMakeFiles/FakeMuduo.dir/main.cpp.o  -o FakeMuduo  base/libFakeMuduoBase.a net/libFakeMuduoNet.a 

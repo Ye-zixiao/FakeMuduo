@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wall -O3 -g   CMakeFiles/HttpServer.dir/HttpServer_unittest.cpp.o  -o HttpServer  -Wl,-rpath,/mnt/e/Desktop/FakeMuduo/build/src/base:/mnt/e/Desktop/FakeMuduo/build/src/net -lpthread ../src/base/libFakeMuduoBase.so ../src/net/libFakeMuduoNet.so -lpthread 

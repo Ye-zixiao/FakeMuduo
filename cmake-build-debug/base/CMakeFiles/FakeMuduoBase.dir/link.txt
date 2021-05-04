@@ -1,2 +1,0 @@
-/usr/bin/ar qc libFakeMuduoBase.a  CMakeFiles/FakeMuduoBase.dir/Exception.cpp.o CMakeFiles/FakeMuduoBase.dir/FileUtil.cpp.o CMakeFiles/FakeMuduoBase.dir/LogFile.cpp.o CMakeFiles/FakeMuduoBase.dir/Logging.cpp.o CMakeFiles/FakeMuduoBase.dir/ThreadPool.cpp.o CMakeFiles/FakeMuduoBase.dir/TimeStamp.cpp.o
-/usr/bin/ranlib libFakeMuduoBase.a

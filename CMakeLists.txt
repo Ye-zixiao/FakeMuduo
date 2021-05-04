@@ -1,14 +1,16 @@
 cmake_minimum_required(VERSION 3.16)
+project(FakeMuduo LANGUAGES CXX)
 
-project(FakeMuduo)
+if(NOT CMAKE_BUILD_TYPE)
+    message("Setting build type to 'Debug' as non was specified")
+    set(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build." FORCE)
+endif()
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -Wall")
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-add_executable(FakeMuduo main.cpp FakeMuduo.h)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3")
 
-aux_source_directory(. DIR_SRCS)
-add_subdirectory(base)
-add_subdirectory(net)
-
-target_link_libraries(FakeMuduo FakeMuduoBase FakeMuduoNet)
+add_subdirectory(src/base)
+add_subdirectory(src/net)
+add_subdirectory(example)

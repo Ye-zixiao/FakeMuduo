@@ -1,6 +1,10 @@
 # FakeMuduo
 
-我自己对这个项目的解读：[项目解读.md](项目解读.md)
+改进了CMakeList.txt构建文件。其实CMake入门简单，深入了也挺烦的，等有空再把项目结构再优化吧。
+
+---
+
+我自己对这个项目的解读：[项目解读.md](doc/项目解读.md)
 
 ---
 
@@ -18,4 +22,10 @@
 <center>
     <img src="image/muduo.png">
 </center>
+**推荐阅读：**
+
+1. [CMake 入门实战 | HaHack](https://www.hahack.com/codes/cmake/)
+2. [《CMake Cookbook》的中文翻译](https://github.com/xiaoweiChen/CMake-Cookbook)
+
+
 
