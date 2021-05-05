@@ -44,6 +44,8 @@ int main(int argc, char *argv[]) {
     exit(EXIT_FAILURE);
   }
 
+  Logger::setLogLevel(Logger::TRACE);
+
   files = {
       // 通过这种方式模仿文件缓存，这样每一次就不需要为每一个请求重复性的打开文件。
       // 当然该部分还可以改进，因为这种解决方案仅仅适合文件数少且小的情况

@@ -110,8 +110,12 @@ void TimerQueue::delTimerInLoop(TimerId timerId) {
   if (iter != activeTimers_.end()) {
     Timer *timer = timerId.timer();
     // 先从定时器红黑树中删除关于这个定时器的表项记录
+#ifndef NDEBUG
     size_t n = timerTree_.erase(TimerEntry(timer->expiration(), timer));
     assert(n == 1);
+#else
+    timerTree_.erase(TimerEntry(timer->expiration(), timer));
+#endif
     // 再从活跃定时器集合中删除这个定时器
     activeTimers_.erase(iter);
     delete timer;
@@ -173,10 +177,15 @@ bool TimerQueue::insertTimer(Timer *timer) {
     isEarliestTimer = true;
 
   // 分别插入到定时器列表和活跃定时器列表中
+#ifndef NDEBUG
   auto res1 = timerTree_.insert(TimerEntry(timer->expiration(), timer));
   assert(res1.second);
   auto res2 = activeTimers_.emplace(timer, timer->sequence());
   assert(res2.second);
+#else
+  timerTree_.insert(TimerEntry(timer->expiration(), timer));
+  activeTimers_.emplace(timer, timer->sequence());
+#endif
   return isEarliestTimer;
 }
 
@@ -195,8 +204,12 @@ std::vector<TimerQueue::TimerEntry> TimerQueue::getExpired(TimeStamp now) {
   // 从活跃定时器标识集合中删除过期的定时器标识
   for (const TimerEntry &entry:expired) {
     TimerId timerId(entry.second, entry.second->sequence());
+#ifndef NDEBUG
     size_t n = activeTimers_.erase(timerId);
     assert(n == 1);
+#else
+    activeTimers_.erase(timerId);
+#endif
   }
   assert(timerTree_.size() == activeTimers_.size());
   return expired;

@@ -1,1 +1,0 @@
-/usr/bin/c++   -Wall -O3 -g   CMakeFiles/EchoServer.dir/EchoServer/EchoServer.cpp.o  -o EchoServer  -Wl,-rpath,/mnt/e/Desktop/FakeMuduo/build/src/net:/mnt/e/Desktop/FakeMuduo/build/src/base -lpthread ../src/net/libFakeMuduoNet.so ../src/base/libFakeMuduoBase.so -lpthread 

@@ -22,7 +22,7 @@
 <center>
     <img src="image/muduo.png">
 </center>
-**推荐阅读：**
+**推荐阅读**：
 
 1. [CMake 入门实战 | HaHack](https://www.hahack.com/codes/cmake/)
 2. [《CMake Cookbook》的中文翻译](https://github.com/xiaoweiChen/CMake-Cookbook)

@@ -26,3 +26,6 @@ target_link_libraries(TcpServer_unittest pthread ${FAKE_MUDUO_LIBS})
 
 add_executable(TimerQueue_unittest UnitTest/TimerQueue_unittest.cpp)
 target_link_libraries(TimerQueue_unittest pthread ${FAKE_MUDUO_LIBS})
+
+add_executable(Logger_unittest UnitTest/Logger_unittest.cpp)
+target_link_libraries(Logger_unittest FakeMuduoBase)
