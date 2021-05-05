@@ -16,10 +16,8 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/mnt/e/Desktop/FakeMuduo/src/net/SocketsOps.cpp" "/mnt/e/Desktop/FakeMuduo/build/src/net/CMakeFiles/FakeMuduoNet.dir/SocketsOps.cpp.o"
   "/mnt/e/Desktop/FakeMuduo/src/net/TcpConnection.cpp" "/mnt/e/Desktop/FakeMuduo/build/src/net/CMakeFiles/FakeMuduoNet.dir/TcpConnection.cpp.o"
   "/mnt/e/Desktop/FakeMuduo/src/net/TcpServer.cpp" "/mnt/e/Desktop/FakeMuduo/build/src/net/CMakeFiles/FakeMuduoNet.dir/TcpServer.cpp.o"
-  "/mnt/e/Desktop/FakeMuduo/src/net/http/HttpContext.cpp" "/mnt/e/Desktop/FakeMuduo/build/src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.o"
-  "/mnt/e/Desktop/FakeMuduo/src/net/http/HttpRequest.cpp" "/mnt/e/Desktop/FakeMuduo/build/src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.o"
-  "/mnt/e/Desktop/FakeMuduo/src/net/http/HttpResponse.cpp" "/mnt/e/Desktop/FakeMuduo/build/src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.o"
-  "/mnt/e/Desktop/FakeMuduo/src/net/http/HttpServer.cpp" "/mnt/e/Desktop/FakeMuduo/build/src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o"
+  "/mnt/e/Desktop/FakeMuduo/src/net/Timer.cpp" "/mnt/e/Desktop/FakeMuduo/build/src/net/CMakeFiles/FakeMuduoNet.dir/Timer.cpp.o"
+  "/mnt/e/Desktop/FakeMuduo/src/net/TimerQueue.cpp" "/mnt/e/Desktop/FakeMuduo/build/src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.o"
   "/mnt/e/Desktop/FakeMuduo/src/net/poller/DefaultPoller.cpp" "/mnt/e/Desktop/FakeMuduo/build/src/net/CMakeFiles/FakeMuduoNet.dir/poller/DefaultPoller.cpp.o"
   "/mnt/e/Desktop/FakeMuduo/src/net/poller/EpollPoller.cpp" "/mnt/e/Desktop/FakeMuduo/build/src/net/CMakeFiles/FakeMuduoNet.dir/poller/EpollPoller.cpp.o"
   )
@@ -36,6 +34,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/mnt/e/Desktop/FakeMuduo/build/src/base/CMakeFiles/FakeMuduoBase.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

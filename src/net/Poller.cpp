@@ -3,7 +3,6 @@
 //
 
 #include "Poller.h"
-
 #include "Channel.h"
 
 using namespace fm::net;

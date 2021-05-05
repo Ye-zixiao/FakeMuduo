@@ -449,113 +449,59 @@ TcpServer.cpp.s:
 	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/TcpServer.cpp.s
 .PHONY : TcpServer.cpp.s
 
-http/HttpContext.o: http/HttpContext.cpp.o
+Timer.o: Timer.cpp.o
 
-.PHONY : http/HttpContext.o
-
-# target to build an object file
-http/HttpContext.cpp.o:
-	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.o
-.PHONY : http/HttpContext.cpp.o
-
-http/HttpContext.i: http/HttpContext.cpp.i
-
-.PHONY : http/HttpContext.i
-
-# target to preprocess a source file
-http/HttpContext.cpp.i:
-	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.i
-.PHONY : http/HttpContext.cpp.i
-
-http/HttpContext.s: http/HttpContext.cpp.s
-
-.PHONY : http/HttpContext.s
-
-# target to generate assembly for a file
-http/HttpContext.cpp.s:
-	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.s
-.PHONY : http/HttpContext.cpp.s
-
-http/HttpRequest.o: http/HttpRequest.cpp.o
-
-.PHONY : http/HttpRequest.o
+.PHONY : Timer.o
 
 # target to build an object file
-http/HttpRequest.cpp.o:
-	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.o
-.PHONY : http/HttpRequest.cpp.o
+Timer.cpp.o:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/Timer.cpp.o
+.PHONY : Timer.cpp.o
 
-http/HttpRequest.i: http/HttpRequest.cpp.i
+Timer.i: Timer.cpp.i
 
-.PHONY : http/HttpRequest.i
+.PHONY : Timer.i
 
 # target to preprocess a source file
-http/HttpRequest.cpp.i:
-	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.i
-.PHONY : http/HttpRequest.cpp.i
+Timer.cpp.i:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/Timer.cpp.i
+.PHONY : Timer.cpp.i
 
-http/HttpRequest.s: http/HttpRequest.cpp.s
+Timer.s: Timer.cpp.s
 
-.PHONY : http/HttpRequest.s
+.PHONY : Timer.s
 
 # target to generate assembly for a file
-http/HttpRequest.cpp.s:
-	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.s
-.PHONY : http/HttpRequest.cpp.s
+Timer.cpp.s:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/Timer.cpp.s
+.PHONY : Timer.cpp.s
 
-http/HttpResponse.o: http/HttpResponse.cpp.o
+TimerQueue.o: TimerQueue.cpp.o
 
-.PHONY : http/HttpResponse.o
+.PHONY : TimerQueue.o
 
 # target to build an object file
-http/HttpResponse.cpp.o:
-	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.o
-.PHONY : http/HttpResponse.cpp.o
+TimerQueue.cpp.o:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.o
+.PHONY : TimerQueue.cpp.o
 
-http/HttpResponse.i: http/HttpResponse.cpp.i
+TimerQueue.i: TimerQueue.cpp.i
 
-.PHONY : http/HttpResponse.i
-
-# target to preprocess a source file
-http/HttpResponse.cpp.i:
-	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.i
-.PHONY : http/HttpResponse.cpp.i
-
-http/HttpResponse.s: http/HttpResponse.cpp.s
-
-.PHONY : http/HttpResponse.s
-
-# target to generate assembly for a file
-http/HttpResponse.cpp.s:
-	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.s
-.PHONY : http/HttpResponse.cpp.s
-
-http/HttpServer.o: http/HttpServer.cpp.o
-
-.PHONY : http/HttpServer.o
-
-# target to build an object file
-http/HttpServer.cpp.o:
-	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o
-.PHONY : http/HttpServer.cpp.o
-
-http/HttpServer.i: http/HttpServer.cpp.i
-
-.PHONY : http/HttpServer.i
+.PHONY : TimerQueue.i
 
 # target to preprocess a source file
-http/HttpServer.cpp.i:
-	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.i
-.PHONY : http/HttpServer.cpp.i
+TimerQueue.cpp.i:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.i
+.PHONY : TimerQueue.cpp.i
 
-http/HttpServer.s: http/HttpServer.cpp.s
+TimerQueue.s: TimerQueue.cpp.s
 
-.PHONY : http/HttpServer.s
+.PHONY : TimerQueue.s
 
 # target to generate assembly for a file
-http/HttpServer.cpp.s:
-	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.s
-.PHONY : http/HttpServer.cpp.s
+TimerQueue.cpp.s:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.s
+.PHONY : TimerQueue.cpp.s
 
 poller/DefaultPoller.o: poller/DefaultPoller.cpp.o
 
@@ -656,18 +602,12 @@ help:
 	@echo "... TcpServer.o"
 	@echo "... TcpServer.i"
 	@echo "... TcpServer.s"
-	@echo "... http/HttpContext.o"
-	@echo "... http/HttpContext.i"
-	@echo "... http/HttpContext.s"
-	@echo "... http/HttpRequest.o"
-	@echo "... http/HttpRequest.i"
-	@echo "... http/HttpRequest.s"
-	@echo "... http/HttpResponse.o"
-	@echo "... http/HttpResponse.i"
-	@echo "... http/HttpResponse.s"
-	@echo "... http/HttpServer.o"
-	@echo "... http/HttpServer.i"
-	@echo "... http/HttpServer.s"
+	@echo "... Timer.o"
+	@echo "... Timer.i"
+	@echo "... Timer.s"
+	@echo "... TimerQueue.o"
+	@echo "... TimerQueue.i"
+	@echo "... TimerQueue.s"
 	@echo "... poller/DefaultPoller.o"
 	@echo "... poller/DefaultPoller.i"
 	@echo "... poller/DefaultPoller.s"

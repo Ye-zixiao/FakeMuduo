@@ -20,8 +20,8 @@ namespace net {
 
 class Channel;
 class Poller;
-//class TimerId;
-//class TimerQueue;
+class TimerId;
+class TimerQueue;
 
 class EventLoop : private noncopyable {
  public:
@@ -42,10 +42,10 @@ class EventLoop : private noncopyable {
   bool hasChannel(Channel *channel);
 
   // 定时器部分先不实现
-//  TimerId runAt(TimeStamp time, TimerCallback cb);
-//  TimerId runAfter(double delay, TimerCallback cb);
-//  TimerId runEvery(double interval, TimerCallback cb);
-//  void cancel(TimerId timerId);
+  TimerId runAt(TimeStamp time, TimerCallback cb);
+  TimerId runAfter(double delay, TimerCallback cb);
+  TimerId runEvery(double interval, TimerCallback cb);
+  void cancel(TimerId timerId);
 
   size_t queueSize() const;
   TimeStamp pollReturnTime() { return pollReturnTime_; }
@@ -77,7 +77,7 @@ class EventLoop : private noncopyable {
   TimeStamp pollReturnTime_;
 
   std::unique_ptr<Poller> poller_;         // 轮询器
-//  std::unique_ptr<TimerQueue> timerQueue_; // 定时器队列
+  std::unique_ptr<TimerQueue> timerQueue_; // 定时器队列
 
   int wakeupFd_;
   std::unique_ptr<Channel> wakeupChannel_; // 其他线程唤醒I/O线程的通道

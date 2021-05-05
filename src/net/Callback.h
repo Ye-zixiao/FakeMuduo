@@ -5,10 +5,10 @@
 #ifndef FAKEMUDUO_NET_CALLBACK_H_
 #define FAKEMUDUO_NET_CALLBACK_H_
 
-#include "../base/TimeStamp.h"
-
 #include <functional>
 #include <memory>
+
+#include "../base/TimeStamp.h"
 
 namespace fm {
 

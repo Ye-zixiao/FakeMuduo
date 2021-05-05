@@ -213,9 +213,35 @@ src/net/CMakeFiles/FakeMuduoNet.dir/TcpServer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/FakeMuduoNet.dir/TcpServer.cpp.s"
 	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/e/Desktop/FakeMuduo/src/net/TcpServer.cpp -o CMakeFiles/FakeMuduoNet.dir/TcpServer.cpp.s
 
+src/net/CMakeFiles/FakeMuduoNet.dir/Timer.cpp.o: src/net/CMakeFiles/FakeMuduoNet.dir/flags.make
+src/net/CMakeFiles/FakeMuduoNet.dir/Timer.cpp.o: ../src/net/Timer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/net/CMakeFiles/FakeMuduoNet.dir/Timer.cpp.o"
+	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FakeMuduoNet.dir/Timer.cpp.o -c /mnt/e/Desktop/FakeMuduo/src/net/Timer.cpp
+
+src/net/CMakeFiles/FakeMuduoNet.dir/Timer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/FakeMuduoNet.dir/Timer.cpp.i"
+	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/e/Desktop/FakeMuduo/src/net/Timer.cpp > CMakeFiles/FakeMuduoNet.dir/Timer.cpp.i
+
+src/net/CMakeFiles/FakeMuduoNet.dir/Timer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/FakeMuduoNet.dir/Timer.cpp.s"
+	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/e/Desktop/FakeMuduo/src/net/Timer.cpp -o CMakeFiles/FakeMuduoNet.dir/Timer.cpp.s
+
+src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.o: src/net/CMakeFiles/FakeMuduoNet.dir/flags.make
+src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.o: ../src/net/TimerQueue.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.o"
+	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.o -c /mnt/e/Desktop/FakeMuduo/src/net/TimerQueue.cpp
+
+src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.i"
+	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/e/Desktop/FakeMuduo/src/net/TimerQueue.cpp > CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.i
+
+src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.s"
+	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/e/Desktop/FakeMuduo/src/net/TimerQueue.cpp -o CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.s
+
 src/net/CMakeFiles/FakeMuduoNet.dir/poller/DefaultPoller.cpp.o: src/net/CMakeFiles/FakeMuduoNet.dir/flags.make
 src/net/CMakeFiles/FakeMuduoNet.dir/poller/DefaultPoller.cpp.o: ../src/net/poller/DefaultPoller.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/net/CMakeFiles/FakeMuduoNet.dir/poller/DefaultPoller.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object src/net/CMakeFiles/FakeMuduoNet.dir/poller/DefaultPoller.cpp.o"
 	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FakeMuduoNet.dir/poller/DefaultPoller.cpp.o -c /mnt/e/Desktop/FakeMuduo/src/net/poller/DefaultPoller.cpp
 
 src/net/CMakeFiles/FakeMuduoNet.dir/poller/DefaultPoller.cpp.i: cmake_force
@@ -228,7 +254,7 @@ src/net/CMakeFiles/FakeMuduoNet.dir/poller/DefaultPoller.cpp.s: cmake_force
 
 src/net/CMakeFiles/FakeMuduoNet.dir/poller/EpollPoller.cpp.o: src/net/CMakeFiles/FakeMuduoNet.dir/flags.make
 src/net/CMakeFiles/FakeMuduoNet.dir/poller/EpollPoller.cpp.o: ../src/net/poller/EpollPoller.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object src/net/CMakeFiles/FakeMuduoNet.dir/poller/EpollPoller.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object src/net/CMakeFiles/FakeMuduoNet.dir/poller/EpollPoller.cpp.o"
 	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FakeMuduoNet.dir/poller/EpollPoller.cpp.o -c /mnt/e/Desktop/FakeMuduo/src/net/poller/EpollPoller.cpp
 
 src/net/CMakeFiles/FakeMuduoNet.dir/poller/EpollPoller.cpp.i: cmake_force
@@ -238,58 +264,6 @@ src/net/CMakeFiles/FakeMuduoNet.dir/poller/EpollPoller.cpp.i: cmake_force
 src/net/CMakeFiles/FakeMuduoNet.dir/poller/EpollPoller.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/FakeMuduoNet.dir/poller/EpollPoller.cpp.s"
 	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/e/Desktop/FakeMuduo/src/net/poller/EpollPoller.cpp -o CMakeFiles/FakeMuduoNet.dir/poller/EpollPoller.cpp.s
-
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.o: src/net/CMakeFiles/FakeMuduoNet.dir/flags.make
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.o: ../src/net/http/HttpContext.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.o"
-	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.o -c /mnt/e/Desktop/FakeMuduo/src/net/http/HttpContext.cpp
-
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.i"
-	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/e/Desktop/FakeMuduo/src/net/http/HttpContext.cpp > CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.i
-
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.s"
-	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/e/Desktop/FakeMuduo/src/net/http/HttpContext.cpp -o CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.s
-
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.o: src/net/CMakeFiles/FakeMuduoNet.dir/flags.make
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.o: ../src/net/http/HttpRequest.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.o"
-	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.o -c /mnt/e/Desktop/FakeMuduo/src/net/http/HttpRequest.cpp
-
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.i"
-	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/e/Desktop/FakeMuduo/src/net/http/HttpRequest.cpp > CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.i
-
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.s"
-	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/e/Desktop/FakeMuduo/src/net/http/HttpRequest.cpp -o CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.s
-
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.o: src/net/CMakeFiles/FakeMuduoNet.dir/flags.make
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.o: ../src/net/http/HttpResponse.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.o"
-	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.o -c /mnt/e/Desktop/FakeMuduo/src/net/http/HttpResponse.cpp
-
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.i"
-	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/e/Desktop/FakeMuduo/src/net/http/HttpResponse.cpp > CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.i
-
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.s"
-	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/e/Desktop/FakeMuduo/src/net/http/HttpResponse.cpp -o CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.s
-
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: src/net/CMakeFiles/FakeMuduoNet.dir/flags.make
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/net/http/HttpServer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o"
-	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o -c /mnt/e/Desktop/FakeMuduo/src/net/http/HttpServer.cpp
-
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.i"
-	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/e/Desktop/FakeMuduo/src/net/http/HttpServer.cpp > CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.i
-
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.s"
-	cd /mnt/e/Desktop/FakeMuduo/build/src/net && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/e/Desktop/FakeMuduo/src/net/http/HttpServer.cpp -o CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.s
 
 # Object files for target FakeMuduoNet
 FakeMuduoNet_OBJECTS = \
@@ -305,12 +279,10 @@ FakeMuduoNet_OBJECTS = \
 "CMakeFiles/FakeMuduoNet.dir/SocketsOps.cpp.o" \
 "CMakeFiles/FakeMuduoNet.dir/TcpConnection.cpp.o" \
 "CMakeFiles/FakeMuduoNet.dir/TcpServer.cpp.o" \
+"CMakeFiles/FakeMuduoNet.dir/Timer.cpp.o" \
+"CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.o" \
 "CMakeFiles/FakeMuduoNet.dir/poller/DefaultPoller.cpp.o" \
-"CMakeFiles/FakeMuduoNet.dir/poller/EpollPoller.cpp.o" \
-"CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.o" \
-"CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.o" \
-"CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.o" \
-"CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o"
+"CMakeFiles/FakeMuduoNet.dir/poller/EpollPoller.cpp.o"
 
 # External object files for target FakeMuduoNet
 FakeMuduoNet_EXTERNAL_OBJECTS =
@@ -327,15 +299,14 @@ src/net/libFakeMuduoNet.so: src/net/CMakeFiles/FakeMuduoNet.dir/Socket.cpp.o
 src/net/libFakeMuduoNet.so: src/net/CMakeFiles/FakeMuduoNet.dir/SocketsOps.cpp.o
 src/net/libFakeMuduoNet.so: src/net/CMakeFiles/FakeMuduoNet.dir/TcpConnection.cpp.o
 src/net/libFakeMuduoNet.so: src/net/CMakeFiles/FakeMuduoNet.dir/TcpServer.cpp.o
+src/net/libFakeMuduoNet.so: src/net/CMakeFiles/FakeMuduoNet.dir/Timer.cpp.o
+src/net/libFakeMuduoNet.so: src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.o
 src/net/libFakeMuduoNet.so: src/net/CMakeFiles/FakeMuduoNet.dir/poller/DefaultPoller.cpp.o
 src/net/libFakeMuduoNet.so: src/net/CMakeFiles/FakeMuduoNet.dir/poller/EpollPoller.cpp.o
-src/net/libFakeMuduoNet.so: src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.o
-src/net/libFakeMuduoNet.so: src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.o
-src/net/libFakeMuduoNet.so: src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.o
-src/net/libFakeMuduoNet.so: src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o
 src/net/libFakeMuduoNet.so: src/net/CMakeFiles/FakeMuduoNet.dir/build.make
+src/net/libFakeMuduoNet.so: src/base/libFakeMuduoBase.so
 src/net/libFakeMuduoNet.so: src/net/CMakeFiles/FakeMuduoNet.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Linking CXX shared library libFakeMuduoNet.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX shared library libFakeMuduoNet.so"
 	cd /mnt/e/Desktop/FakeMuduo/build/src/net && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/FakeMuduoNet.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

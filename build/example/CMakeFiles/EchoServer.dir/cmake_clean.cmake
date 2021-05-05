@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/EchoServer.dir/EchoServer_unittest.cpp.o"
+  "CMakeFiles/EchoServer.dir/EchoServer/EchoServer.cpp.o"
   "EchoServer"
   "EchoServer.pdb"
 )

@@ -57,30 +57,31 @@ include example/CMakeFiles/HttpServer.dir/progress.make
 # Include the compile flags for this target's objects.
 include example/CMakeFiles/HttpServer.dir/flags.make
 
-example/CMakeFiles/HttpServer.dir/HttpServer_unittest.cpp.o: example/CMakeFiles/HttpServer.dir/flags.make
-example/CMakeFiles/HttpServer.dir/HttpServer_unittest.cpp.o: ../example/HttpServer_unittest.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object example/CMakeFiles/HttpServer.dir/HttpServer_unittest.cpp.o"
-	cd /mnt/e/Desktop/FakeMuduo/build/example && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/HttpServer.dir/HttpServer_unittest.cpp.o -c /mnt/e/Desktop/FakeMuduo/example/HttpServer_unittest.cpp
+example/CMakeFiles/HttpServer.dir/HttpServer/WebServer.cpp.o: example/CMakeFiles/HttpServer.dir/flags.make
+example/CMakeFiles/HttpServer.dir/HttpServer/WebServer.cpp.o: ../example/HttpServer/WebServer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object example/CMakeFiles/HttpServer.dir/HttpServer/WebServer.cpp.o"
+	cd /mnt/e/Desktop/FakeMuduo/build/example && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/HttpServer.dir/HttpServer/WebServer.cpp.o -c /mnt/e/Desktop/FakeMuduo/example/HttpServer/WebServer.cpp
 
-example/CMakeFiles/HttpServer.dir/HttpServer_unittest.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HttpServer.dir/HttpServer_unittest.cpp.i"
-	cd /mnt/e/Desktop/FakeMuduo/build/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/e/Desktop/FakeMuduo/example/HttpServer_unittest.cpp > CMakeFiles/HttpServer.dir/HttpServer_unittest.cpp.i
+example/CMakeFiles/HttpServer.dir/HttpServer/WebServer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HttpServer.dir/HttpServer/WebServer.cpp.i"
+	cd /mnt/e/Desktop/FakeMuduo/build/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/e/Desktop/FakeMuduo/example/HttpServer/WebServer.cpp > CMakeFiles/HttpServer.dir/HttpServer/WebServer.cpp.i
 
-example/CMakeFiles/HttpServer.dir/HttpServer_unittest.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HttpServer.dir/HttpServer_unittest.cpp.s"
-	cd /mnt/e/Desktop/FakeMuduo/build/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/e/Desktop/FakeMuduo/example/HttpServer_unittest.cpp -o CMakeFiles/HttpServer.dir/HttpServer_unittest.cpp.s
+example/CMakeFiles/HttpServer.dir/HttpServer/WebServer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HttpServer.dir/HttpServer/WebServer.cpp.s"
+	cd /mnt/e/Desktop/FakeMuduo/build/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/e/Desktop/FakeMuduo/example/HttpServer/WebServer.cpp -o CMakeFiles/HttpServer.dir/HttpServer/WebServer.cpp.s
 
 # Object files for target HttpServer
 HttpServer_OBJECTS = \
-"CMakeFiles/HttpServer.dir/HttpServer_unittest.cpp.o"
+"CMakeFiles/HttpServer.dir/HttpServer/WebServer.cpp.o"
 
 # External object files for target HttpServer
 HttpServer_EXTERNAL_OBJECTS =
 
-example/HttpServer: example/CMakeFiles/HttpServer.dir/HttpServer_unittest.cpp.o
+example/HttpServer: example/CMakeFiles/HttpServer.dir/HttpServer/WebServer.cpp.o
 example/HttpServer: example/CMakeFiles/HttpServer.dir/build.make
-example/HttpServer: src/base/libFakeMuduoBase.so
 example/HttpServer: src/net/libFakeMuduoNet.so
+example/HttpServer: src/net/http/libFakeMuduoHttp.so
+example/HttpServer: src/base/libFakeMuduoBase.so
 example/HttpServer: example/CMakeFiles/HttpServer.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable HttpServer"
 	cd /mnt/e/Desktop/FakeMuduo/build/example && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/HttpServer.dir/link.txt --verbose=$(VERBOSE)

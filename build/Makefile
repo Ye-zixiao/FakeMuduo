@@ -137,6 +137,71 @@ FakeMuduoNet/fast:
 .PHONY : FakeMuduoNet/fast
 
 #=============================================================================
+# Target rules for targets named FakeMuduoHttp
+
+# Build rule for target.
+FakeMuduoHttp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 FakeMuduoHttp
+.PHONY : FakeMuduoHttp
+
+# fast build rule for target.
+FakeMuduoHttp/fast:
+	$(MAKE) -f src/net/http/CMakeFiles/FakeMuduoHttp.dir/build.make src/net/http/CMakeFiles/FakeMuduoHttp.dir/build
+.PHONY : FakeMuduoHttp/fast
+
+#=============================================================================
+# Target rules for targets named TcpServer_unittest
+
+# Build rule for target.
+TcpServer_unittest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 TcpServer_unittest
+.PHONY : TcpServer_unittest
+
+# fast build rule for target.
+TcpServer_unittest/fast:
+	$(MAKE) -f example/CMakeFiles/TcpServer_unittest.dir/build.make example/CMakeFiles/TcpServer_unittest.dir/build
+.PHONY : TcpServer_unittest/fast
+
+#=============================================================================
+# Target rules for targets named Sockets_unitest
+
+# Build rule for target.
+Sockets_unitest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Sockets_unitest
+.PHONY : Sockets_unitest
+
+# fast build rule for target.
+Sockets_unitest/fast:
+	$(MAKE) -f example/CMakeFiles/Sockets_unitest.dir/build.make example/CMakeFiles/Sockets_unitest.dir/build
+.PHONY : Sockets_unitest/fast
+
+#=============================================================================
+# Target rules for targets named LogFile_unittest
+
+# Build rule for target.
+LogFile_unittest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 LogFile_unittest
+.PHONY : LogFile_unittest
+
+# fast build rule for target.
+LogFile_unittest/fast:
+	$(MAKE) -f example/CMakeFiles/LogFile_unittest.dir/build.make example/CMakeFiles/LogFile_unittest.dir/build
+.PHONY : LogFile_unittest/fast
+
+#=============================================================================
+# Target rules for targets named TimerQueue_unittest
+
+# Build rule for target.
+TimerQueue_unittest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 TimerQueue_unittest
+.PHONY : TimerQueue_unittest
+
+# fast build rule for target.
+TimerQueue_unittest/fast:
+	$(MAKE) -f example/CMakeFiles/TimerQueue_unittest.dir/build.make example/CMakeFiles/TimerQueue_unittest.dir/build
+.PHONY : TimerQueue_unittest/fast
+
+#=============================================================================
 # Target rules for targets named EchoServer
 
 # Build rule for target.
@@ -172,6 +237,11 @@ help:
 	@echo "... edit_cache"
 	@echo "... FakeMuduoBase"
 	@echo "... FakeMuduoNet"
+	@echo "... FakeMuduoHttp"
+	@echo "... TcpServer_unittest"
+	@echo "... Sockets_unitest"
+	@echo "... LogFile_unittest"
+	@echo "... TimerQueue_unittest"
 	@echo "... EchoServer"
 	@echo "... HttpServer"
 .PHONY : help

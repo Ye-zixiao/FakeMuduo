@@ -4,13 +4,13 @@
 
 #include "TcpConnection.h"
 
+#include <cerrno>
+#include <cassert>
+
 #include "../base/Logging.h"
 #include "Channel.h"
 #include "EventLoop.h"
 #include "Socket.h"
-
-#include <cerrno>
-#include <cassert>
 
 using namespace fm;
 using namespace fm::net;

@@ -111,6 +111,66 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+example/CMakeFiles/TcpServer_unittest.dir/rule:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f CMakeFiles/Makefile2 example/CMakeFiles/TcpServer_unittest.dir/rule
+.PHONY : example/CMakeFiles/TcpServer_unittest.dir/rule
+
+# Convenience name for target.
+TcpServer_unittest: example/CMakeFiles/TcpServer_unittest.dir/rule
+
+.PHONY : TcpServer_unittest
+
+# fast build rule for target.
+TcpServer_unittest/fast:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/TcpServer_unittest.dir/build.make example/CMakeFiles/TcpServer_unittest.dir/build
+.PHONY : TcpServer_unittest/fast
+
+# Convenience name for target.
+example/CMakeFiles/Sockets_unitest.dir/rule:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f CMakeFiles/Makefile2 example/CMakeFiles/Sockets_unitest.dir/rule
+.PHONY : example/CMakeFiles/Sockets_unitest.dir/rule
+
+# Convenience name for target.
+Sockets_unitest: example/CMakeFiles/Sockets_unitest.dir/rule
+
+.PHONY : Sockets_unitest
+
+# fast build rule for target.
+Sockets_unitest/fast:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/Sockets_unitest.dir/build.make example/CMakeFiles/Sockets_unitest.dir/build
+.PHONY : Sockets_unitest/fast
+
+# Convenience name for target.
+example/CMakeFiles/LogFile_unittest.dir/rule:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f CMakeFiles/Makefile2 example/CMakeFiles/LogFile_unittest.dir/rule
+.PHONY : example/CMakeFiles/LogFile_unittest.dir/rule
+
+# Convenience name for target.
+LogFile_unittest: example/CMakeFiles/LogFile_unittest.dir/rule
+
+.PHONY : LogFile_unittest
+
+# fast build rule for target.
+LogFile_unittest/fast:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/LogFile_unittest.dir/build.make example/CMakeFiles/LogFile_unittest.dir/build
+.PHONY : LogFile_unittest/fast
+
+# Convenience name for target.
+example/CMakeFiles/TimerQueue_unittest.dir/rule:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f CMakeFiles/Makefile2 example/CMakeFiles/TimerQueue_unittest.dir/rule
+.PHONY : example/CMakeFiles/TimerQueue_unittest.dir/rule
+
+# Convenience name for target.
+TimerQueue_unittest: example/CMakeFiles/TimerQueue_unittest.dir/rule
+
+.PHONY : TimerQueue_unittest
+
+# fast build rule for target.
+TimerQueue_unittest/fast:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/TimerQueue_unittest.dir/build.make example/CMakeFiles/TimerQueue_unittest.dir/build
+.PHONY : TimerQueue_unittest/fast
+
+# Convenience name for target.
 example/CMakeFiles/EchoServer.dir/rule:
 	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f CMakeFiles/Makefile2 example/CMakeFiles/EchoServer.dir/rule
 .PHONY : example/CMakeFiles/EchoServer.dir/rule
@@ -140,59 +200,167 @@ HttpServer/fast:
 	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/HttpServer.dir/build.make example/CMakeFiles/HttpServer.dir/build
 .PHONY : HttpServer/fast
 
-EchoServer_unittest.o: EchoServer_unittest.cpp.o
+EchoServer/EchoServer.o: EchoServer/EchoServer.cpp.o
 
-.PHONY : EchoServer_unittest.o
-
-# target to build an object file
-EchoServer_unittest.cpp.o:
-	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/EchoServer.dir/build.make example/CMakeFiles/EchoServer.dir/EchoServer_unittest.cpp.o
-.PHONY : EchoServer_unittest.cpp.o
-
-EchoServer_unittest.i: EchoServer_unittest.cpp.i
-
-.PHONY : EchoServer_unittest.i
-
-# target to preprocess a source file
-EchoServer_unittest.cpp.i:
-	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/EchoServer.dir/build.make example/CMakeFiles/EchoServer.dir/EchoServer_unittest.cpp.i
-.PHONY : EchoServer_unittest.cpp.i
-
-EchoServer_unittest.s: EchoServer_unittest.cpp.s
-
-.PHONY : EchoServer_unittest.s
-
-# target to generate assembly for a file
-EchoServer_unittest.cpp.s:
-	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/EchoServer.dir/build.make example/CMakeFiles/EchoServer.dir/EchoServer_unittest.cpp.s
-.PHONY : EchoServer_unittest.cpp.s
-
-HttpServer_unittest.o: HttpServer_unittest.cpp.o
-
-.PHONY : HttpServer_unittest.o
+.PHONY : EchoServer/EchoServer.o
 
 # target to build an object file
-HttpServer_unittest.cpp.o:
-	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/HttpServer.dir/build.make example/CMakeFiles/HttpServer.dir/HttpServer_unittest.cpp.o
-.PHONY : HttpServer_unittest.cpp.o
+EchoServer/EchoServer.cpp.o:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/EchoServer.dir/build.make example/CMakeFiles/EchoServer.dir/EchoServer/EchoServer.cpp.o
+.PHONY : EchoServer/EchoServer.cpp.o
 
-HttpServer_unittest.i: HttpServer_unittest.cpp.i
+EchoServer/EchoServer.i: EchoServer/EchoServer.cpp.i
 
-.PHONY : HttpServer_unittest.i
+.PHONY : EchoServer/EchoServer.i
 
 # target to preprocess a source file
-HttpServer_unittest.cpp.i:
-	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/HttpServer.dir/build.make example/CMakeFiles/HttpServer.dir/HttpServer_unittest.cpp.i
-.PHONY : HttpServer_unittest.cpp.i
+EchoServer/EchoServer.cpp.i:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/EchoServer.dir/build.make example/CMakeFiles/EchoServer.dir/EchoServer/EchoServer.cpp.i
+.PHONY : EchoServer/EchoServer.cpp.i
 
-HttpServer_unittest.s: HttpServer_unittest.cpp.s
+EchoServer/EchoServer.s: EchoServer/EchoServer.cpp.s
 
-.PHONY : HttpServer_unittest.s
+.PHONY : EchoServer/EchoServer.s
 
 # target to generate assembly for a file
-HttpServer_unittest.cpp.s:
-	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/HttpServer.dir/build.make example/CMakeFiles/HttpServer.dir/HttpServer_unittest.cpp.s
-.PHONY : HttpServer_unittest.cpp.s
+EchoServer/EchoServer.cpp.s:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/EchoServer.dir/build.make example/CMakeFiles/EchoServer.dir/EchoServer/EchoServer.cpp.s
+.PHONY : EchoServer/EchoServer.cpp.s
+
+HttpServer/WebServer.o: HttpServer/WebServer.cpp.o
+
+.PHONY : HttpServer/WebServer.o
+
+# target to build an object file
+HttpServer/WebServer.cpp.o:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/HttpServer.dir/build.make example/CMakeFiles/HttpServer.dir/HttpServer/WebServer.cpp.o
+.PHONY : HttpServer/WebServer.cpp.o
+
+HttpServer/WebServer.i: HttpServer/WebServer.cpp.i
+
+.PHONY : HttpServer/WebServer.i
+
+# target to preprocess a source file
+HttpServer/WebServer.cpp.i:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/HttpServer.dir/build.make example/CMakeFiles/HttpServer.dir/HttpServer/WebServer.cpp.i
+.PHONY : HttpServer/WebServer.cpp.i
+
+HttpServer/WebServer.s: HttpServer/WebServer.cpp.s
+
+.PHONY : HttpServer/WebServer.s
+
+# target to generate assembly for a file
+HttpServer/WebServer.cpp.s:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/HttpServer.dir/build.make example/CMakeFiles/HttpServer.dir/HttpServer/WebServer.cpp.s
+.PHONY : HttpServer/WebServer.cpp.s
+
+UnitTest/LogFile_unittest.o: UnitTest/LogFile_unittest.cpp.o
+
+.PHONY : UnitTest/LogFile_unittest.o
+
+# target to build an object file
+UnitTest/LogFile_unittest.cpp.o:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/LogFile_unittest.dir/build.make example/CMakeFiles/LogFile_unittest.dir/UnitTest/LogFile_unittest.cpp.o
+.PHONY : UnitTest/LogFile_unittest.cpp.o
+
+UnitTest/LogFile_unittest.i: UnitTest/LogFile_unittest.cpp.i
+
+.PHONY : UnitTest/LogFile_unittest.i
+
+# target to preprocess a source file
+UnitTest/LogFile_unittest.cpp.i:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/LogFile_unittest.dir/build.make example/CMakeFiles/LogFile_unittest.dir/UnitTest/LogFile_unittest.cpp.i
+.PHONY : UnitTest/LogFile_unittest.cpp.i
+
+UnitTest/LogFile_unittest.s: UnitTest/LogFile_unittest.cpp.s
+
+.PHONY : UnitTest/LogFile_unittest.s
+
+# target to generate assembly for a file
+UnitTest/LogFile_unittest.cpp.s:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/LogFile_unittest.dir/build.make example/CMakeFiles/LogFile_unittest.dir/UnitTest/LogFile_unittest.cpp.s
+.PHONY : UnitTest/LogFile_unittest.cpp.s
+
+UnitTest/Sockets_unitest.o: UnitTest/Sockets_unitest.cpp.o
+
+.PHONY : UnitTest/Sockets_unitest.o
+
+# target to build an object file
+UnitTest/Sockets_unitest.cpp.o:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/Sockets_unitest.dir/build.make example/CMakeFiles/Sockets_unitest.dir/UnitTest/Sockets_unitest.cpp.o
+.PHONY : UnitTest/Sockets_unitest.cpp.o
+
+UnitTest/Sockets_unitest.i: UnitTest/Sockets_unitest.cpp.i
+
+.PHONY : UnitTest/Sockets_unitest.i
+
+# target to preprocess a source file
+UnitTest/Sockets_unitest.cpp.i:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/Sockets_unitest.dir/build.make example/CMakeFiles/Sockets_unitest.dir/UnitTest/Sockets_unitest.cpp.i
+.PHONY : UnitTest/Sockets_unitest.cpp.i
+
+UnitTest/Sockets_unitest.s: UnitTest/Sockets_unitest.cpp.s
+
+.PHONY : UnitTest/Sockets_unitest.s
+
+# target to generate assembly for a file
+UnitTest/Sockets_unitest.cpp.s:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/Sockets_unitest.dir/build.make example/CMakeFiles/Sockets_unitest.dir/UnitTest/Sockets_unitest.cpp.s
+.PHONY : UnitTest/Sockets_unitest.cpp.s
+
+UnitTest/TcpServer_unittest.o: UnitTest/TcpServer_unittest.cpp.o
+
+.PHONY : UnitTest/TcpServer_unittest.o
+
+# target to build an object file
+UnitTest/TcpServer_unittest.cpp.o:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/TcpServer_unittest.dir/build.make example/CMakeFiles/TcpServer_unittest.dir/UnitTest/TcpServer_unittest.cpp.o
+.PHONY : UnitTest/TcpServer_unittest.cpp.o
+
+UnitTest/TcpServer_unittest.i: UnitTest/TcpServer_unittest.cpp.i
+
+.PHONY : UnitTest/TcpServer_unittest.i
+
+# target to preprocess a source file
+UnitTest/TcpServer_unittest.cpp.i:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/TcpServer_unittest.dir/build.make example/CMakeFiles/TcpServer_unittest.dir/UnitTest/TcpServer_unittest.cpp.i
+.PHONY : UnitTest/TcpServer_unittest.cpp.i
+
+UnitTest/TcpServer_unittest.s: UnitTest/TcpServer_unittest.cpp.s
+
+.PHONY : UnitTest/TcpServer_unittest.s
+
+# target to generate assembly for a file
+UnitTest/TcpServer_unittest.cpp.s:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/TcpServer_unittest.dir/build.make example/CMakeFiles/TcpServer_unittest.dir/UnitTest/TcpServer_unittest.cpp.s
+.PHONY : UnitTest/TcpServer_unittest.cpp.s
+
+UnitTest/TimerQueue_unittest.o: UnitTest/TimerQueue_unittest.cpp.o
+
+.PHONY : UnitTest/TimerQueue_unittest.o
+
+# target to build an object file
+UnitTest/TimerQueue_unittest.cpp.o:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/TimerQueue_unittest.dir/build.make example/CMakeFiles/TimerQueue_unittest.dir/UnitTest/TimerQueue_unittest.cpp.o
+.PHONY : UnitTest/TimerQueue_unittest.cpp.o
+
+UnitTest/TimerQueue_unittest.i: UnitTest/TimerQueue_unittest.cpp.i
+
+.PHONY : UnitTest/TimerQueue_unittest.i
+
+# target to preprocess a source file
+UnitTest/TimerQueue_unittest.cpp.i:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/TimerQueue_unittest.dir/build.make example/CMakeFiles/TimerQueue_unittest.dir/UnitTest/TimerQueue_unittest.cpp.i
+.PHONY : UnitTest/TimerQueue_unittest.cpp.i
+
+UnitTest/TimerQueue_unittest.s: UnitTest/TimerQueue_unittest.cpp.s
+
+.PHONY : UnitTest/TimerQueue_unittest.s
+
+# target to generate assembly for a file
+UnitTest/TimerQueue_unittest.cpp.s:
+	cd /mnt/e/Desktop/FakeMuduo/build && $(MAKE) -f example/CMakeFiles/TimerQueue_unittest.dir/build.make example/CMakeFiles/TimerQueue_unittest.dir/UnitTest/TimerQueue_unittest.cpp.s
+.PHONY : UnitTest/TimerQueue_unittest.cpp.s
 
 # Help Target
 help:
@@ -200,16 +368,32 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... TcpServer_unittest"
+	@echo "... Sockets_unitest"
 	@echo "... rebuild_cache"
+	@echo "... LogFile_unittest"
+	@echo "... TimerQueue_unittest"
 	@echo "... EchoServer"
 	@echo "... edit_cache"
 	@echo "... HttpServer"
-	@echo "... EchoServer_unittest.o"
-	@echo "... EchoServer_unittest.i"
-	@echo "... EchoServer_unittest.s"
-	@echo "... HttpServer_unittest.o"
-	@echo "... HttpServer_unittest.i"
-	@echo "... HttpServer_unittest.s"
+	@echo "... EchoServer/EchoServer.o"
+	@echo "... EchoServer/EchoServer.i"
+	@echo "... EchoServer/EchoServer.s"
+	@echo "... HttpServer/WebServer.o"
+	@echo "... HttpServer/WebServer.i"
+	@echo "... HttpServer/WebServer.s"
+	@echo "... UnitTest/LogFile_unittest.o"
+	@echo "... UnitTest/LogFile_unittest.i"
+	@echo "... UnitTest/LogFile_unittest.s"
+	@echo "... UnitTest/Sockets_unitest.o"
+	@echo "... UnitTest/Sockets_unitest.i"
+	@echo "... UnitTest/Sockets_unitest.s"
+	@echo "... UnitTest/TcpServer_unittest.o"
+	@echo "... UnitTest/TcpServer_unittest.i"
+	@echo "... UnitTest/TcpServer_unittest.s"
+	@echo "... UnitTest/TimerQueue_unittest.o"
+	@echo "... UnitTest/TimerQueue_unittest.i"
+	@echo "... UnitTest/TimerQueue_unittest.s"
 .PHONY : help
 
 

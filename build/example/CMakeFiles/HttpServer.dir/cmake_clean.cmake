@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/HttpServer.dir/HttpServer_unittest.cpp.o"
+  "CMakeFiles/HttpServer.dir/HttpServer/WebServer.cpp.o"
   "HttpServer"
   "HttpServer.pdb"
 )

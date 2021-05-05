@@ -6,7 +6,14 @@
 /mnt/e/Desktop/FakeMuduo/build/src/net/CMakeFiles/rebuild_cache.dir
 /mnt/e/Desktop/FakeMuduo/build/src/net/CMakeFiles/edit_cache.dir
 /mnt/e/Desktop/FakeMuduo/build/src/net/CMakeFiles/FakeMuduoNet.dir
+/mnt/e/Desktop/FakeMuduo/build/src/net/http/CMakeFiles/rebuild_cache.dir
+/mnt/e/Desktop/FakeMuduo/build/src/net/http/CMakeFiles/edit_cache.dir
+/mnt/e/Desktop/FakeMuduo/build/src/net/http/CMakeFiles/FakeMuduoHttp.dir
+/mnt/e/Desktop/FakeMuduo/build/example/CMakeFiles/TcpServer_unittest.dir
+/mnt/e/Desktop/FakeMuduo/build/example/CMakeFiles/Sockets_unitest.dir
 /mnt/e/Desktop/FakeMuduo/build/example/CMakeFiles/rebuild_cache.dir
+/mnt/e/Desktop/FakeMuduo/build/example/CMakeFiles/LogFile_unittest.dir
+/mnt/e/Desktop/FakeMuduo/build/example/CMakeFiles/TimerQueue_unittest.dir
 /mnt/e/Desktop/FakeMuduo/build/example/CMakeFiles/EchoServer.dir
 /mnt/e/Desktop/FakeMuduo/build/example/CMakeFiles/edit_cache.dir
 /mnt/e/Desktop/FakeMuduo/build/example/CMakeFiles/HttpServer.dir

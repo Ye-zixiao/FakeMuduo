@@ -46,6 +46,8 @@ src/net/CMakeFiles/FakeMuduoNet.dir/EventLoop.cpp.o: ../src/net/EventLoop.cpp
 src/net/CMakeFiles/FakeMuduoNet.dir/EventLoop.cpp.o: ../src/net/EventLoop.h
 src/net/CMakeFiles/FakeMuduoNet.dir/EventLoop.cpp.o: ../src/net/Poller.h
 src/net/CMakeFiles/FakeMuduoNet.dir/EventLoop.cpp.o: ../src/net/SocketsOps.h
+src/net/CMakeFiles/FakeMuduoNet.dir/EventLoop.cpp.o: ../src/net/Timer.h
+src/net/CMakeFiles/FakeMuduoNet.dir/EventLoop.cpp.o: ../src/net/TimerQueue.h
 
 src/net/CMakeFiles/FakeMuduoNet.dir/EventLoopThread.cpp.o: ../src/base/LogStream.h
 src/net/CMakeFiles/FakeMuduoNet.dir/EventLoopThread.cpp.o: ../src/base/Logging.h
@@ -142,51 +144,24 @@ src/net/CMakeFiles/FakeMuduoNet.dir/TcpServer.cpp.o: ../src/net/TcpConnection.h
 src/net/CMakeFiles/FakeMuduoNet.dir/TcpServer.cpp.o: ../src/net/TcpServer.cpp
 src/net/CMakeFiles/FakeMuduoNet.dir/TcpServer.cpp.o: ../src/net/TcpServer.h
 
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.o: ../src/base/TimeStamp.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.o: ../src/base/copyable.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.o: ../src/net/Buffer.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.o: ../src/net/Endian.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.o: ../src/net/http/HttpBase.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.o: ../src/net/http/HttpContext.cpp
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.o: ../src/net/http/HttpContext.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpContext.cpp.o: ../src/net/http/HttpRequest.h
+src/net/CMakeFiles/FakeMuduoNet.dir/Timer.cpp.o: ../src/base/TimeStamp.h
+src/net/CMakeFiles/FakeMuduoNet.dir/Timer.cpp.o: ../src/base/copyable.h
+src/net/CMakeFiles/FakeMuduoNet.dir/Timer.cpp.o: ../src/base/noncoapyable.h
+src/net/CMakeFiles/FakeMuduoNet.dir/Timer.cpp.o: ../src/net/Callback.h
+src/net/CMakeFiles/FakeMuduoNet.dir/Timer.cpp.o: ../src/net/Timer.cpp
+src/net/CMakeFiles/FakeMuduoNet.dir/Timer.cpp.o: ../src/net/Timer.h
 
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.o: ../src/base/TimeStamp.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.o: ../src/base/copyable.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.o: ../src/net/http/HttpBase.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.o: ../src/net/http/HttpRequest.cpp
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpRequest.cpp.o: ../src/net/http/HttpRequest.h
-
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.o: ../src/base/LogStream.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.o: ../src/base/Logging.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.o: ../src/base/TimeStamp.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.o: ../src/base/copyable.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.o: ../src/base/noncoapyable.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.o: ../src/net/Buffer.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.o: ../src/net/Endian.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.o: ../src/net/http/HttpBase.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.o: ../src/net/http/HttpResponse.cpp
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpResponse.cpp.o: ../src/net/http/HttpResponse.h
-
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/base/LogStream.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/base/Logging.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/base/ThreadPool.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/base/TimeStamp.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/base/copyable.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/base/noncoapyable.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/net/Buffer.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/net/Callback.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/net/Endian.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/net/InetAddress.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/net/SocketsOps.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/net/TcpConnection.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/net/TcpServer.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/net/http/HttpBase.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/net/http/HttpContext.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/net/http/HttpRequest.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/net/http/HttpResponse.h
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/net/http/HttpServer.cpp
-src/net/CMakeFiles/FakeMuduoNet.dir/http/HttpServer.cpp.o: ../src/net/http/HttpServer.h
+src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.o: ../src/base/LogStream.h
+src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.o: ../src/base/Logging.h
+src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.o: ../src/base/TimeStamp.h
+src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.o: ../src/base/copyable.h
+src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.o: ../src/base/noncoapyable.h
+src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.o: ../src/net/Callback.h
+src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.o: ../src/net/Channel.h
+src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.o: ../src/net/EventLoop.h
+src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.o: ../src/net/Timer.h
+src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.o: ../src/net/TimerQueue.cpp
+src/net/CMakeFiles/FakeMuduoNet.dir/TimerQueue.cpp.o: ../src/net/TimerQueue.h
 
 src/net/CMakeFiles/FakeMuduoNet.dir/poller/DefaultPoller.cpp.o: ../src/base/TimeStamp.h
 src/net/CMakeFiles/FakeMuduoNet.dir/poller/DefaultPoller.cpp.o: ../src/base/copyable.h

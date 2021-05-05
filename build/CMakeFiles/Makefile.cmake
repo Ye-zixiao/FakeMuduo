@@ -13,6 +13,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "../example/CMakeLists.txt"
   "../src/base/CMakeLists.txt"
   "../src/net/CMakeLists.txt"
+  "../src/net/http/CMakeLists.txt"
   "/usr/share/cmake-3.16/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake-3.16/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake"
   "/usr/share/cmake-3.16/Modules/CMakeCommonLanguageInclude.cmake"
@@ -45,6 +46,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/base/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/net/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/net/http/CMakeFiles/CMakeDirectoryInformation.cmake"
   "example/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
@@ -52,6 +54,11 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "src/base/CMakeFiles/FakeMuduoBase.dir/DependInfo.cmake"
   "src/net/CMakeFiles/FakeMuduoNet.dir/DependInfo.cmake"
+  "src/net/http/CMakeFiles/FakeMuduoHttp.dir/DependInfo.cmake"
+  "example/CMakeFiles/TcpServer_unittest.dir/DependInfo.cmake"
+  "example/CMakeFiles/Sockets_unitest.dir/DependInfo.cmake"
+  "example/CMakeFiles/LogFile_unittest.dir/DependInfo.cmake"
+  "example/CMakeFiles/TimerQueue_unittest.dir/DependInfo.cmake"
   "example/CMakeFiles/EchoServer.dir/DependInfo.cmake"
   "example/CMakeFiles/HttpServer.dir/DependInfo.cmake"
   )

@@ -5,10 +5,9 @@
 #ifndef FAKEMUDUO_NET_INETADDRESS_H_
 #define FAKEMUDUO_NET_INETADDRESS_H_
 
-#include "../base/copyable.h"
-
 #include <string>
 
+#include "../base/copyable.h"
 #include "SocketsOps.h"
 
 namespace fm {

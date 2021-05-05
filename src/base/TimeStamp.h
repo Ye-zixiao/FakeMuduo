@@ -66,16 +66,15 @@ inline bool operator==(const TimeStamp &lhs, const TimeStamp &rhs) {
   return lhs.usSinceEpoch() == rhs.usSinceEpoch();
 }
 
-// timeDiff的另一种提供方式
-inline double operator-(const TimeStamp &lhs, const TimeStamp &rhs) {
-  uint64_t diff = lhs.usSinceEpoch() - rhs.usSinceEpoch();
-  return static_cast<double>(diff) / TimeStamp::kUsPerSecond;
-}
-
 // 返回相差多少秒
 inline double timeDiff(const TimeStamp &lhs, const TimeStamp &rhs) {
   uint64_t diff = lhs.usSinceEpoch() - rhs.usSinceEpoch();
   return static_cast<double>(diff) / TimeStamp::kUsPerSecond;
+}
+
+inline TimeStamp timeAdd(TimeStamp time, double seconds) {
+  auto delta = static_cast<int64_t>(seconds * TimeStamp::kUsPerSecond);
+  return TimeStamp(time.usSinceEpoch() + delta);
 }
 
 } // namespace fm

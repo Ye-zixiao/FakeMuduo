@@ -5,10 +5,10 @@
 #include "TcpServer.h"
 
 #include "../base/Logging.h"
-#include "Acceptor.h"
-#include "EventLoop.h"
-#include "EventLoopThread.h"
 #include "EventLoopThreadPool.h"
+#include "EventLoopThread.h"
+#include "EventLoop.h"
+#include "Acceptor.h"
 
 #include <cstdio>
 

@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wall -O3 -g   CMakeFiles/LogFile_unittest.dir/UnitTest/LogFile_unittest.cpp.o  -o LogFile_unittest  -Wl,-rpath,/mnt/e/Desktop/FakeMuduo/build/src/net:/mnt/e/Desktop/FakeMuduo/build/src/base -lpthread ../src/net/libFakeMuduoNet.so ../src/base/libFakeMuduoBase.so -lpthread 

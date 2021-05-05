@@ -6,21 +6,22 @@
 
 #include <cassert>
 
-#include "EventLoop.h"
-#include "EventLoopThread.h"
 #include "../base/Logging.h"
+#include "EventLoopThread.h"
+#include "EventLoop.h"
 
 using namespace fm;
 using namespace fm::net;
 
-EventLoopThreadPool::EventLoopThreadPool(EventLoop *baseLoop, const std::string &name)
-	: baseLoop_(baseLoop),
-	  name_(name),
-	  start_(false),
-	  numThreads_(0),
-	  next_(0),
-	  threads_(),
-	  loops_() {}
+EventLoopThreadPool::EventLoopThreadPool(EventLoop *baseLoop,
+                                         const std::string &name)
+    : baseLoop_(baseLoop),
+      name_(name),
+      start_(false),
+      numThreads_(0),
+      next_(0),
+      threads_(),
+      loops_() {}
 
 void EventLoopThreadPool::start() {
   assert(!start_);
@@ -28,11 +29,11 @@ void EventLoopThreadPool::start() {
 
   start_ = true;
   for (int i = 0; i < numThreads_; ++i) {
-	char buf[name_.size() + 32];
-	snprintf(buf, sizeof(buf), "%s%d", name_.c_str(), i);
-	auto *t = new EventLoopThread(buf);
-	threads_.push_back(std::unique_ptr<EventLoopThread>(t));
-	loops_.push_back(t->startLoop());
+    char buf[name_.size() + 32];
+    snprintf(buf, sizeof(buf), "%s%d", name_.c_str(), i);
+    auto *t = new EventLoopThread(buf);
+    threads_.push_back(std::unique_ptr<EventLoopThread>(t));
+    loops_.push_back(t->startLoop());
   }
 }
 
@@ -42,8 +43,8 @@ EventLoop *EventLoopThreadPool::getNextLoop() {
   EventLoop *loop = baseLoop_;
 
   if (!loops_.empty()) {
-	loop = loops_[next_++];
-	next_ = next_ % loops_.size();
+    loop = loops_[next_++];
+    next_ = next_ % loops_.size();
   }
   return loop;
 }
@@ -53,7 +54,7 @@ EventLoop *EventLoopThreadPool::getLoopForHash(size_t hashCode) {
   EventLoop *loop = baseLoop_;
 
   if (!loops_.empty())
-	loop = loops_[hashCode % loops_.size()];
+    loop = loops_[hashCode % loops_.size()];
   return loop;
 }
 

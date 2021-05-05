@@ -5,7 +5,7 @@
 		<Option title="FakeMuduo"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\src\;CMake Files\src\base\;CMake Files\src\net\;CMake Files\example\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\src\;CMake Files\src\base\;CMake Files\src\net\;CMake Files\src\net\http\;CMake Files\example\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/mnt/e/Desktop/FakeMuduo/build"/>
@@ -125,6 +125,226 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/src/net/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="FakeMuduoHttp">
+				<Option output="/mnt/e/Desktop/FakeMuduo/build/src/net/http/libFakeMuduoHttp.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/e/Desktop/FakeMuduo/build/src/net/http"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/src/net/http/Makefile&quot;  VERBOSE=1 FakeMuduoHttp"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/src/net/http/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/src/net/http/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/src/net/http/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="FakeMuduoHttp/fast">
+				<Option output="/mnt/e/Desktop/FakeMuduo/build/src/net/http/libFakeMuduoHttp.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/e/Desktop/FakeMuduo/build/src/net/http"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/src/net/http/Makefile&quot;  VERBOSE=1 FakeMuduoHttp/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/src/net/http/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/src/net/http/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/src/net/http/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TcpServer_unittest">
+				<Option output="/mnt/e/Desktop/FakeMuduo/build/example/TcpServer_unittest" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/e/Desktop/FakeMuduo/build/example"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 TcpServer_unittest"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TcpServer_unittest/fast">
+				<Option output="/mnt/e/Desktop/FakeMuduo/build/example/TcpServer_unittest" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/e/Desktop/FakeMuduo/build/example"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 TcpServer_unittest/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Sockets_unitest">
+				<Option output="/mnt/e/Desktop/FakeMuduo/build/example/Sockets_unitest" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/e/Desktop/FakeMuduo/build/example"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 Sockets_unitest"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Sockets_unitest/fast">
+				<Option output="/mnt/e/Desktop/FakeMuduo/build/example/Sockets_unitest" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/e/Desktop/FakeMuduo/build/example"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 Sockets_unitest/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="LogFile_unittest">
+				<Option output="/mnt/e/Desktop/FakeMuduo/build/example/LogFile_unittest" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/e/Desktop/FakeMuduo/build/example"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 LogFile_unittest"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="LogFile_unittest/fast">
+				<Option output="/mnt/e/Desktop/FakeMuduo/build/example/LogFile_unittest" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/e/Desktop/FakeMuduo/build/example"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 LogFile_unittest/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TimerQueue_unittest">
+				<Option output="/mnt/e/Desktop/FakeMuduo/build/example/TimerQueue_unittest" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/e/Desktop/FakeMuduo/build/example"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 TimerQueue_unittest"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TimerQueue_unittest/fast">
+				<Option output="/mnt/e/Desktop/FakeMuduo/build/example/TimerQueue_unittest" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/e/Desktop/FakeMuduo/build/example"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 TimerQueue_unittest/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/e/Desktop/FakeMuduo/build/example/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="EchoServer">
 				<Option output="/mnt/e/Desktop/FakeMuduo/build/example/EchoServer" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/mnt/e/Desktop/FakeMuduo/build/example"/>
@@ -214,11 +434,23 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/mnt/e/Desktop/FakeMuduo/example/EchoServer_unittest.cpp">
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/example/EchoServer/EchoServer.cpp">
 			<Option target="EchoServer"/>
 		</Unit>
-		<Unit filename="/mnt/e/Desktop/FakeMuduo/example/HttpServer_unittest.cpp">
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/example/HttpServer/WebServer.cpp">
 			<Option target="HttpServer"/>
+		</Unit>
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/example/UnitTest/LogFile_unittest.cpp">
+			<Option target="LogFile_unittest"/>
+		</Unit>
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/example/UnitTest/Sockets_unitest.cpp">
+			<Option target="Sockets_unitest"/>
+		</Unit>
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/example/UnitTest/TcpServer_unittest.cpp">
+			<Option target="TcpServer_unittest"/>
+		</Unit>
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/example/UnitTest/TimerQueue_unittest.cpp">
+			<Option target="TimerQueue_unittest"/>
 		</Unit>
 		<Unit filename="/mnt/e/Desktop/FakeMuduo/src/base/Exception.cpp">
 			<Option target="FakeMuduoBase"/>
@@ -328,29 +560,41 @@
 		<Unit filename="/mnt/e/Desktop/FakeMuduo/src/net/TcpServer.h">
 			<Option target="FakeMuduoNet"/>
 		</Unit>
-		<Unit filename="/mnt/e/Desktop/FakeMuduo/src/net/http/HttpContext.cpp">
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/src/net/Timer.cpp">
 			<Option target="FakeMuduoNet"/>
+		</Unit>
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/src/net/Timer.h">
+			<Option target="FakeMuduoNet"/>
+		</Unit>
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/src/net/TimerQueue.cpp">
+			<Option target="FakeMuduoNet"/>
+		</Unit>
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/src/net/TimerQueue.h">
+			<Option target="FakeMuduoNet"/>
+		</Unit>
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/src/net/http/HttpContext.cpp">
+			<Option target="FakeMuduoHttp"/>
 		</Unit>
 		<Unit filename="/mnt/e/Desktop/FakeMuduo/src/net/http/HttpContext.h">
-			<Option target="FakeMuduoNet"/>
+			<Option target="FakeMuduoHttp"/>
 		</Unit>
 		<Unit filename="/mnt/e/Desktop/FakeMuduo/src/net/http/HttpRequest.cpp">
-			<Option target="FakeMuduoNet"/>
+			<Option target="FakeMuduoHttp"/>
 		</Unit>
 		<Unit filename="/mnt/e/Desktop/FakeMuduo/src/net/http/HttpRequest.h">
-			<Option target="FakeMuduoNet"/>
+			<Option target="FakeMuduoHttp"/>
 		</Unit>
 		<Unit filename="/mnt/e/Desktop/FakeMuduo/src/net/http/HttpResponse.cpp">
-			<Option target="FakeMuduoNet"/>
+			<Option target="FakeMuduoHttp"/>
 		</Unit>
 		<Unit filename="/mnt/e/Desktop/FakeMuduo/src/net/http/HttpResponse.h">
-			<Option target="FakeMuduoNet"/>
+			<Option target="FakeMuduoHttp"/>
 		</Unit>
 		<Unit filename="/mnt/e/Desktop/FakeMuduo/src/net/http/HttpServer.cpp">
-			<Option target="FakeMuduoNet"/>
+			<Option target="FakeMuduoHttp"/>
 		</Unit>
 		<Unit filename="/mnt/e/Desktop/FakeMuduo/src/net/http/HttpServer.h">
-			<Option target="FakeMuduoNet"/>
+			<Option target="FakeMuduoHttp"/>
 		</Unit>
 		<Unit filename="/mnt/e/Desktop/FakeMuduo/src/net/poller/DefaultPoller.cpp">
 			<Option target="FakeMuduoNet"/>
@@ -369,6 +613,9 @@
 		</Unit>
 		<Unit filename="/mnt/e/Desktop/FakeMuduo/src/net/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\src\net\"/>
+		</Unit>
+		<Unit filename="/mnt/e/Desktop/FakeMuduo/src/net/http/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\net\http\"/>
 		</Unit>
 		<Unit filename="/mnt/e/Desktop/FakeMuduo/example/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\example\"/>

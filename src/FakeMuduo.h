@@ -22,6 +22,7 @@
 #include "net/Socket.h"
 #include "net/EventLoop.h"
 #include "net/TcpServer.h"
+#include "net/Timer.h"
 
 #include "net/http/HttpServer.h"
 #include "net/http/HttpRequest.h"

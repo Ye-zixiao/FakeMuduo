@@ -57,30 +57,30 @@ include example/CMakeFiles/EchoServer.dir/progress.make
 # Include the compile flags for this target's objects.
 include example/CMakeFiles/EchoServer.dir/flags.make
 
-example/CMakeFiles/EchoServer.dir/EchoServer_unittest.cpp.o: example/CMakeFiles/EchoServer.dir/flags.make
-example/CMakeFiles/EchoServer.dir/EchoServer_unittest.cpp.o: ../example/EchoServer_unittest.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object example/CMakeFiles/EchoServer.dir/EchoServer_unittest.cpp.o"
-	cd /mnt/e/Desktop/FakeMuduo/build/example && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EchoServer.dir/EchoServer_unittest.cpp.o -c /mnt/e/Desktop/FakeMuduo/example/EchoServer_unittest.cpp
+example/CMakeFiles/EchoServer.dir/EchoServer/EchoServer.cpp.o: example/CMakeFiles/EchoServer.dir/flags.make
+example/CMakeFiles/EchoServer.dir/EchoServer/EchoServer.cpp.o: ../example/EchoServer/EchoServer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object example/CMakeFiles/EchoServer.dir/EchoServer/EchoServer.cpp.o"
+	cd /mnt/e/Desktop/FakeMuduo/build/example && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EchoServer.dir/EchoServer/EchoServer.cpp.o -c /mnt/e/Desktop/FakeMuduo/example/EchoServer/EchoServer.cpp
 
-example/CMakeFiles/EchoServer.dir/EchoServer_unittest.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EchoServer.dir/EchoServer_unittest.cpp.i"
-	cd /mnt/e/Desktop/FakeMuduo/build/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/e/Desktop/FakeMuduo/example/EchoServer_unittest.cpp > CMakeFiles/EchoServer.dir/EchoServer_unittest.cpp.i
+example/CMakeFiles/EchoServer.dir/EchoServer/EchoServer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EchoServer.dir/EchoServer/EchoServer.cpp.i"
+	cd /mnt/e/Desktop/FakeMuduo/build/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/e/Desktop/FakeMuduo/example/EchoServer/EchoServer.cpp > CMakeFiles/EchoServer.dir/EchoServer/EchoServer.cpp.i
 
-example/CMakeFiles/EchoServer.dir/EchoServer_unittest.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EchoServer.dir/EchoServer_unittest.cpp.s"
-	cd /mnt/e/Desktop/FakeMuduo/build/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/e/Desktop/FakeMuduo/example/EchoServer_unittest.cpp -o CMakeFiles/EchoServer.dir/EchoServer_unittest.cpp.s
+example/CMakeFiles/EchoServer.dir/EchoServer/EchoServer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EchoServer.dir/EchoServer/EchoServer.cpp.s"
+	cd /mnt/e/Desktop/FakeMuduo/build/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/e/Desktop/FakeMuduo/example/EchoServer/EchoServer.cpp -o CMakeFiles/EchoServer.dir/EchoServer/EchoServer.cpp.s
 
 # Object files for target EchoServer
 EchoServer_OBJECTS = \
-"CMakeFiles/EchoServer.dir/EchoServer_unittest.cpp.o"
+"CMakeFiles/EchoServer.dir/EchoServer/EchoServer.cpp.o"
 
 # External object files for target EchoServer
 EchoServer_EXTERNAL_OBJECTS =
 
-example/EchoServer: example/CMakeFiles/EchoServer.dir/EchoServer_unittest.cpp.o
+example/EchoServer: example/CMakeFiles/EchoServer.dir/EchoServer/EchoServer.cpp.o
 example/EchoServer: example/CMakeFiles/EchoServer.dir/build.make
-example/EchoServer: src/base/libFakeMuduoBase.so
 example/EchoServer: src/net/libFakeMuduoNet.so
+example/EchoServer: src/base/libFakeMuduoBase.so
 example/EchoServer: example/CMakeFiles/EchoServer.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable EchoServer"
 	cd /mnt/e/Desktop/FakeMuduo/build/example && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/EchoServer.dir/link.txt --verbose=$(VERBOSE)

@@ -55,6 +55,7 @@ CMAKE_BINARY_DIR = /mnt/e/Desktop/FakeMuduo/build
 # The main recursive "all" target.
 all: src/base/all
 all: src/net/all
+all: src/net/http/all
 all: example/all
 
 .PHONY : all
@@ -62,6 +63,7 @@ all: example/all
 # The main recursive "preinstall" target.
 preinstall: src/base/preinstall
 preinstall: src/net/preinstall
+preinstall: src/net/http/preinstall
 preinstall: example/preinstall
 
 .PHONY : preinstall
@@ -69,6 +71,7 @@ preinstall: example/preinstall
 # The main recursive "clean" target.
 clean: src/base/clean
 clean: src/net/clean
+clean: src/net/http/clean
 clean: example/clean
 
 .PHONY : clean
@@ -77,6 +80,10 @@ clean: example/clean
 # Directory level rules for directory example
 
 # Recursive "all" directory target.
+example/all: example/CMakeFiles/TcpServer_unittest.dir/all
+example/all: example/CMakeFiles/Sockets_unitest.dir/all
+example/all: example/CMakeFiles/LogFile_unittest.dir/all
+example/all: example/CMakeFiles/TimerQueue_unittest.dir/all
 example/all: example/CMakeFiles/EchoServer.dir/all
 example/all: example/CMakeFiles/HttpServer.dir/all
 
@@ -88,6 +95,10 @@ example/preinstall:
 .PHONY : example/preinstall
 
 # Recursive "clean" directory target.
+example/clean: example/CMakeFiles/TcpServer_unittest.dir/clean
+example/clean: example/CMakeFiles/Sockets_unitest.dir/clean
+example/clean: example/CMakeFiles/LogFile_unittest.dir/clean
+example/clean: example/CMakeFiles/TimerQueue_unittest.dir/clean
 example/clean: example/CMakeFiles/EchoServer.dir/clean
 example/clean: example/CMakeFiles/HttpServer.dir/clean
 
@@ -130,6 +141,24 @@ src/net/clean: src/net/CMakeFiles/FakeMuduoNet.dir/clean
 .PHONY : src/net/clean
 
 #=============================================================================
+# Directory level rules for directory src/net/http
+
+# Recursive "all" directory target.
+src/net/http/all: src/net/http/CMakeFiles/FakeMuduoHttp.dir/all
+
+.PHONY : src/net/http/all
+
+# Recursive "preinstall" directory target.
+src/net/http/preinstall:
+
+.PHONY : src/net/http/preinstall
+
+# Recursive "clean" directory target.
+src/net/http/clean: src/net/http/CMakeFiles/FakeMuduoHttp.dir/clean
+
+.PHONY : src/net/http/clean
+
+#=============================================================================
 # Target rules for target src/base/CMakeFiles/FakeMuduoBase.dir
 
 # All Build rule for target.
@@ -160,15 +189,15 @@ src/base/CMakeFiles/FakeMuduoBase.dir/clean:
 # Target rules for target src/net/CMakeFiles/FakeMuduoNet.dir
 
 # All Build rule for target.
-src/net/CMakeFiles/FakeMuduoNet.dir/all:
+src/net/CMakeFiles/FakeMuduoNet.dir/all: src/base/CMakeFiles/FakeMuduoBase.dir/all
 	$(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/depend
 	$(MAKE) -f src/net/CMakeFiles/FakeMuduoNet.dir/build.make src/net/CMakeFiles/FakeMuduoNet.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28 "Built target FakeMuduoNet"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31 "Built target FakeMuduoNet"
 .PHONY : src/net/CMakeFiles/FakeMuduoNet.dir/all
 
 # Build rule for subdir invocation for target.
 src/net/CMakeFiles/FakeMuduoNet.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Desktop/FakeMuduo/build/CMakeFiles 19
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Desktop/FakeMuduo/build/CMakeFiles 24
 	$(MAKE) -f CMakeFiles/Makefile2 src/net/CMakeFiles/FakeMuduoNet.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Desktop/FakeMuduo/build/CMakeFiles 0
 .PHONY : src/net/CMakeFiles/FakeMuduoNet.dir/rule
@@ -184,6 +213,145 @@ src/net/CMakeFiles/FakeMuduoNet.dir/clean:
 .PHONY : src/net/CMakeFiles/FakeMuduoNet.dir/clean
 
 #=============================================================================
+# Target rules for target src/net/http/CMakeFiles/FakeMuduoHttp.dir
+
+# All Build rule for target.
+src/net/http/CMakeFiles/FakeMuduoHttp.dir/all:
+	$(MAKE) -f src/net/http/CMakeFiles/FakeMuduoHttp.dir/build.make src/net/http/CMakeFiles/FakeMuduoHttp.dir/depend
+	$(MAKE) -f src/net/http/CMakeFiles/FakeMuduoHttp.dir/build.make src/net/http/CMakeFiles/FakeMuduoHttp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=10,11,12,13,14 "Built target FakeMuduoHttp"
+.PHONY : src/net/http/CMakeFiles/FakeMuduoHttp.dir/all
+
+# Build rule for subdir invocation for target.
+src/net/http/CMakeFiles/FakeMuduoHttp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Desktop/FakeMuduo/build/CMakeFiles 5
+	$(MAKE) -f CMakeFiles/Makefile2 src/net/http/CMakeFiles/FakeMuduoHttp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Desktop/FakeMuduo/build/CMakeFiles 0
+.PHONY : src/net/http/CMakeFiles/FakeMuduoHttp.dir/rule
+
+# Convenience name for target.
+FakeMuduoHttp: src/net/http/CMakeFiles/FakeMuduoHttp.dir/rule
+
+.PHONY : FakeMuduoHttp
+
+# clean rule for target.
+src/net/http/CMakeFiles/FakeMuduoHttp.dir/clean:
+	$(MAKE) -f src/net/http/CMakeFiles/FakeMuduoHttp.dir/build.make src/net/http/CMakeFiles/FakeMuduoHttp.dir/clean
+.PHONY : src/net/http/CMakeFiles/FakeMuduoHttp.dir/clean
+
+#=============================================================================
+# Target rules for target example/CMakeFiles/TcpServer_unittest.dir
+
+# All Build rule for target.
+example/CMakeFiles/TcpServer_unittest.dir/all: src/base/CMakeFiles/FakeMuduoBase.dir/all
+example/CMakeFiles/TcpServer_unittest.dir/all: src/net/CMakeFiles/FakeMuduoNet.dir/all
+	$(MAKE) -f example/CMakeFiles/TcpServer_unittest.dir/build.make example/CMakeFiles/TcpServer_unittest.dir/depend
+	$(MAKE) -f example/CMakeFiles/TcpServer_unittest.dir/build.make example/CMakeFiles/TcpServer_unittest.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=38,39 "Built target TcpServer_unittest"
+.PHONY : example/CMakeFiles/TcpServer_unittest.dir/all
+
+# Build rule for subdir invocation for target.
+example/CMakeFiles/TcpServer_unittest.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Desktop/FakeMuduo/build/CMakeFiles 26
+	$(MAKE) -f CMakeFiles/Makefile2 example/CMakeFiles/TcpServer_unittest.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Desktop/FakeMuduo/build/CMakeFiles 0
+.PHONY : example/CMakeFiles/TcpServer_unittest.dir/rule
+
+# Convenience name for target.
+TcpServer_unittest: example/CMakeFiles/TcpServer_unittest.dir/rule
+
+.PHONY : TcpServer_unittest
+
+# clean rule for target.
+example/CMakeFiles/TcpServer_unittest.dir/clean:
+	$(MAKE) -f example/CMakeFiles/TcpServer_unittest.dir/build.make example/CMakeFiles/TcpServer_unittest.dir/clean
+.PHONY : example/CMakeFiles/TcpServer_unittest.dir/clean
+
+#=============================================================================
+# Target rules for target example/CMakeFiles/Sockets_unitest.dir
+
+# All Build rule for target.
+example/CMakeFiles/Sockets_unitest.dir/all: src/base/CMakeFiles/FakeMuduoBase.dir/all
+example/CMakeFiles/Sockets_unitest.dir/all: src/net/CMakeFiles/FakeMuduoNet.dir/all
+	$(MAKE) -f example/CMakeFiles/Sockets_unitest.dir/build.make example/CMakeFiles/Sockets_unitest.dir/depend
+	$(MAKE) -f example/CMakeFiles/Sockets_unitest.dir/build.make example/CMakeFiles/Sockets_unitest.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=36,37 "Built target Sockets_unitest"
+.PHONY : example/CMakeFiles/Sockets_unitest.dir/all
+
+# Build rule for subdir invocation for target.
+example/CMakeFiles/Sockets_unitest.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Desktop/FakeMuduo/build/CMakeFiles 26
+	$(MAKE) -f CMakeFiles/Makefile2 example/CMakeFiles/Sockets_unitest.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Desktop/FakeMuduo/build/CMakeFiles 0
+.PHONY : example/CMakeFiles/Sockets_unitest.dir/rule
+
+# Convenience name for target.
+Sockets_unitest: example/CMakeFiles/Sockets_unitest.dir/rule
+
+.PHONY : Sockets_unitest
+
+# clean rule for target.
+example/CMakeFiles/Sockets_unitest.dir/clean:
+	$(MAKE) -f example/CMakeFiles/Sockets_unitest.dir/build.make example/CMakeFiles/Sockets_unitest.dir/clean
+.PHONY : example/CMakeFiles/Sockets_unitest.dir/clean
+
+#=============================================================================
+# Target rules for target example/CMakeFiles/LogFile_unittest.dir
+
+# All Build rule for target.
+example/CMakeFiles/LogFile_unittest.dir/all: src/base/CMakeFiles/FakeMuduoBase.dir/all
+example/CMakeFiles/LogFile_unittest.dir/all: src/net/CMakeFiles/FakeMuduoNet.dir/all
+	$(MAKE) -f example/CMakeFiles/LogFile_unittest.dir/build.make example/CMakeFiles/LogFile_unittest.dir/depend
+	$(MAKE) -f example/CMakeFiles/LogFile_unittest.dir/build.make example/CMakeFiles/LogFile_unittest.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=34,35 "Built target LogFile_unittest"
+.PHONY : example/CMakeFiles/LogFile_unittest.dir/all
+
+# Build rule for subdir invocation for target.
+example/CMakeFiles/LogFile_unittest.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Desktop/FakeMuduo/build/CMakeFiles 26
+	$(MAKE) -f CMakeFiles/Makefile2 example/CMakeFiles/LogFile_unittest.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Desktop/FakeMuduo/build/CMakeFiles 0
+.PHONY : example/CMakeFiles/LogFile_unittest.dir/rule
+
+# Convenience name for target.
+LogFile_unittest: example/CMakeFiles/LogFile_unittest.dir/rule
+
+.PHONY : LogFile_unittest
+
+# clean rule for target.
+example/CMakeFiles/LogFile_unittest.dir/clean:
+	$(MAKE) -f example/CMakeFiles/LogFile_unittest.dir/build.make example/CMakeFiles/LogFile_unittest.dir/clean
+.PHONY : example/CMakeFiles/LogFile_unittest.dir/clean
+
+#=============================================================================
+# Target rules for target example/CMakeFiles/TimerQueue_unittest.dir
+
+# All Build rule for target.
+example/CMakeFiles/TimerQueue_unittest.dir/all: src/base/CMakeFiles/FakeMuduoBase.dir/all
+example/CMakeFiles/TimerQueue_unittest.dir/all: src/net/CMakeFiles/FakeMuduoNet.dir/all
+	$(MAKE) -f example/CMakeFiles/TimerQueue_unittest.dir/build.make example/CMakeFiles/TimerQueue_unittest.dir/depend
+	$(MAKE) -f example/CMakeFiles/TimerQueue_unittest.dir/build.make example/CMakeFiles/TimerQueue_unittest.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=40,41 "Built target TimerQueue_unittest"
+.PHONY : example/CMakeFiles/TimerQueue_unittest.dir/all
+
+# Build rule for subdir invocation for target.
+example/CMakeFiles/TimerQueue_unittest.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Desktop/FakeMuduo/build/CMakeFiles 26
+	$(MAKE) -f CMakeFiles/Makefile2 example/CMakeFiles/TimerQueue_unittest.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Desktop/FakeMuduo/build/CMakeFiles 0
+.PHONY : example/CMakeFiles/TimerQueue_unittest.dir/rule
+
+# Convenience name for target.
+TimerQueue_unittest: example/CMakeFiles/TimerQueue_unittest.dir/rule
+
+.PHONY : TimerQueue_unittest
+
+# clean rule for target.
+example/CMakeFiles/TimerQueue_unittest.dir/clean:
+	$(MAKE) -f example/CMakeFiles/TimerQueue_unittest.dir/build.make example/CMakeFiles/TimerQueue_unittest.dir/clean
+.PHONY : example/CMakeFiles/TimerQueue_unittest.dir/clean
+
+#=============================================================================
 # Target rules for target example/CMakeFiles/EchoServer.dir
 
 # All Build rule for target.
@@ -196,7 +364,7 @@ example/CMakeFiles/EchoServer.dir/all: src/net/CMakeFiles/FakeMuduoNet.dir/all
 
 # Build rule for subdir invocation for target.
 example/CMakeFiles/EchoServer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Desktop/FakeMuduo/build/CMakeFiles 28
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Desktop/FakeMuduo/build/CMakeFiles 26
 	$(MAKE) -f CMakeFiles/Makefile2 example/CMakeFiles/EchoServer.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Desktop/FakeMuduo/build/CMakeFiles 0
 .PHONY : example/CMakeFiles/EchoServer.dir/rule
@@ -217,14 +385,15 @@ example/CMakeFiles/EchoServer.dir/clean:
 # All Build rule for target.
 example/CMakeFiles/HttpServer.dir/all: src/base/CMakeFiles/FakeMuduoBase.dir/all
 example/CMakeFiles/HttpServer.dir/all: src/net/CMakeFiles/FakeMuduoNet.dir/all
+example/CMakeFiles/HttpServer.dir/all: src/net/http/CMakeFiles/FakeMuduoHttp.dir/all
 	$(MAKE) -f example/CMakeFiles/HttpServer.dir/build.make example/CMakeFiles/HttpServer.dir/depend
 	$(MAKE) -f example/CMakeFiles/HttpServer.dir/build.make example/CMakeFiles/HttpServer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=29,30 "Built target HttpServer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/e/Desktop/FakeMuduo/build/CMakeFiles --progress-num=32,33 "Built target HttpServer"
 .PHONY : example/CMakeFiles/HttpServer.dir/all
 
 # Build rule for subdir invocation for target.
 example/CMakeFiles/HttpServer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Desktop/FakeMuduo/build/CMakeFiles 28
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Desktop/FakeMuduo/build/CMakeFiles 31
 	$(MAKE) -f CMakeFiles/Makefile2 example/CMakeFiles/HttpServer.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Desktop/FakeMuduo/build/CMakeFiles 0
 .PHONY : example/CMakeFiles/HttpServer.dir/rule
