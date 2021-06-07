@@ -12,7 +12,6 @@
 
 #include "libfm/base/Logging.h"
 #include "libfm/net/SocketsOps.h"
-#include "libfm/net/TimerQueue.h"
 #include "libfm/net/Epoller.h"
 
 using namespace fm;
@@ -206,29 +205,17 @@ void EventLoop::doPendingFunctors() {
   LOG_TRACE << "PendingFunctors done";
 }
 
+void EventLoop::printActiveChannels() const {
+  for (const auto &channel:activeChannels_)
+    LOG_TRACE << "{" << channel->reventsToString() << "}";
+}
+
 TimerId EventLoop::runAt(time::Timestamp time, TimerCallback cb) {
   using duration = time::Timestamp::duration;
   return timerQueue_->addTimer(std::move(cb),
                                time,
                                duration::zero());
 }
-
-//template<typename Rep, typename Period>
-//TimerId EventLoop::runAfter(const std::chrono::duration<Rep, Period> &interval,
-//                            TimerCallback cb) {
-//  using duration = time::Timestamp::duration;
-//  return timerQueue_->addTimer(std::move(cb),
-//                               time::SystemClock::now() + interval,
-//                               duration::zero());
-//}
-//
-//template<typename Rep, typename Period>
-//TimerId EventLoop::runEvery(const std::chrono::duration<Rep, Period> &interval,
-//                            TimerCallback cb) {
-//  return timerQueue_->addTimer(std::move(cb),
-//                               time::SystemClock::now() + interval,
-//                               interval);
-//}
 
 TimerId EventLoop::runAfter(const time::Timestamp::duration &interval,
                             TimerCallback cb) {
@@ -246,27 +233,4 @@ TimerId EventLoop::runEvery(const time::Timestamp::duration &interval,
 
 void EventLoop::cancel(TimerId timerId) {
   timerQueue_->delTimer(timerId);
-}
-
-//TimerId EventLoop::runAt(TimeStamp time, TimerCallback cb) {
-//  return timerQueue_->addTimer(std::move(cb), time, 0);
-//}
-//
-//TimerId EventLoop::runAfter(double delay, TimerCallback cb) {
-//  TimeStamp time(timeAdd(TimeStamp::now(), delay));
-//  return timerQueue_->addTimer(std::move(cb), time, 0);
-//}
-//
-//TimerId EventLoop::runEvery(double interval, TimerCallback cb) {
-//  TimeStamp time(timeAdd(TimeStamp::now(), interval));
-//  return timerQueue_->addTimer(std::move(cb), time, interval);
-//}
-//
-//void EventLoop::cancel(TimerId timerId) {
-//  timerQueue_->delTimer(timerId);
-//}
-
-void EventLoop::printActiveChannels() const {
-  for (const auto &channel:activeChannels_)
-    LOG_TRACE << "{" << channel->reventsToString() << "}";
 }

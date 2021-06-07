@@ -9,7 +9,7 @@
 #include <set>
 
 #include "libfm/base/noncoapyable.h"
-#include "libfm/base/Timestamp1.h"
+#include "libfm/base/Timestamp.h"
 #include "libfm/net/Callback.h"
 #include "libfm/net/Channel.h"
 #include "libfm/net/Timer.h"

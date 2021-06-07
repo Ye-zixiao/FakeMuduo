@@ -7,7 +7,6 @@
 
 #include <arpa/inet.h>
 
-
 namespace fm::net::sockets {
 
 int createNonblockingSocketOrDie(sa_family_t family);

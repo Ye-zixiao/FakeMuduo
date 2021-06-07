@@ -8,7 +8,7 @@
 #include <functional>
 #include <memory>
 
-#include "libfm/base/Timestamp1.h"
+#include "libfm/base/Timestamp.h"
 
 namespace fm {
 

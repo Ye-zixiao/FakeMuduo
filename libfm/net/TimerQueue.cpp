@@ -33,14 +33,6 @@ int createTimerfd() {
 }
 
 struct timespec timespecFromNow(time::Timestamp when) {
-//  int64_t usFromNow = when.usSinceEpoch() -
-//      TimeStamp::now().usSinceEpoch();
-//  if (usFromNow < 100) usFromNow = 100;
-//  return {
-//      static_cast<time_t>(usFromNow / TimeStamp::kUsPerSecond),
-//      static_cast<long>(usFromNow % TimeStamp::kUsPerSecond *
-//          TimeStamp::kNsPerUSecond)
-//  };
   timespec interval = time::SystemClock::to_timespec(when - time::SystemClock::now());
   if (interval.tv_sec < 0)
     interval.tv_sec = 0;
@@ -63,10 +55,6 @@ void updateTimerfd(int timerfd, time::Timestamp expiration) {
   struct itimerspec newValue{};
   // itimerspec结构体中的重复时间间隔字段不设置，重复定时由TimerQueue自己实现
   newValue.it_value = timespecFromNow(expiration);
-  newValue.it_interval = {0, 0};
-  LOG_TRACE << "timerfd: " << timerfd;
-  LOG_TRACE << "newValue.it_value " << newValue.it_value.tv_sec
-            << ',' << newValue.it_value.tv_nsec;
   int ret = ::timerfd_settime(timerfd, 0, &newValue, nullptr);
   if (ret < 0)
     LOG_ERROR << "timerfd_settime()";

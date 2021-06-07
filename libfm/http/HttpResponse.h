@@ -2,17 +2,16 @@
 // Created by Ye-zixiao on 2021/4/30.
 //
 
-#ifndef FAKEMUDUO_HTTP_HTTPRESPONSE_H_
-#define FAKEMUDUO_HTTP_HTTPRESPONSE_H_
+#ifndef LIBFM_HTTP_HTTPRESPONSE_H_
+#define LIBFM_HTTP_HTTPRESPONSE_H_
 
 #include <unordered_map>
 #include <string>
 
-#include "../../base/copyable.h"
-#include "HttpBase.h"
+#include "libfm/base/copyable.h"
+#include "libfm/http/HttpBase.h"
 
-namespace fm {
-namespace net {
+namespace fm::net {
 
 class Buffer;
 
@@ -61,8 +60,7 @@ class HttpResponse : public copyable {
   std::string body_;
 };
 
-} // namespace http
-} // namespace net
+} // namespace fm::net::http
 } // namespace fm
 
-#endif //FAKEMUDUO_HTTP_HTTPRESPONSE_H_
+#endif //LIBFM_HTTP_HTTPRESPONSE_H_

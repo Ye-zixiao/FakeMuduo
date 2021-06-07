@@ -1,76 +1,98 @@
-# FakeMuduo
+# Libfm: A fake muduo network library
 
-项目背景S：
+## 一. 简介
 
-这个项目主要是在我学习完Linux网络编程相关的技术之后找的，一方面是为了增长网络编程的实际动手能力，另一方面也是为了学习一下C++语言在实际中是如何应用的。
+顾名思义，libfm是一个仿照muduo实现的基于Reactor事件驱动模式的C++多线程网络库，相比于原来的代码本项目有着如下的特点：
 
-在网络服务器编程中，比如unp描述的回射echo服务器，最传统的实现方式就是使用阻塞迭代的方式来服务一个个到来的客户（socket-bind-listen-accept），但这样最大的缺点在于程序并不支持并发，一旦服务器接受了某一个客户，那么就代表不能再处理新到来客户的连接请求。
+- 更简洁的线程模型，基于C++11提供的线程库，而不再像muduo一样重复造轮子；
+- 更易用的时间库，类似于`std::chrono`时间库，且复用`std::chrono::duration`，并与`fm::time::Timetamp`、`fm::time::SystemClock`一起组成时长、时间戳、时钟三个概念；
+- 更简单的时间轮询器，只基于`epoll`而不再支持`poll`，减少了虚调用的性能开销；
+- 其他，一些小的代码优化，包括优化类结构、增加移动语义等。
 
-因此为了能够支持并发的处理客户的请求，后来又引入了新的解决方案，比如one-client-one-process或者one-client-one-thread这样的解决方案，但实际上这种方式的成本比较高昂，同时系统中进程或者线程也是有限的。所以需要一些新的解决方案，一种比较典型的就是基于进程池或者线程池的方案。
+至于该网络库的实现原理推荐看看我自己写的[项目解读](docs/项目解读.md)，更新后的网络库结构如下：
 
-但实际上上述的所有方案都是基于阻塞I/O的方式来进行构建的，如果某一个服务器线程不能从到客户的连接上获取到相应的数据或者说客户根本就没有发送数据给服务器但却又阻塞此，那么此时如果服务器即使想要发送数据给客户端，它也无可奈何，只能等待客户发送过来数据，然后调用write使得服务器有机会向客户端发送数据。显然这样基于阻塞I/O的服务器编程方式是非常愚蠢的，因为服务器根本无法有效且高效的完成作业。
-
-因此为了构建更高效的并发服务器，一种更为有效的方式就是避免使用阻塞I/O，而是使用I/O多路复用+非阻塞I/O这样的解决方案，最为典型的就是使用epoll。这种方案可以使得服务器可以根据与客户连接相关的读写事件可用性来相应的处理客户，使得服务器对客户的处理更具有针对性，即使连接的数量非常大，当然前提这个编程者需要将相应的感兴趣事件注册到epoll对象之中。这种方法实际上就是事件驱动模型。
-
-基于事件驱动的网络编程模型确实高效，但在上面我们所提及的最为简单的实现方式还是有很多的问题需要我们去解决：
-
-- 第一个问题就是业务逻辑和底层的套接字API使用掺杂在一起，对于简单的echo服务器而言业务逻辑简单，我们到可以使用这种方式。但一旦业务逻辑服务复杂了，这样直接使用底层API的方式就变得讨厌。对于业务逻辑层面的编程者而言它不应该去接触这些套接字！所以我们应该需要一种东西去实现“**业务逻辑和底层套接字API或者并发策略分离**”的工作，使得服务器业务逻辑的编程更像是填空一样简单，而上层的编程者完全对底层的东西浑然不知！
-- 第二个问题就是既然选择I/O多路复用+非阻塞的方式来构建网络服务器，而实际上这种构建方式（即使去实现不同业务的服务器）在编程实现上是有很多共性存在的，因此我们需要一种通用的网络服务器模式来抽象的描述这种实现方式，使得框架的设计有章可循。这便是基于事件驱动的Reactor模型。我们需要有一种东西**去实现Reactor模型**。
-- 第三个问题就是既然选择I/O多路复用+非阻塞I/O的解决方法，就意味着服务器并不能一直总是专门的处理一个客户，这也就意味着客户的消息在此刻不能一下次完全的接收到，所以我们需要**为每一个客户关联一个应用层缓冲区，为每一个客户未一次性接受完全的消息数据进行备份**。业务逻辑的代码应该感知到的是消息包到来的事件而不是其他，至于底层网络I/O的处理到底调用了几次read它根本不知道也不感兴趣。
-- 第四个问题就是要使得服务器**能够支持多线程并发**，而不仅仅是单线程。它不仅能够支持单Reactor模型，而且还可以支持多Reactor模型，甚至还能够为其独立于Reactor线程（I/O线程）之外加工作线程池，同时还能够保证线程安全性。
-- 其实还有一些其他没有解决的问题，比如解析消息时的oneshot设置。
+<img src="docs/image/libfm.png" alt="libfm" style="zoom: 67%;" />
 
 
 
-项目目的T：
+## 二. 使用
 
-上面的需要解决的问题正是这个网络库所设计的目的，它的特点也可以说成是目的：
+在libfm中，所有的功能都是基于函数回调实现的。因此为了使用libfm，必须在自定义的服务器类中设置Tcp服务器TcpServer类对象的回调函数，这样当客户请求消息到来的时候libfm就会自动的调用你注册的回调函数。这些回调函数包括：
 
-- 支持快速的构建高并发的Tcp网络服务器，接口简单，只需要用户设置回调即可；
-- 业务逻辑和底层套接字API以及并发策略的分离；
-- 实现基于事件驱动的Reactor模式，包括单Reactor、多Reactor以及Reactor+线程池的解决方案；
-- 提供了可动态扩容的应用层缓冲区
+- 定时器过期时的回调函数TimerCallback
+- 客户连接建立/断开的回调函数ConnectionCallback 
+- 客户数据到来的回调函数MessageCallback 
+- 完成向客户写数据的回调函数WriteCompleteCallback 
+- 接收数据超过高水位线的回调函数HighWaterMarkCallback 
 
-![网络库](image/网络库.png)
+至于上述回调函数的调用形式怎样，可以查看头文件`libfm/net/Callback.h`中的定义。如果上述的回调函数不定义，那么网络库就会对相应的事件做出默认的处理，一般就是忽略。
+
+例如我们需要构建一个日期时间服务器（客户建立到服务器的Tcp连接之后服务器就发送日期时间字符串，为了不将TIME_WAIT这个状态留在服务器我选择让客户端来主动关闭连接。如果客户端继续发送过来数据，服务器只需要忽略就可以了），那么我们至少需要向TcpServer类注册一个ConnectionCallback（不过为了保证客户后续客户仍然发送过来数据，我们还是多注册了一个MessageCallback），如下所示：
+
+```cpp
+class DatetimeServer {
+ public:
+  DatetimeServer(EventLoop *loop,
+                 const InetAddress &address,
+                 const std::string &str)
+      : server_(loop, address, str) {
+    // 在DatetimeServer启动之初注册回调函数
+    server_.setConnectionCallback([this](const TcpConnectionPtr &conn) {
+      this->onConnection(conn);
+    });
+    server_.setMessageCallback(std::bind(&DatetimeServer::onMessage,
+                                         this, _1, _2, _3));
+  }
+
+  void setThreadsNum(int threads) { server_.setThreadNum(threads); }
+  void start() { server_.start(); }
+
+ private:
+  // 客户数据到来时的回调函数
+  void onMessage(const TcpConnectionPtr &conn, Buffer *buffer, time::Timestamp now) {
+    // unlikely!
+    buffer->retrieveAll();
+  }
+
+  // 客户连接到来时的回调函数
+  void onConnection(const TcpConnectionPtr &conn) {
+    if (conn->isConnected())
+      conn->send(time::SystemClock::now().toString());
+  }
+
+ private:
+  TcpServer server_;
+};
+```
+
+当这个日期时间服务器构建成功后，剩下的就是最简单的`main()`函数部分：
+
+```cpp
+int main() {
+  EventLoop loop;
+  InetAddress address(12000);
+  DatetimeServer server(&loop, address, "DatetimeServer");
+  server.start();
+  loop.loop();
+}
+```
+
+最后编译链接的时候链接上fmbase和fmnet两个库文件即可。
 
 
 
-如何解决A行动：
+## 三. 编译安装
 
-- 通过抽象的方式将具体事件的处理交给具体的事件处理器进行处理，事件循环会在相关事件激活的时候调用注册事件处理器上的回调函数，这样我们就可以解决
-
-
-
----
-
-改进了CMakeList.txt构建文件。其实CMake入门简单，深入了也挺烦的，等有空再把项目结构再优化吧。
-
----
-
-我自己对这个项目的解读：[项目解读.md](doc/项目解读.md)
-
----
-
-基本上把muduo的东西复现了一遍，同时陈硕老师给出的一些自己封装实现的组件我进行了一定程度的替换，改成了C++11之后标准库中出现的新组件，有些东西标准库用的挺好的，没有必要重复造轮子。
-
-我先留下几个坑：
-
-- 第一个是自己从上次的[My-TinyWebServer](https://github.com/Ye-zixiao/My-TinyWebServer.git)到现在的FakeMuduo，一路走过来想结合道格拉斯的论文，重新谈一谈Reactor模式。回头再看看TinyWebServer这个项目，啊，感觉和muduo差远了，就是一个玩具罢了🙃。
-- 第二个是谈一谈的muduo库设计的过程中的一些细节，有很多地方值得自己学习，比如对象的生命期管理、作者对线程安全性的考量、回调的过程。再谈一谈在使用muduo编写的程序执行的过程中，一个客户的连接的建立到关闭这段过程中，各个线程间发生了什么。
-- 第三个是想谈一谈设计模式，虽然muduo库使用基于对象的编程思维设计的，但是其各个类与类、模块与模块之间的设计精巧程度远胜于[My-TinyWebServer](https://github.com/Ye-zixiao/My-TinyWebServer.git)中那些粗制滥造的程序好了很多（很多😂！）那个程序就是一坨一坨的模块粘合在一起的东西，看着就难受！所以作为学习者我觉得很有必要思考下如何设计一个良好、高内聚低耦合的软件程序（当然这种思考是初级的！）
-- 最后是想思考下muduo是否还可以做的更好，是否还可以支持零拷贝的文件传输？`sendfile()`？`mmap()+write()`？怎么做？是否有必要？如果想不出，那就学习一下muduo上的优点，也可以，例如muduo是怎么使用智能指针的？等等。。。
-
-下面是一张muduo的类图，不规范，只是按照着自己的想法画的，加颜色只是为了方便自己突出重点（那些成员函数、数据成员对于这个网络库结构而言是重要的）：
-
-<center>
-    <img src="image/muduo.png">
-</center>
+```bash
+$> git clone https://github.com/Ye-zixiao/Libfm.git
+$> sh ./build.sh
+```
 
 
-**推荐阅读**：
 
-1. [CMake 入门实战 | HaHack](https://www.hahack.com/codes/cmake/)
-2. [《CMake Cookbook》的中文翻译](https://github.com/xiaoweiChen/CMake-Cookbook)
+## 四. 参考资料
 
-
+1. [Linux多线程服务端编程](https://detail.tmall.com/item.htm?spm=a230r.1.14.14.6fa3597eib5rju&id=643242317479&ns=1&abbucket=6)
+2. [CMake Cookbook](https://github.com/xiaoweiChen/CMake-Cookbook)
+3. [CMake 入门实战 | HaHack](https://www.hahack.com/codes/cmake/)
 

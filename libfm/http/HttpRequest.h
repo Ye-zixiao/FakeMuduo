@@ -2,19 +2,17 @@
 // Created by Ye-zixiao on 2021/4/30.
 //
 
-#ifndef FAKEMUDUO_HTTP_HTTPREQUEST_H_
-#define FAKEMUDUO_HTTP_HTTPREQUEST_H_
+#ifndef LIBFM_HTTP_HTTPREQUEST_H_
+#define LIBFM_HTTP_HTTPREQUEST_H_
 
 #include <unordered_map>
 #include <string>
 
-#include "../../base/copyable.h"
-#include "libfm/base/Timestamp1.h"
-#include "HttpBase.h"
+#include "libfm/base/copyable.h"
+#include "libfm/base/Timestamp.h"
+#include "libfm/http/HttpBase.h"
 
-namespace fm {
-namespace net {
-namespace http {
+namespace fm::net::http {
 
 class HttpRequest : public copyable {
  public:
@@ -61,8 +59,6 @@ class HttpRequest : public copyable {
   HeaderMap headers_;
 };
 
-} // namespace http
-} // namespace net
-} // namespace fm
+} // namespace fm::net::http
 
-#endif //FAKEMUDUO_HTTP_HTTPREQUEST_H_
+#endif //LIBFM_HTTP_HTTPREQUEST_H_

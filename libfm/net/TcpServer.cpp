@@ -95,12 +95,10 @@ void TcpServer::removeConnectionInLoop(const TcpConnectionPtr &conn) {
   LOG_TRACE << "TcpServer::removeConnectionInLoop [" << name_
             << "] - connection " << conn->name();
 
-#ifndef NDEBUG
   size_t n = connections_.erase(conn->name());
-#else
-  connections_.erase(conn->name());
-#endif
   assert(n == 1);
+  (void)n;
+
   EventLoop *ioLoop = conn->getLoop();
   // std::bind(&TcpConnection::connectDestroyed, conn)会在内部拷贝处一个
   // 共享指针TcpConnectionPtr指向TcpConnection对象，只有当这个function在sub-Reactor

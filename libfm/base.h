@@ -15,7 +15,7 @@
 #include "base/Logging.h"
 #include "base/LogFile.h"
 #include "base/SystemClock.h"
-#include "base/Timestamp1.h"
+#include "base/Timestamp.h"
 #include "base/ThreadPool.h"
 #endif
 

@@ -6,7 +6,7 @@
 #define LIBFM_BASE_LOGGING_H_
 
 #include "libfm/base/LogStream.h"
-#include "libfm/base/Timestamp1.h"
+#include "libfm/base/Timestamp.h"
 #include "libfm/base/SystemClock.h"
 
 namespace fm {

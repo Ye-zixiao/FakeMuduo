@@ -2,11 +2,11 @@
 // Created by Ye-zixiao on 2021/4/30.
 //
 
-#ifndef FAKEMUDUO_HTTP_HTTPCONTEXT_H_
-#define FAKEMUDUO_HTTP_HTTPCONTEXT_H_
+#ifndef LIBFM_HTTP_HTTPCONTEXT_H_
+#define LIBFM_HTTP_HTTPCONTEXT_H_
 
 #include "libfm/base/copyable.h"
-#include "libfm/net/http/HttpRequest.h"
+#include "libfm/http/HttpRequest.h"
 
 namespace fm::net {
 
@@ -44,4 +44,4 @@ class HttpContext : public copyable {
 } // namespace http
 } // namespace fm
 
-#endif //FAKEMUDUO_HTTP_HTTPCONTEXT_H_
+#endif //LIBFMO_HTTP_HTTPCONTEXT_H_

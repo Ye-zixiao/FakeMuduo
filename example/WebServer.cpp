@@ -6,6 +6,7 @@
 
 #include "libfm/base.h"
 #include "libfm/net.h"
+#include "libfm/http.h"
 
 using namespace std;
 using namespace fm;
@@ -45,7 +46,7 @@ int main(int argc, char *argv[]) {
     exit(EXIT_FAILURE);
   }
 
-//  Logger::setLogLevel(Logger::TRACE);
+  Logger::setLogLevel(Logger::TRACE);
 
   files = {
       // 通过这种方式模仿文件缓存，这样每一次就不需要为每一个请求重复性的打开文件。

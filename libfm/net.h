@@ -15,10 +15,6 @@
 #include "libfm/net/TcpServer.h"
 #include "libfm/net/Timer.h"
 #include "libfm/net/Socket.h"
-
-#include "libfm/net/http/HttpRequest.h"
-#include "libfm/net/http/HttpResponse.h"
-#include "libfm/net/http/HttpServer.h"
 #endif
 
 #endif //LIBFM_LIBFM_NET_H_

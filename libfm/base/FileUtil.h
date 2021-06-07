@@ -9,7 +9,7 @@
 #include <string>
 
 #include "libfm/base/noncoapyable.h"
-#include "libfm/base/Timestamp1.h"
+#include "libfm/base/Timestamp.h"
 #include "libfm/base/SystemClock.h"
 
 namespace fm {
