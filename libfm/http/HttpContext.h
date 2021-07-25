@@ -5,7 +5,7 @@
 #ifndef LIBFM_HTTP_HTTPCONTEXT_H_
 #define LIBFM_HTTP_HTTPCONTEXT_H_
 
-#include "libfm/base/copyable.h"
+#include "libfm/base/Copyable.h"
 #include "libfm/http/HttpRequest.h"
 
 namespace fm::net {
@@ -14,7 +14,7 @@ class Buffer;
 
 namespace http {
 
-class HttpContext : public copyable {
+class HttpContext : public Copyable {
  public:
   enum HttpRequestParseState { kParseRequestLine, kParseHeaders, kParseBody, kAllDone };
 

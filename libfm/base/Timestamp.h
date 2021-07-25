@@ -7,44 +7,41 @@
 
 #include <chrono>
 #include <string>
-
-#include <libfm/base/copyable.h>
+#include <libfm/base/Copyable.h>
 
 namespace fm::time {
 
 using namespace std::chrono_literals;
 
-class Timestamp : public copyable {
+// 时间戳
+class Timestamp : public Copyable {
  public:
   using duration = std::chrono::microseconds;
 
   template<typename Rep, typename Period>
-  Timestamp(std::chrono::duration<Rep, Period> time)
-      :timeSinceEpoch_(time) {}
-  Timestamp(duration time)
-      : timeSinceEpoch_(time) {}
-  Timestamp()
-      : timeSinceEpoch_(duration::zero()) {}
+  Timestamp(std::chrono::duration<Rep, Period> time) : time_since_epoch_(time) {}
+  Timestamp(duration time) : time_since_epoch_(time) {}
+  Timestamp() : time_since_epoch_(duration::zero()) {}
 
   std::string toFormattedString(const char *fmt) const;
   std::string toString(bool microsecond = false) const;
 
-  duration timeSinceEpoch() const { return timeSinceEpoch_; }
+  duration timeSinceEpoch() const { return time_since_epoch_; }
 
-  bool isZero() const { return timeSinceEpoch_ == duration::zero(); }
+  bool isZero() const { return time_since_epoch_ == duration::zero(); }
 
   Timestamp &operator+=(const duration &rhs) {
-    timeSinceEpoch_ += rhs;
+    time_since_epoch_ += rhs;
     return *this;
   }
 
   Timestamp &operator-=(const duration &rhs) {
-    timeSinceEpoch_ -= rhs;
+    time_since_epoch_ -= rhs;
     return *this;
   }
 
  private:
-  duration timeSinceEpoch_;
+  duration time_since_epoch_;
 };
 
 template<typename Rep, typename Period>
@@ -66,7 +63,7 @@ inline Timestamp operator-(const Timestamp &lhs,
 }
 
 inline time::Timestamp::duration operator-(const time::Timestamp &lhs,
-                                    const time::Timestamp &rhs) {
+                                           const time::Timestamp &rhs) {
   return lhs.timeSinceEpoch() - rhs.timeSinceEpoch();
 }
 

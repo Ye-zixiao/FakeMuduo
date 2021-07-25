@@ -7,20 +7,18 @@
 
 #include <condition_variable>
 #include <mutex>
-
-#include "libfm/base/noncoapyable.h"
+#include "libfm/base/NonCopyable.h"
 
 namespace fm {
 
-class CountDownLatch : private noncopyable {
+class CountDownLatch : private NonCopyable {
  public:
   explicit CountDownLatch(size_t count)
       : mutex_(), cond_(), counter_(count) {}
 
   void wait() {
     std::unique_lock<std::mutex> lock(mutex_);
-    while (counter_ == 0)
-      cond_.wait(lock);
+    cond_.wait(lock, [this] { return counter_ == 0; });
   }
 
   void countDown() {
@@ -29,7 +27,7 @@ class CountDownLatch : private noncopyable {
       cond_.notify_all();
   }
 
-  int getCount() const {
+  size_t getCount() const {
     std::lock_guard<std::mutex> lock(mutex_);
     return counter_;
   }

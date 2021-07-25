@@ -7,8 +7,7 @@
 
 #include <unordered_set>
 #include <set>
-
-#include "libfm/base/noncoapyable.h"
+#include "libfm/base/NonCopyable.h"
 #include "libfm/base/Timestamp.h"
 #include "libfm/net/Callback.h"
 #include "libfm/net/Channel.h"
@@ -20,7 +19,7 @@ class EventLoop;
 class Timer;
 class TimerId;
 
-class TimerQueue : private noncopyable {
+class TimerQueue : private NonCopyable {
  public:
   using duration=time::Timestamp::duration;
 
@@ -52,13 +51,13 @@ class TimerQueue : private noncopyable {
 
  private:
   EventLoop *loop_;
-  const int timerFd_;         // 注意timerFd在系统内只能为用户维护一个定时器
-  Channel timerFdChannel_;
+  const int timer_fd_;         // 注意timerFd在系统内只能为用户维护一个定时器
+  Channel timer_fd_channel_;
 
-  TimerTree timerTree_;       // 定时器红黑树，按照过期时间进行排序
-  TimerIdSet activeTimers_;   // 定时器标识集合，记录哪些定时器仍然有效/活跃
-  TimerIdSet deletedTimers_;  // 定时器标识集合，记录哪些定时器即将被删除
-  bool callingExpiredTimers_; // 当前是否在调用用户的定时器回调函数
+  TimerTree timer_tree_;       // 定时器红黑树，按照过期时间进行排序
+  TimerIdSet active_timers_;   // 定时器标识集合，记录哪些定时器仍然有效/活跃
+  TimerIdSet deleted_timers_;  // 定时器标识集合，记录哪些定时器即将被删除
+  bool calling_expired_timers_; // 当前是否在调用用户的定时器回调函数
 };
 
 } // namespace fm::net

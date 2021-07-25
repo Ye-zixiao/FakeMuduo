@@ -2,8 +2,8 @@
 // Date: 2020-04-07
 
 #include <functional>
+#include <string_view>
 #include <iostream>
-
 #include "libfm/base.h"
 #include "libfm/net.h"
 #include "libfm/http.h"
@@ -21,7 +21,7 @@ void onRequest(const HttpRequest &request, HttpResponse *resp) {
 //    cout << header.first << ": " << header.second << endl;
 //  }
 
-  string path = request.path();
+  string path(request.path());
   if (path.back() == '/') path.append("index.html");
 
   resp->setVersion(request.getVersion());

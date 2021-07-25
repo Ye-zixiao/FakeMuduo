@@ -45,10 +45,10 @@ class Logger {
   using OutputFunc = void (*)(const char *msg, int len);
   using FlushFunc = void (*)();
 
-  static void setOutput(OutputFunc outputFunc) { outputFunc_ = outputFunc; }
-  static void setFlush(FlushFunc flushFunc) { flushFunc_ = flushFunc; }
-  static void setLogLevel(LogLevel logLevel) { logLevel_ = logLevel; }
-  static LogLevel logLevel() { return logLevel_; }
+  static void setOutput(OutputFunc outputFunc) { output_func_ = outputFunc; }
+  static void setFlush(FlushFunc flushFunc) { flush_func_ = flushFunc; }
+  static void setLogLevel(LogLevel logLevel) { log_level_ = logLevel; }
+  static LogLevel logLevel() { return log_level_; }
 
   Logger(SourceFile file, int line);
   Logger(SourceFile file, int line, LogLevel level);
@@ -76,9 +76,9 @@ class Logger {
   };
 
  private:
-  static LogLevel logLevel_;
-  static OutputFunc outputFunc_;
-  static FlushFunc flushFunc_;
+  static LogLevel log_level_;
+  static OutputFunc output_func_;
+  static FlushFunc flush_func_;
 
   Impl impl_;
 };

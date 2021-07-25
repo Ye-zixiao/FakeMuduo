@@ -7,15 +7,14 @@
 
 #include <functional>
 #include <memory>
-
-#include "libfm/base/noncoapyable.h"
+#include "libfm/base/NonCopyable.h"
 #include "libfm/base/Timestamp.h"
 
 namespace fm::net {
 
 class EventLoop;
 
-class Channel : private noncopyable {
+class Channel : private NonCopyable {
  public:
   // 可读事件的回调函数比较特殊，需要向用户的回调函数传递一个接收时间信息
   using EventCallback = std::function<void()>;
@@ -27,10 +26,10 @@ class Channel : private noncopyable {
 
   void handleEvent(time::Timestamp receiveTime);
 
-  void setReadCallback(ReadEventCallback cb) { readCallback_ = std::move(cb); }
-  void setWriteCallback(EventCallback cb) { writeCallback_ = std::move(cb); }
-  void setCloseCallback(EventCallback cb) { closeCallback_ = std::move(cb); }
-  void setErrorCallback(EventCallback cb) { errorCallback_ = std::move(cb); }
+  void setReadCallback(ReadEventCallback cb) { read_callback_ = std::move(cb); }
+  void setWriteCallback(EventCallback cb) { write_callback_ = std::move(cb); }
+  void setCloseCallback(EventCallback cb) { close_callback_ = std::move(cb); }
+  void setErrorCallback(EventCallback cb) { error_callback_ = std::move(cb); }
 
   void enableReading() { events_ |= kReadEvent, update(); }
   void enableWriting() { events_ |= kWriteEvent, update(); }
@@ -75,16 +74,16 @@ class Channel : private noncopyable {
   int events_;
   int revents_;
   int index_;
-  bool logHup_;          // 连接挂掉的时候是否需要进行日志
+  bool log_hup_;          // 连接挂掉的时候是否需要进行日志
 
   std::weak_ptr<void> tie_;
   bool tied_;            // 是否与某一个连接绑定
-  bool eventHandling_;   // 是否正在处理事件
-  bool addedToLoop_;     // 是否添加到事件循环中
-  ReadEventCallback readCallback_;
-  EventCallback writeCallback_;
-  EventCallback closeCallback_;
-  EventCallback errorCallback_;
+  bool event_handling_;   // 是否正在处理事件
+  bool added_to_loop_;     // 是否添加到事件循环中
+  ReadEventCallback read_callback_;
+  EventCallback write_callback_;
+  EventCallback close_callback_;
+  EventCallback error_callback_;
 };
 
 } // namespace fm::net

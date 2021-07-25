@@ -3,7 +3,6 @@
 //
 
 #include "libfm/http/HttpServer.h"
-
 #include "libfm/base/Logging.h"
 #include "libfm/http/HttpRequest.h"
 #include "libfm/http/HttpResponse.h"
@@ -31,8 +30,11 @@ HttpServer::HttpServer(EventLoop *loop,
     : server_(loop, listenAddr, name, option),
       threadPool_("ThreadPool", threadPoolMaxSize),
       httpCallback_(defaultHttpCallback) {
-  server_.setConnectionCallback(std::bind(&HttpServer::onConnection, this, _1));
-  server_.setMessageCallback(std::bind(&HttpServer::onMessage, this, _1, _2, _3));
+  server_.setConnectionCallback([this](const TcpConnectionPtr &conn) { onConnection(conn); });
+  server_.setMessageCallback(
+      [this](const TcpConnectionPtr &conn, Buffer *buffer, time::Timestamp rt) {
+        onMessage(conn, buffer, rt);
+      });
 }
 
 void HttpServer::setThreadNum(int numIOThreads, int numThreadPools) {
@@ -86,6 +88,8 @@ void HttpServer::onRequestInThreadPool(const TcpConnectionPtr &conn, HttpRequest
 
 // 在http报文解析之后处理请求，并回调用户层的具体处理函数
 void HttpServer::onRequest(const TcpConnectionPtr &conn, HttpRequest request) {
-  threadPool_.run(std::bind(&HttpServer::onRequestInThreadPool,
-                            this, conn, std::move(request)));
+  threadPool_.submit(
+      [this, conn, r = std::move(request)] {
+        onRequestInThreadPool(conn, r);
+      });
 }

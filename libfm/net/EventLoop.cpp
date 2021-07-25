@@ -3,13 +3,11 @@
 //
 
 #include "libfm/net/EventLoop.h"
-
 #include <sys/eventfd.h>
 #include <unistd.h>
 #include <algorithm>
 #include <csignal>
 #include <cassert>
-
 #include "libfm/base/Logging.h"
 #include "libfm/net/SocketsOps.h"
 #include "libfm/net/Epoller.h"
@@ -19,13 +17,12 @@ using namespace fm::net;
 
 namespace {
 
-thread_local EventLoop *loopInThisThread_ts = nullptr;
+thread_local EventLoop *loop_in_this_thread_ts = nullptr;
 constexpr int kPollTimeMs = 10000; // 10s
 
 int createNonblockingEventfdOrDie() {
   int evtfd = ::eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC);
-  if (evtfd < 0)
-    LOG_FATAL << "Failed in eventfd";
+  if (evtfd < 0) LOG_FATAL << "Failed in eventfd";
   return evtfd;
 }
 
@@ -36,42 +33,42 @@ struct IgnoreSigPipe {
 };
 
 // 程序创建之初就忽略SIGPIPE信号
-IgnoreSigPipe initToIgnoreSigPipe;
+IgnoreSigPipe g_init_to_ignore_sigpipe;
 
-}
+} // unnamed namespace
 
 EventLoop::EventLoop()
     : looping_(false),
       quit_(false),
-      eventHandling_(false),
-      callingPendingFunctors_(false),
+      event_handling_(false),
+      calling_pending_functors_(false),
       iteration_(0),
-      threadId_(gettid()),
-      pollReturnTime_(),
+      thread_id_(gettid()),
+      poll_return_time_(),
       poller_(std::make_unique<Epoller>(this)),
-      timerQueue_(std::make_unique<TimerQueue>(this)),
-      wakeupFd_(createNonblockingEventfdOrDie()),
-      wakeupChannel_(new Channel(this, wakeupFd_)),
-      currentActiveChannel_(nullptr) {
-  LOG_DEBUG << "created " << this << " in thread " << threadId_;
+      timer_queue_(std::make_unique<TimerQueue>(this)),
+      wakeup_fd_(createNonblockingEventfdOrDie()),
+      wakeup_channel_(new Channel(this, wakeup_fd_)),
+      current_active_channel_(nullptr) {
+  LOG_DEBUG << "created " << this << " in thread " << thread_id_;
 
   // 检查当前线程是否已经运行了事件循环，若是直接终止进程
-  if (loopInThisThread_ts) {
-    LOG_FATAL << "Another EventLoop " << loopInThisThread_ts
-              << " exits in this thread " << threadId_;
+  if (loop_in_this_thread_ts) {
+    LOG_FATAL << "Another EventLoop " << loop_in_this_thread_ts
+              << " exits in this thread " << thread_id_;
   } else {
-    loopInThisThread_ts = this;
+    loop_in_this_thread_ts = this;
   }
   // 将唤醒频道注册到事件循环中
-  wakeupChannel_->setReadCallback(std::bind(&EventLoop::handleRead, this));
-  wakeupChannel_->enableReading();
+  wakeup_channel_->setReadCallback([this](time::Timestamp t) { handleRead(t); });
+  wakeup_channel_->enableReading();
 }
 
 EventLoop::~EventLoop() {
-  wakeupChannel_->disableAll();
-  wakeupChannel_->remove();
-  ::close(wakeupFd_);
-  loopInThisThread_ts = nullptr;
+  wakeup_channel_->disableAll();
+  wakeup_channel_->remove();
+  ::close(wakeup_fd_);
+  loop_in_this_thread_ts = nullptr;
 }
 
 void EventLoop::loop() {
@@ -82,21 +79,21 @@ void EventLoop::loop() {
   LOG_TRACE << "EventLoop " << this << " start looping";
 
   while (!quit_) {
-    activeChannels_.clear();
+    active_channels_.clear();
     // 通过Poller中的epoll_wait()或poll()等待激活事件的通知
-    pollReturnTime_ = poller_->poll(&activeChannels_, kPollTimeMs);
+    poll_return_time_ = poller_->poll(&active_channels_, kPollTimeMs);
     ++iteration_;
     if (Logger::logLevel() <= Logger::TRACE)
       printActiveChannels();
 
     // 开始处理激活频道上的回调函数
-    eventHandling_ = true;
-    for (auto &channel:activeChannels_) {
-      currentActiveChannel_ = channel;
-      currentActiveChannel_->handleEvent(pollReturnTime_);
+    event_handling_ = true;
+    for (auto &channel:active_channels_) {
+      current_active_channel_ = channel;
+      current_active_channel_->handleEvent(poll_return_time_);
     }
-    currentActiveChannel_ = nullptr;
-    eventHandling_ = false;
+    current_active_channel_ = nullptr;
+    event_handling_ = false;
 
     // 特别处理事件循环自己的唤醒频道上的可读事件
     doPendingFunctors();
@@ -113,18 +110,16 @@ void EventLoop::quit() {
 }
 
 void EventLoop::runInLoop(Functor cb) {
-  if (isInLoopThread()) {
-    cb();
-  } else
-    queueInLoop(std::move(cb));
+  if (isInLoopThread()) cb();
+  else queueInLoop(std::move(cb));
 }
 
 void EventLoop::queueInLoop(Functor cb) {
   {
     std::lock_guard<std::mutex> lock(mutex_);
-    pendingFunctors_.push_back(std::move(cb));
+    pending_functors_.push_back(std::move(cb));
   }
-  if (!isInLoopThread() || callingPendingFunctors_)
+  if (!isInLoopThread() || calling_pending_functors_)
     wakeup();
 }
 
@@ -137,11 +132,11 @@ void EventLoop::updateChannel(Channel *channel) {
 void EventLoop::removeChannel(Channel *channel) {
   assert(channel->ownerLoop() == this);
   assertInLoopThread();
-  if (eventHandling_) {
+  if (event_handling_) {
     // 当前事件处理器的频道想移除自己或者触发可用频道没有自己，那么直接终止进程
-    assert(currentActiveChannel_ == channel ||
-        std::find(activeChannels_.begin(), activeChannels_.end(), channel)
-            == activeChannels_.end());
+    assert(current_active_channel_ == channel ||
+        std::find(active_channels_.begin(), active_channels_.end(), channel)
+            == active_channels_.end());
   }
   poller_->removeChannel(channel);
 }
@@ -154,14 +149,14 @@ bool EventLoop::hasChannel(Channel *channel) {
 
 void EventLoop::wakeup() {
   uint64_t one = 1;
-  ssize_t n = sockets::write(wakeupFd_, &one, sizeof(one));
+  ssize_t n = sockets::write(wakeup_fd_, &one, sizeof(one));
   if (n != sizeof(one))
     LOG_ERROR << "EventLoop::wakeup() writes " << n << " bytes instead of 8";
 }
 
 size_t EventLoop::queueSize() const {
   std::lock_guard<std::mutex> lock(mutex_);
-  return pendingFunctors_.size();
+  return pending_functors_.size();
 }
 
 void EventLoop::assertInLoopThread() {
@@ -170,67 +165,67 @@ void EventLoop::assertInLoopThread() {
 }
 
 bool EventLoop::isInLoopThread() const {
-  return gettid() == threadId_;
+  return gettid() == thread_id_;
 }
 
 EventLoop *EventLoop::getEventLoopOfCurrentThread() {
-  return loopInThisThread_ts;
+  return loop_in_this_thread_ts;
 }
 
 void EventLoop::abortNotInLoopThread() {
   LOG_FATAL << "EventLoop::abortNotInLoopThread - EventLoop" << this
-            << " was create in threadId_ = " << threadId_
+            << " was create in thread_id_ = " << thread_id_
             << ", current thread id = " << ::gettid();
 }
 
-void EventLoop::handleRead() {
+void EventLoop::handleRead(time::Timestamp) {
   uint64_t one = 1;
-  ssize_t n = sockets::read(wakeupFd_, &one, sizeof(one));
+  ssize_t n = sockets::read(wakeup_fd_, &one, sizeof(one));
   if (n != sizeof(one))
     LOG_ERROR << "EventLoop::handleRead() reads " << n << " bytes instead of 8";
 }
 
 void EventLoop::doPendingFunctors() {
   std::vector<Functor> functors;
-  callingPendingFunctors_ = true;
+  calling_pending_functors_ = true;
 
   {
     std::lock_guard<std::mutex> lock(mutex_);
-    functors.swap(pendingFunctors_);
+    functors.swap(pending_functors_);
   }
 
   for (const auto &functor:functors)
     functor();
-  callingPendingFunctors_ = false;
+  calling_pending_functors_ = false;
   LOG_TRACE << "PendingFunctors done";
 }
 
 void EventLoop::printActiveChannels() const {
-  for (const auto &channel:activeChannels_)
+  for (const auto &channel:active_channels_)
     LOG_TRACE << "{" << channel->reventsToString() << "}";
 }
 
 TimerId EventLoop::runAt(time::Timestamp time, TimerCallback cb) {
   using duration = time::Timestamp::duration;
-  return timerQueue_->addTimer(std::move(cb),
-                               time,
-                               duration::zero());
+  return timer_queue_->addTimer(std::move(cb),
+                                time,
+                                duration::zero());
 }
 
 TimerId EventLoop::runAfter(const time::Timestamp::duration &interval,
                             TimerCallback cb) {
-  return timerQueue_->addTimer(std::move(cb),
-                               time::SystemClock::now() + interval,
-                               time::Timestamp::duration::zero());
+  return timer_queue_->addTimer(std::move(cb),
+                                time::SystemClock::now() + interval,
+                                time::Timestamp::duration::zero());
 }
 
 TimerId EventLoop::runEvery(const time::Timestamp::duration &interval,
                             TimerCallback cb) {
-  return timerQueue_->addTimer(std::move(cb),
-                               time::SystemClock::now() + interval,
-                               interval);
+  return timer_queue_->addTimer(std::move(cb),
+                                time::SystemClock::now() + interval,
+                                interval);
 }
 
 void EventLoop::cancel(TimerId timerId) {
-  timerQueue_->delTimer(timerId);
+  timer_queue_->delTimer(timerId);
 }

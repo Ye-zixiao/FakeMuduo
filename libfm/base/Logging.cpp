@@ -3,7 +3,6 @@
 //
 
 #include "libfm/base/Logging.h"
-
 #include <cerrno>
 #include <cstring>
 #include <cstdio>
@@ -50,9 +49,9 @@ void defaultFlush() {
 
 using namespace fm;
 
-Logger::LogLevel Logger::logLevel_ = initLogLevel();
-Logger::OutputFunc Logger::outputFunc_ = defaultOutput;
-Logger::FlushFunc Logger::flushFunc_ = defaultFlush;
+Logger::LogLevel Logger::log_level_ = initLogLevel();
+Logger::OutputFunc Logger::output_func_ = defaultOutput;
+Logger::FlushFunc Logger::flush_func_ = defaultFlush;
 
 Logger::Impl::Impl(LogLevel level, int old_errno, const SourceFile &file, int line)
     : time_(time::SystemClock::now()),
@@ -99,9 +98,9 @@ Logger::Logger(SourceFile file, int line, bool toAbort) :
 Logger::~Logger() {
   impl_.finish();
   const LogStream::Buffer &buf(stream().buffer());
-  outputFunc_(buf.data(), buf.length());
+  output_func_(buf.data(), buf.length());
   if (impl_.level_ == FATAL) {
-    flushFunc_();
+    flush_func_();
     abort();
   }
 }

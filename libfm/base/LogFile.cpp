@@ -3,7 +3,6 @@
 //
 
 #include "libfm/base/LogFile.h"
-
 #include <unistd.h>
 
 using namespace fm;
@@ -14,13 +13,13 @@ LogFile::LogFile(std::string basename,
                  int flushInterval,
                  int logLineMax)
     : basename_(std::move(basename)),
-      rollFileSizeMax_(rollFileSizeMax),
-      flushInterval_(flushInterval),
-      checkOfNLines(logLineMax),
+      roll_file_size_max_(rollFileSizeMax),
+      flush_interval_(flushInterval),
+      check_of_n_lines_(logLineMax),
       mutex_(threadSafe ? new std::mutex : nullptr),
-      startOfLog_(0),
-      lastRoll_(0),
-      lastFlush_(0),
+      start_of_log_(0),
+      last_roll_(0),
+      last_flush_(0),
       count_(0) {
   // 执行一次日志文件滚动更新，因为刚开始时日志文件还没有创建
   rollFile();
@@ -47,18 +46,18 @@ void LogFile::flush() {
 void LogFile::append_unlocked(const char *logline, size_t len) {
   file_->append(logline, len);
 
-  if (file_->writenBytes() > rollFileSizeMax_) {
+  if (file_->writenBytes() > roll_file_size_max_) {
     rollFile();
   } else {
     ++count_;
-    if (count_ >= checkOfNLines) {
+    if (count_ >= check_of_n_lines_) {
       count_ = 0;
       time_t now = ::time(nullptr);
       time_t currentPeriod = now / kRollPerSeconds_ * kRollPerSeconds_;
-      if (currentPeriod != startOfLog_) {
+      if (currentPeriod != start_of_log_) {
         rollFile();
-      } else if (now - lastFlush_ > flushInterval_) {
-        lastFlush_ = now;
+      } else if (now - last_flush_ > flush_interval_) {
+        last_flush_ = now;
         file_->flush();
       }
     }
@@ -70,9 +69,9 @@ void LogFile::rollFile() {
   std::string filename = getLogFileName(basename_, &now);
   time_t start = now / kRollPerSeconds_ * kRollPerSeconds_;
 
-  lastRoll_ = now;
-  lastFlush_ = now;
-  startOfLog_ = start;
+  last_roll_ = now;
+  last_flush_ = now;
+  start_of_log_ = start;
   file_ = std::make_unique<AppendFile>(filename);
 }
 

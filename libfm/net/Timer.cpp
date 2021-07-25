@@ -3,7 +3,6 @@
 //
 
 #include "libfm/net/Timer.h"
-
 #include "libfm/base/SystemClock.h"
 
 using namespace fm;

@@ -7,14 +7,13 @@
 
 #include <unordered_map>
 #include <string>
-
-#include "libfm/base/copyable.h"
+#include "libfm/base/Copyable.h"
 #include "libfm/base/Timestamp.h"
 #include "libfm/http/HttpBase.h"
 
 namespace fm::net::http {
 
-class HttpRequest : public copyable {
+class HttpRequest : public Copyable {
  public:
   enum Method { kInvalidMethod, kGet, kPost, kHead, kPut, kDelete };
 
@@ -32,13 +31,13 @@ class HttpRequest : public copyable {
   std::string methodToString() const;
 
   void setPath(const char *start, const char *end) { path_.assign(start, end); }
-  const std::string &path() const { return path_; }
+  std::string_view path() const { return path_; }
 
   void setVersion(Version v) { version_ = v; }
   Version getVersion() const { return version_; }
 
   void setQuery(const char *start, const char *end) { query_.assign(start, end); }
-  const std::string &query() const { return query_; }
+  std::string_view query() const { return query_; }
 
   void setReceivedTime(time::Timestamp t) { receivedTime_ = t; }
   const time::Timestamp &receivedTime() const { return receivedTime_; }

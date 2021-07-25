@@ -13,12 +13,11 @@
 #include <memory>
 #include <mutex>
 #include <queue>
-
-#include "libfm/base/noncoapyable.h"
+#include "libfm/base/NonCopyable.h"
 
 namespace fm {
 
-class ThreadPool : private noncopyable {
+class ThreadPool : private NonCopyable {
  public:
   using Task = std::function<void()>;
   using ThreadPtr = std::unique_ptr<std::thread>;
@@ -26,13 +25,13 @@ class ThreadPool : private noncopyable {
   ThreadPool(std::string str, size_t maxSize);
   ~ThreadPool();
 
-  const std::string &name() const { return name_; }
+  std::string_view name() const { return name_; }
 
   void setThreadNum(int numThreads);
 
   void start();
   void stop();
-  void run(Task task);
+  void submit(Task task);
 
  private:
   void runInThread(); // 工作线程所执行的例程
@@ -42,12 +41,12 @@ class ThreadPool : private noncopyable {
  private:
   std::string name_;
   std::mutex mutex_;
-  std::condition_variable notEmpty_;
-  std::condition_variable notFull_;
+  std::condition_variable not_empty_;
+  std::condition_variable not_full_;
   std::queue<Task> queue_;
   std::vector<ThreadPtr> threads_;
-  bool running_; // 是否能够用原子操作替代？或者说有这个必要吗？
-  size_t maxSize_;
+  bool running_;
+  size_t max_size_;
 };
 
 } // namespace fm

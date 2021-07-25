@@ -6,13 +6,12 @@
 #define LIBFM_NET_INETADDRESS_H_
 
 #include <string>
-
-#include "libfm/base/copyable.h"
+#include "libfm/base/Copyable.h"
 #include "libfm/net/SocketsOps.h"
 
 namespace fm::net {
 
-class InetAddress : public copyable {
+class InetAddress : public Copyable {
  public:
   explicit InetAddress(uint16_t port = 0, bool loopBackOnly = false, bool ipv6 = false);
   explicit InetAddress(std::string ip, uint16_t port, bool ipv6 = false);

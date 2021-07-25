@@ -9,16 +9,15 @@
 #include <memory>
 #include <thread>
 #include <mutex>
-
-#include "libfm/base/noncoapyable.h"
+#include "libfm/base/NonCopyable.h"
 
 namespace fm::net {
 
 class EventLoop;
 
-class EventLoopThread : private noncopyable {
+class EventLoopThread : private NonCopyable {
  public:
-  EventLoopThread(const std::string &name = std::string());
+  EventLoopThread();
   ~EventLoopThread();
 
   EventLoop *startLoop();

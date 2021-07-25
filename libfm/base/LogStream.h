@@ -7,13 +7,12 @@
 
 #include <cstring>
 #include <string>
-
-#include "libfm/base/noncoapyable.h"
+#include "libfm/base/NonCopyable.h"
 
 namespace fm {
 
 template<int SIZE>
-class FixedBuffer : private noncopyable {
+class FixedBuffer : private NonCopyable {
  public:
   FixedBuffer() : data_{}, curr_(data_) {}
 
@@ -42,7 +41,7 @@ class FixedBuffer : private noncopyable {
   char *curr_;
 };
 
-class LogStream : private noncopyable {
+class LogStream : private NonCopyable {
  public:
   static constexpr int kSmallBuffer = 4096;
   static constexpr int kLargeBuffer = 4096 * 1024;
@@ -87,8 +86,8 @@ class LogStream : private noncopyable {
     return *this;
   }
 
-  self &operator<<(const std::string &str) {
-    buffer_.append(str.c_str(), str.length());
+  self &operator<<(std::string_view str) {
+    buffer_.append(str.data(), str.size());
     return *this;
   }
 

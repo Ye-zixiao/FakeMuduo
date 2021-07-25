@@ -7,15 +7,14 @@
 
 #include <functional>
 #include <atomic>
-
-#include "libfm/base/noncoapyable.h"
-#include "libfm/base/copyable.h"
+#include "libfm/base/NonCopyable.h"
+#include "libfm/base/Copyable.h"
 #include "libfm/base/Timestamp.h"
 #include "libfm/net/Callback.h"
 
 namespace fm::net {
 
-class Timer : private noncopyable {
+class Timer : private NonCopyable {
  public:
   using duration = time::Timestamp::duration;
 
@@ -38,7 +37,7 @@ class Timer : private noncopyable {
  private:
   const TimerCallback callback_;                    // 用户回调函数
   time::Timestamp expiration_;                      // 过期时间
-  const duration interval_;        // 定时器周期
+  const duration interval_;                         // 定时器周期
   const bool repeat_;                               // 是否周期定时
   const int64_t sequence_;                          // 定时器序号
 
@@ -46,7 +45,7 @@ class Timer : private noncopyable {
 };
 
 // 定时器标识
-class TimerId : public copyable {
+class TimerId : public Copyable {
  public:
   friend class TimerQueue;
   friend struct std::hash<TimerId>;

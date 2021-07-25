@@ -3,11 +3,9 @@
 //
 
 #include "libfm/net/Channel.h"
-
 #include <sstream>
 #include <sys/poll.h>
 #include <cassert>
-
 #include "libfm/base/Logging.h"
 #include "libfm/net/EventLoop.h"
 
@@ -19,21 +17,21 @@ const int Channel::kReadEvent = POLLIN | POLLPRI;
 const int Channel::kWriteEvent = POLLOUT;
 
 Channel::Channel(EventLoop *loop, int fd)
-	: loop_(loop),
-	  fd_(fd),
-	  events_(0),
-	  revents_(0),
-	  index_(-1),
-	  logHup_(false),
-	  tied_(false),
-	  eventHandling_(false),
-	  addedToLoop_(false) {}
+    : loop_(loop),
+      fd_(fd),
+      events_(0),
+      revents_(0),
+      index_(-1),
+      log_hup_(false),
+      tied_(false),
+      event_handling_(false),
+      added_to_loop_(false) {}
 
 Channel::~Channel() {
-  assert(!eventHandling_);
-  assert(!addedToLoop_);
+  assert(!event_handling_);
+  assert(!added_to_loop_);
   if (loop_->isInLoopThread())
-	assert(!loop_->hasChannel(this));
+    assert(!loop_->hasChannel(this));
 }
 
 void Channel::tie(const std::shared_ptr<void> &obj) {
@@ -44,70 +42,70 @@ void Channel::tie(const std::shared_ptr<void> &obj) {
 }
 
 void Channel::update() {
-  addedToLoop_ = true;
+  added_to_loop_ = true;
   loop_->updateChannel(this);
 }
 
 void Channel::remove() {
   assert(isNoneEvent());
-  addedToLoop_ = false;
+  added_to_loop_ = false;
   loop_->removeChannel(this);
 }
 
 void Channel::handleEvent(time::Timestamp receiveTime) {
   std::shared_ptr<void> guard;
   if (tied_) {
-	// 防止在执行回调函数的过程中将通道的所有者TcpServer杀死！
-	guard = tie_.lock();
-	if (guard)
-	  handleEventWithGurad(receiveTime);
-	LOG_TRACE << "guard use_count: " << guard.use_count(); // 3
+    // 防止在执行回调函数的过程中将通道的所有者TcpServer杀死！
+    guard = tie_.lock();
+    if (guard)
+      handleEventWithGurad(receiveTime);
+    LOG_TRACE << "guard use_count: " << guard.use_count(); // 3
   } else {
-	handleEventWithGurad(receiveTime);
+    handleEventWithGurad(receiveTime);
   }
 }
 
 void Channel::handleEventWithGurad(time::Timestamp receiveTime) {
   // 通道的操纵权在事件通知时属于I/O线程，所以不需要加锁
-  eventHandling_ = true;
+  event_handling_ = true;
   LOG_TRACE << reventsToString();
 
   // 处理3种异常事件
   if ((revents_ & POLLHUP) && !(revents_ & POLLIN)) {
-	if (logHup_)
-	  LOG_WARN << "fd = " << fd_ << " Channel::handle_event() POLLHUP";
-	if (closeCallback_) closeCallback_();
+    if (log_hup_)
+      LOG_WARN << "fd = " << fd_ << " Channel::handle_event() POLLHUP";
+    if (close_callback_) close_callback_();
   }
   if (revents_ & POLLNVAL)
-	LOG_WARN << "fd = " << fd_ << " Channel::handle_event() POLLINVAL";
+    LOG_WARN << "fd = " << fd_ << " Channel::handle_event() POLLINVAL";
   if (revents_ & (POLLERR | POLLNVAL))
-	if (errorCallback_) errorCallback_();
+    if (error_callback_) error_callback_();
 
   // 处理正常事件
   if (revents_ & (POLLIN | POLLPRI | POLLRDHUP))
-	if (readCallback_) readCallback_(receiveTime);
+    if (read_callback_) read_callback_(receiveTime);
   if (revents_ & POLLOUT)
-	if (writeCallback_) writeCallback_();
+    if (write_callback_) write_callback_();
 
-  eventHandling_ = false;
+  event_handling_ = false;
 }
 
 std::string Channel::eventsToString(int fd, int ev) {
-  std::ostringstream oss;
-  oss << fd << ": ";
+  char buf[32]{};
+  int pr = snprintf(buf, 32, "%d: ", fd);
   if (ev & POLLIN)
-	oss << "IN ";
+    snprintf(buf + pr, 32 - pr, "IN ");
   if (ev & POLLPRI)
-	oss << "PRI ";
+    snprintf(buf + pr, 32 - pr, "PRI ");
   if (ev & POLLOUT)
-	oss << "OUT ";
+    snprintf(buf + pr, 32 - pr, "OUT ");
   if (ev & POLLHUP)
-	oss << "HUP ";
+    snprintf(buf + pr, 32 - pr, "HUP ");
   if (ev & POLLRDHUP)
-	oss << "RDHUP ";
+    snprintf(buf + pr, 32 - pr, "RDHUP ");
   if (ev & POLLERR)
-	oss << "ERR ";
+    snprintf(buf + pr, 32 - pr, "ERR ");
   if (ev & POLLNVAL)
-	oss << "NVAL ";
-  return oss.str();
+    snprintf(buf + pr, 32 - pr, "NVAL ");
+  return buf;
 }

@@ -8,17 +8,16 @@
 #include <string>
 #include <vector>
 #include <memory>
-
-#include "libfm/base/noncoapyable.h"
+#include "libfm/base/NonCopyable.h"
 
 namespace fm::net {
 
 class EventLoop;
 class EventLoopThread;
 
-class EventLoopThreadPool : private noncopyable {
+class EventLoopThreadPool : private NonCopyable {
  public:
-  EventLoopThreadPool(EventLoop *baseLoop, const std::string &name);
+  EventLoopThreadPool(EventLoop *baseLoop, std::string name);
   ~EventLoopThreadPool() = default;
 
   void setThreadNum(int numThreads) { numThreads_ = numThreads; }
@@ -29,7 +28,7 @@ class EventLoopThreadPool : private noncopyable {
   std::vector<EventLoop *> getAllLoops();
 
   bool isStarted() const { return start_; }
-  const std::string& name() const { return name_; }
+  std::string_view name() const { return name_; }
 
  private:
   EventLoop *baseLoop_;

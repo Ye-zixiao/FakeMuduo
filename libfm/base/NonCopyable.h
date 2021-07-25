@@ -7,14 +7,14 @@
 
 namespace fm {
 
-class noncopyable {
+class NonCopyable {
  public:
-  noncopyable(const noncopyable &) = delete;
-  noncopyable &operator=(const noncopyable &) = delete;
+  NonCopyable(const NonCopyable &) = delete;
+  NonCopyable &operator=(const NonCopyable &) = delete;
 
  protected:
-  noncopyable() = default;
-  ~noncopyable() = default;
+  NonCopyable() = default;
+  ~NonCopyable() = default;
 };
 
 } // namespace fm

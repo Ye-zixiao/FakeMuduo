@@ -5,13 +5,13 @@
 #ifndef LIBFM_NET_SOCKET_H_
 #define LIBFM_NET_SOCKET_H_
 
-#include "libfm/base/noncoapyable.h"
+#include "libfm/base/NonCopyable.h"
 
 namespace fm::net {
 
 class InetAddress;
 
-class Socket : private noncopyable {
+class Socket : private NonCopyable {
  public:
   explicit Socket(int sockfd)
 	  : sockfd_(sockfd) {}

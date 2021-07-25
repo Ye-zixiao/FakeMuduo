@@ -56,7 +56,7 @@ int main() {
   auto spec = time::SystemClock::to_timespec(time::Timestamp(3s));
   cout << spec.tv_sec << ' ' << spec.tv_nsec << endl;
 
-  LOG_TRACE << "Timestamp unit test end";
+  LOG_INFO << "Timestamp unit test end";
 
   return 0;
 }

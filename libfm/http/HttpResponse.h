@@ -7,8 +7,7 @@
 
 #include <unordered_map>
 #include <string>
-
-#include "libfm/base/copyable.h"
+#include "libfm/base/Copyable.h"
 #include "libfm/http/HttpBase.h"
 
 namespace fm::net {
@@ -17,7 +16,7 @@ class Buffer;
 
 namespace http {
 
-class HttpResponse : public copyable {
+class HttpResponse : public Copyable {
  public:
   enum HttpStatusCode {
     kInvalidStatus = 0,

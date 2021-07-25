@@ -3,11 +3,9 @@
 //
 
 #include "libfm/net/Epoller.h"
-
 #include <cassert>
 #include <cerrno>
 #include <unistd.h>
-
 #include "libfm/base/Logging.h"
 #include "libfm/net/EventLoop.h"
 #include "libfm/net/Channel.h"
@@ -23,20 +21,20 @@ constexpr int kDeleted = 2;
 }
 
 Epoller::Epoller(EventLoop *loop)
-    : ownerLoop_(loop),
-      epollFd_(::epoll_create1(EPOLL_CLOEXEC)),
+    : owner_loop_(loop),
+      epoll_fd_(::epoll_create1(EPOLL_CLOEXEC)),
       events_(kInitEventListSize) {
-  if (epollFd_ < 0)
+  if (epoll_fd_ < 0)
     LOG_SYSFATAL << "Epoller::Epoller";
 }
 
 Epoller::~Epoller() {
-  ::close(epollFd_);
+  ::close(epoll_fd_);
 }
 
 time::Timestamp Epoller::poll(ChannelList *activateChannels, int timeoutMs) {
   LOG_TRACE << "fd total count: " << channels_.size();
-  int numEvents = ::epoll_wait(epollFd_,
+  int numEvents = ::epoll_wait(epoll_fd_,
                                events_.data(),
                                static_cast<int>(events_.size()),
                                timeoutMs);
@@ -113,7 +111,7 @@ bool Epoller::hasChannel(Channel *channel) const {
 }
 
 void Epoller::assertInLoopThread() const {
-  ownerLoop_->assertInLoopThread();
+  owner_loop_->assertInLoopThread();
 }
 
 void Epoller::fillActiveChannels(ChannelList *activeChannels, int numEvents) const {
@@ -133,7 +131,7 @@ void Epoller::update(Channel *channel, int operation) {
   LOG_TRACE << "epoll_ctl op = " << operationToString(operation)
             << " fd = " << fd << " event = { " << channel->eventsToString() << " }";
 
-  if (::epoll_ctl(epollFd_, operation, fd, &event) < 0) {
+  if (::epoll_ctl(epoll_fd_, operation, fd, &event) < 0) {
     LOG_TRACE << "epoll_ctl op = " << operationToString(operation)
               << " fd = " << fd;
   }

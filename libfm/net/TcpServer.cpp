@@ -3,14 +3,12 @@
 //
 
 #include "libfm/net/TcpServer.h"
-
+#include <cstdio>
 #include "libfm/base/Logging.h"
 #include "libfm/net/EventLoopThreadPool.h"
 #include "libfm/net/EventLoopThread.h"
 #include "libfm/net/EventLoop.h"
 #include "libfm/net/Acceptor.h"
-
-#include <cstdio>
 
 using namespace fm;
 using namespace fm::net;
@@ -18,15 +16,18 @@ using namespace fm::net;
 TcpServer::TcpServer(EventLoop *loop, const InetAddress &listenAddr,
                      std::string name, Option option)
     : loop_((assert(loop), loop)),
-      ipPort_(listenAddr.toIpStr()),
+      ip_port_(listenAddr.toIpStr()),
       name_(std::move(name)),
       acceptor_(std::make_unique<Acceptor>(loop, listenAddr, option == kNoReusePort)),
-      threadPool_(std::make_shared<EventLoopThreadPool>(loop_, name_)),
-      connectionCallback_(defaultConnectionCallback),
-      messageCallback_(defaultMessageCallback),
+      thread_pool_(std::make_shared<EventLoopThreadPool>(loop_, name_)),
+      connection_callback_(defaultConnectionCallback),
+      message_callback_(defaultMessageCallback),
       start_(false),
-      nextConnId_(1) {
-  acceptor_->setNewConnectionCallback(std::bind(&TcpServer::newConnection, this, _1, _2));
+      next_conn_id_(1) {
+  acceptor_->setNewConnectionCallback(
+      [this](int sockfd, const InetAddress &peer_addr) {
+        this->newConnection(sockfd, peer_addr);
+      });
 }
 
 TcpServer::~TcpServer() {
@@ -37,29 +38,29 @@ TcpServer::~TcpServer() {
     TcpConnectionPtr conn(item.second);
     item.second.reset();
     conn->getLoop()->runInLoop(
-        std::bind(&TcpConnection::connectDestroyed, conn));
+        [conn] { conn->connectDestroyed(); });
   }
 }
 
 void TcpServer::setThreadNum(int numThreads) {
   assert(0 <= numThreads);
-  threadPool_->setThreadNum(numThreads);
+  thread_pool_->setThreadNum(numThreads);
 }
 
 void TcpServer::start() {
   if (!start_.exchange(true)) {
-    threadPool_->start();
+    thread_pool_->start();
 
     assert(!acceptor_->isListening());
-    loop_->runInLoop(std::bind(&Acceptor::listen, acceptor_.get()));
+    loop_->runInLoop([acceptor = acceptor_.get()] { acceptor->listen(); });
   }
 }
 
 void TcpServer::newConnection(int sockfd, const InetAddress &peerAddr) {
   loop_->assertInLoopThread();
-  EventLoop *ioLoop = threadPool_->getNextLoop();
+  EventLoop *ioLoop = thread_pool_->getNextLoop();
   char buf[64];
-  snprintf(buf, sizeof(buf), "-%s#%d", ipPort_.c_str(), nextConnId_++);
+  snprintf(buf, sizeof(buf), "-%s#%d", ip_port_.c_str(), next_conn_id_++);
   std::string connName(name_ + buf);
   LOG_INFO << "TcpServer::newConnection [" << name_
            << "] - new connection [" << connName
@@ -75,19 +76,19 @@ void TcpServer::newConnection(int sockfd, const InetAddress &peerAddr) {
                                                           localAddr,
                                                           peerAddr);
   connections_[connName] = conn;
-  conn->setConnectionCallback(connectionCallback_);
-  conn->setMessageCallback(messageCallback_);
-  conn->setWriteCompleteCallback(writeCompleteCallback_);
-  conn->setCloseCallback(std::bind(&TcpServer::removeConnection, this, _1));
+  conn->setConnectionCallback(connection_callback_);
+  conn->setMessageCallback(message_callback_);
+  conn->setWriteCompleteCallback(write_complete_callback_);
+  conn->setCloseCallback([this](const TcpConnectionPtr &conn) { this->removeConnection(conn); });
   // 通过runInLoop()的方法将连接相关的通道注册到Robin-Round法
   // 选出的sub-Reactor线程的事件循环之中
-  ioLoop->runInLoop(std::bind(&TcpConnection::connectEstablished, conn));
+  ioLoop->runInLoop([conn] { conn->connectEstablished(); });
 }
 
 void TcpServer::removeConnection(const TcpConnectionPtr &conn) {
   LOG_INFO << "remove Connection " << conn->peerAddr().toIpPortStr();
   // 这个loop是main Reactor的事件循环
-  loop_->runInLoop(std::bind(&TcpServer::removeConnectionInLoop, this, conn));
+  loop_->runInLoop([this, conn] { this->removeConnectionInLoop(conn); });
 }
 
 void TcpServer::removeConnectionInLoop(const TcpConnectionPtr &conn) {
@@ -95,7 +96,7 @@ void TcpServer::removeConnectionInLoop(const TcpConnectionPtr &conn) {
   LOG_TRACE << "TcpServer::removeConnectionInLoop [" << name_
             << "] - connection " << conn->name();
 
-  size_t n = connections_.erase(conn->name());
+  size_t n = connections_.erase(std::string(conn->name()));
   assert(n == 1);
   (void)n;
 
@@ -103,6 +104,6 @@ void TcpServer::removeConnectionInLoop(const TcpConnectionPtr &conn) {
   // std::bind(&TcpConnection::connectDestroyed, conn)会在内部拷贝处一个
   // 共享指针TcpConnectionPtr指向TcpConnection对象，只有当这个function在sub-Reactor
   // 线程之中执行完毕之后才会是的TcpConnection对象自动析构销毁（引用计数从1变成0）
-  ioLoop->queueInLoop(std::bind(&TcpConnection::connectDestroyed, conn));
+  ioLoop->queueInLoop([conn] { conn->connectDestroyed(); });
   LOG_TRACE << "conn use_count: " << conn.use_count(); // 2
 }

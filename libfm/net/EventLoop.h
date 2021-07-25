@@ -10,8 +10,7 @@
 #include <vector>
 #include <memory>
 #include <mutex>
-
-#include "libfm/base/noncoapyable.h"
+#include "libfm/base/NonCopyable.h"
 #include "libfm/base/Timestamp.h"
 #include "libfm/net/Callback.h"
 #include "libfm/net/TimerQueue.h"
@@ -23,7 +22,7 @@ class Epoller;
 class TimerId;
 class TimerQueue;
 
-class EventLoop : private noncopyable {
+class EventLoop : private NonCopyable {
  public:
   using Functor = std::function<void()>;
 
@@ -58,9 +57,9 @@ class EventLoop : private noncopyable {
   void cancel(TimerId timerId);
 
   size_t queueSize() const;
-  time::Timestamp pollReturnTime() { return pollReturnTime_; }
+  time::Timestamp pollReturnTime() { return poll_return_time_; }
   int64_t iteration() const { return iteration_; }
-  pid_t threadId() const { return threadId_; }
+  pid_t threadId() const { return thread_id_; }
 
   void assertInLoopThread();
   bool isInLoopThread() const;
@@ -69,7 +68,7 @@ class EventLoop : private noncopyable {
 
  private:
   void abortNotInLoopThread();
-  void handleRead();
+  void handleRead(time::Timestamp);
   void doPendingFunctors();
 
   void printActiveChannels() const;
@@ -79,24 +78,24 @@ class EventLoop : private noncopyable {
 
   std::atomic_bool looping_;
   std::atomic_bool quit_;
-  std::atomic_bool eventHandling_;
-  std::atomic_bool callingPendingFunctors_;
+  std::atomic_bool event_handling_;
+  std::atomic_bool calling_pending_functors_;
 
   int64_t iteration_;
-  const pid_t threadId_;
-  time::Timestamp pollReturnTime_;
+  const pid_t thread_id_;
+  time::Timestamp poll_return_time_;
 
-  std::unique_ptr<Epoller> poller_;         // 轮询器
-  std::unique_ptr<TimerQueue> timerQueue_;  // 定时器队列
+  std::unique_ptr<Epoller> poller_;          // 轮询器
+  std::unique_ptr<TimerQueue> timer_queue_;  // 定时器队列
 
-  int wakeupFd_;
-  std::unique_ptr<Channel> wakeupChannel_;  // 其他线程唤醒I/O线程的通道
+  int wakeup_fd_;
+  std::unique_ptr<Channel> wakeup_channel_;  // 其他线程唤醒I/O线程的通道
 
-  ChannelList activeChannels_;
-  Channel *currentActiveChannel_;
+  ChannelList active_channels_;
+  Channel *current_active_channel_;
 
   mutable std::mutex mutex_;
-  std::vector<Functor> pendingFunctors_;
+  std::vector<Functor> pending_functors_;
 };
 
 } // namespace fm::net

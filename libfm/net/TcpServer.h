@@ -9,8 +9,7 @@
 #include <atomic>
 #include <string>
 #include <memory>
-
-#include "libfm/base/noncoapyable.h"
+#include "libfm/base/NonCopyable.h"
 #include "libfm/net/TcpConnection.h"
 #include "libfm/net/InetAddress.h"
 
@@ -20,27 +19,27 @@ class Acceptor;
 class EventLoop;
 class EventLoopThreadPool;
 
-class TcpServer : private noncopyable {
+class TcpServer : private NonCopyable {
  public:
   enum Option { kNoReusePort, kReusePort };
 
   TcpServer(EventLoop *loop,
-			const InetAddress &listenAddr,
+			const InetAddress &peer_addr,
 			std::string name,
 			Option option = kNoReusePort);
   ~TcpServer();
 
-  const std::string &ipPortStr() const { return ipPort_; }
-  const std::string &name() const { return name_; }
+  std::string_view ipPortStr() const { return ip_port_; }
+  std::string_view name() const { return name_; }
   EventLoop *getLoop() const { return loop_; }
 
   void setThreadNum(int numThreads);
 
   void start();
 
-  void setConnectionCallback(const ConnectionCallback &cb) { connectionCallback_ = cb; }
-  void setMessageCallback(const MessageCallback &cb) { messageCallback_ = cb; }
-  void setWriteCompleteCallback(const WriteCompleteCallback &cb) { writeCompleteCallback_ = cb; }
+  void setConnectionCallback(const ConnectionCallback &cb) { connection_callback_ = cb; }
+  void setMessageCallback(const MessageCallback &cb) { message_callback_ = cb; }
+  void setWriteCompleteCallback(const WriteCompleteCallback &cb) { write_complete_callback_ = cb; }
 
  private:
   void newConnection(int sockfd, const InetAddress &peerAddr);
@@ -51,17 +50,17 @@ class TcpServer : private noncopyable {
   using ConnectionMap = std::unordered_map<std::string, TcpConnectionPtr>;
 
   EventLoop *loop_;                                  // main-Reactor的事件循环
-  const std::string ipPort_;
+  const std::string ip_port_;
   const std::string name_;
   std::unique_ptr<Acceptor> acceptor_;               // 接收器Acceptor
-  std::shared_ptr<EventLoopThreadPool> threadPool_;  // sub-Reactor线程池，其实可以定义为独一指针
+  std::shared_ptr<EventLoopThreadPool> thread_pool_;  // sub-Reactor线程池，其实可以定义为独一指针
 
-  ConnectionCallback connectionCallback_;
-  MessageCallback messageCallback_;
-  WriteCompleteCallback writeCompleteCallback_;
+  ConnectionCallback connection_callback_;
+  MessageCallback message_callback_;
+  WriteCompleteCallback write_complete_callback_;
 
   std::atomic_bool start_;
-  int nextConnId_;
+  int next_conn_id_;
   ConnectionMap connections_;
 };
 

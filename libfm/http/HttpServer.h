@@ -6,8 +6,7 @@
 #define LIBFM_HTTP_HTTPSERVER_H_
 
 #include <functional>
-
-#include "libfm/base/noncoapyable.h"
+#include "libfm/base/NonCopyable.h"
 #include "libfm/base/ThreadPool.h"
 #include "libfm/net/Callback.h"
 #include "libfm/net/TcpServer.h"
@@ -17,7 +16,7 @@ namespace fm::net::http {
 class HttpRequest;
 class HttpResponse;
 
-class HttpServer : private noncopyable {
+class HttpServer : private NonCopyable {
  public:
   using HttpCallback = std::function<void(const HttpRequest &,
                                           HttpResponse *)>;

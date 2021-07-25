@@ -3,10 +3,8 @@
 //
 
 #include "libfm/net/Buffer.h"
-
 #include <cstring>
 #include <sys/uio.h>
-
 #include "libfm/base/Logging.h"
 #include "libfm/net/SocketsOps.h"
 
@@ -38,7 +36,7 @@ const char *Buffer::findEOL(const char *start) const {
 void Buffer::retrieve(size_t len) {
   assert(len <= readableBytes());
   if (len < readableBytes())
-	readIndex_ += len;
+    read_index_ += len;
   else
 	retrieveAll();
 }
@@ -152,19 +150,19 @@ void Buffer::prependInt8(int8_t x) {
 
 void Buffer::prepend(const void *data, size_t len) {
   assert(len <= prependableBytes());
-  readIndex_ -= len;
+  read_index_ -= len;
   const char *d = static_cast<const char *>(data);
-  std::copy(d, d + len, begin() + readIndex_);
+  std::copy(d, d + len, begin() + read_index_);
 }
 
 void Buffer::hasWritten(size_t len) {
   assert(len <= writableBytes());
-  writeIndex_ += len;
+  write_index_ += len;
 }
 
 void Buffer::unwrite(size_t len) {
   assert(len <= readableBytes());
-  writeIndex_ -= len;
+  write_index_ -= len;
 }
 
 void Buffer::shrink(size_t reserve) {
@@ -182,14 +180,14 @@ void Buffer::ensureWritableBytes(size_t len) {
 
 void Buffer::makeSpace(size_t len) {
   if (writableBytes() + prependableBytes() < len + kCheapPrepend)
-	buffer_.resize(writeIndex_ + len);
+	buffer_.resize(write_index_ + len);
   else {
-	assert(kCheapPrepend < readIndex_);
+	assert(kCheapPrepend < read_index_);
 	size_t readable = readableBytes();
-	std::copy(begin() + readIndex_, begin() + writeIndex_,
-			  begin() + kCheapPrepend);
-	readIndex_ = kCheapPrepend;
-	writeIndex_ = readIndex_ + readable;
+	std::copy(begin() + read_index_, begin() + write_index_,
+              begin() + kCheapPrepend);
+    read_index_ = kCheapPrepend;
+    write_index_ = read_index_ + readable;
 	assert(readable == readableBytes());
   }
 }
@@ -198,7 +196,7 @@ ssize_t Buffer::readFd(int fd, int *savedErrno) {
   char extraBuf[65536];
   struct iovec iov[2];
   const size_t writable = writableBytes();
-  iov[0].iov_base = begin() + writeIndex_;
+  iov[0].iov_base = begin() + write_index_;
   iov[0].iov_len = writable;
   iov[1].iov_base = extraBuf;
   iov[1].iov_len = sizeof(extraBuf);
@@ -209,9 +207,9 @@ ssize_t Buffer::readFd(int fd, int *savedErrno) {
   if (n < 0)
 	*savedErrno = errno;
   else if (writable <= static_cast<size_t>(writable))
-	writeIndex_ += n;
+    write_index_ += n;
   else {
-	writeIndex_ = buffer_.size();
+    write_index_ = buffer_.size();
 	append(extraBuf, n - writable);
   }
   return n;

@@ -7,14 +7,13 @@
 
 #include <cstdio>
 #include <string>
-
-#include "libfm/base/noncoapyable.h"
+#include "libfm/base/NonCopyable.h"
 #include "libfm/base/Timestamp.h"
 #include "libfm/base/SystemClock.h"
 
 namespace fm {
 
-class AppendFile : private noncopyable {
+class AppendFile : private NonCopyable {
  public:
   explicit AppendFile(const std::string &filename);
   ~AppendFile();
@@ -23,23 +22,23 @@ class AppendFile : private noncopyable {
 
   void flush();
 
-  off_t writenBytes() const { return writenBytes_; }
+  off_t writenBytes() const { return writen_bytes_; }
 
  private:
   size_t write(const char *logline, size_t len);
 
   FILE *fp_;
-  off_t writenBytes_;
+  off_t writen_bytes_;
   char buffer_[64 * 1024];
 };
 
 // 只推荐读取较小的文件！
-class ReadSmallFile : private noncopyable {
+class ReadSmallFile : private NonCopyable {
  public:
   explicit ReadSmallFile(const std::string &filename);
   ~ReadSmallFile();
 
-  size_t fileSize() const { return fileSize_; }
+  size_t fileSize() const { return file_size_; }
 
   const time::Timestamp &mtime() const { return mtime_; }
   const time::Timestamp &ctime() const { return ctime_; }
@@ -62,7 +61,7 @@ class ReadSmallFile : private noncopyable {
  private:
   int fd_;
   int err_;
-  size_t fileSize_;
+  size_t file_size_;
   time::Timestamp mtime_;
   time::Timestamp ctime_;
 };

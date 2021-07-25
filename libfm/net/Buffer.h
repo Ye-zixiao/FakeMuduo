@@ -10,38 +10,38 @@
 #include <cassert>
 #include <string>
 
-#include "libfm/base/copyable.h"
+#include "libfm/base/Copyable.h"
 #include "libfm/net/Endian.h"
 
 namespace fm::net {
 
-class Buffer : public copyable {
+class Buffer : public Copyable {
  public:
   static constexpr size_t kCheapPrepend = 8;
   static constexpr size_t kInitialSize = 1024;
 
   explicit Buffer(size_t initialSize = kInitialSize)
-	  : buffer_(kCheapPrepend + initialSize),
-		readIndex_(kCheapPrepend),
-		writeIndex_(kCheapPrepend) {
-	assert(readableBytes() == 0);
-	assert(writableBytes() == initialSize);
-	assert(prependableBytes() == kCheapPrepend);
+      : buffer_(kCheapPrepend + initialSize),
+        read_index_(kCheapPrepend),
+        write_index_(kCheapPrepend) {
+    assert(readableBytes() == 0);
+    assert(writableBytes() == initialSize);
+    assert(prependableBytes() == kCheapPrepend);
   }
 
   // 是否有移动的必有？
 
-  void swap(Buffer &rhs) {
-	buffer_.swap(rhs.buffer_);
-	std::swap(readIndex_, rhs.readIndex_);
-	std::swap(writeIndex_, rhs.writeIndex_);
+  void swap(Buffer &rhs) noexcept {
+    buffer_.swap(rhs.buffer_);
+    std::swap(read_index_, rhs.read_index_);
+    std::swap(write_index_, rhs.write_index_);
   }
 
-  size_t readableBytes() const { return writeIndex_ - readIndex_; }
-  size_t writableBytes() const { return buffer_.size() - writeIndex_; }
-  size_t prependableBytes() const { return readIndex_; }
+  size_t readableBytes() const { return write_index_ - read_index_; }
+  size_t writableBytes() const { return buffer_.size() - write_index_; }
+  size_t prependableBytes() const { return read_index_; }
 
-  const char *peek() const { return begin() + readIndex_; }
+  const char *peek() const { return begin() + read_index_; }
   const char *findCRLF() const;
   const char *findCRLF(const char *start) const;
   const char *findEOL() const;
@@ -54,11 +54,12 @@ class Buffer : public copyable {
   void retrieveInt32() { retrieve(sizeof(int32_t)); }
   void retrieveInt16() { retrieve(sizeof(int16_t)); }
   void retrieveInt8() { retrieve(sizeof(int8_t)); }
-  void retrieveAll() { readIndex_ = kCheapPrepend, writeIndex_ = kCheapPrepend; }
+  void retrieveAll() { read_index_ = kCheapPrepend, write_index_ = kCheapPrepend; }
 
   std::string retrieveAllAsString() { return retrieveAsString(readableBytes()); }
   std::string retrieveAsString(size_t len);
   std::string toString() const { return std::string(peek(), readableBytes()); }
+  std::string_view toStringView() const { return std::string_view(peek(), readableBytes()); }
 
   void append(const std::string &str) { append(str.data(), str.size()); }
   void append(const char *data, size_t len);
@@ -90,8 +91,8 @@ class Buffer : public copyable {
   void prepend(const void *data, size_t len);
 
   size_t internalCapacity() const { return buffer_.capacity(); }
-  const char *beginWrite() const { return buffer_.data() + writeIndex_; }
-  char *beginWrite() { return buffer_.data() + writeIndex_; }
+  const char *beginWrite() const { return buffer_.data() + write_index_; }
+  char *beginWrite() { return buffer_.data() + write_index_; }
   void hasWritten(size_t len);
   void unwrite(size_t len);
   void shrink(size_t reserve);
@@ -110,8 +111,8 @@ class Buffer : public copyable {
   static constexpr char kCRLF[] = "\r\n";
 
   std::vector<char> buffer_;
-  size_t readIndex_;
-  size_t writeIndex_;
+  size_t read_index_;
+  size_t write_index_;
 };
 
 } // namespace fm::net

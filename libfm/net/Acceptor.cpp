@@ -3,12 +3,10 @@
 //
 
 #include "libfm/net/Acceptor.h"
-
 #include <cerrno>
 #include <cassert>
 #include <unistd.h>
 #include <fcntl.h>
-
 #include "libfm/base/Logging.h"
 #include "libfm/net/InetAddress.h"
 #include "libfm/net/EventLoop.h"
@@ -17,53 +15,53 @@ using namespace fm;
 using namespace fm::net;
 
 Acceptor::Acceptor(EventLoop *loop, const InetAddress &listenAddr, bool reusePort)
-	: loop_(loop),
-	  acceptSocket_(sockets::createNonblockingSocketOrDie(listenAddr.family())),
-	  acceptChannel_(loop, acceptSocket_.fd()),
-	  listening_(false),
-	  idleFd_(::open("/dev/null", O_RDONLY | O_CLOEXEC)) {
-  assert(acceptSocket_.fd() >= 0);
-  acceptSocket_.setReuseAddr(true);
-  acceptSocket_.setReusePort(reusePort);
-  acceptSocket_.bindAddress(listenAddr);
-  acceptChannel_.setReadCallback(std::bind(&Acceptor::handleRead, this));
+    : loop_(loop),
+      accept_socket_(sockets::createNonblockingSocketOrDie(listenAddr.family())),
+      accept_channel_(loop, accept_socket_.fd()),
+      listening_(false),
+      idle_fd_(::open("/dev/null", O_RDONLY | O_CLOEXEC)) {
+  assert(accept_socket_.fd() >= 0);
+  accept_socket_.setReuseAddr(true);
+  accept_socket_.setReusePort(reusePort);
+  accept_socket_.bindAddress(listenAddr);
+  accept_channel_.setReadCallback([this](time::Timestamp t) { this->handleRead(t); });
 }
 
 Acceptor::~Acceptor() {
-  acceptChannel_.disableAll();
-  acceptChannel_.remove();
-  ::close(idleFd_);
+  accept_channel_.disableAll();
+  accept_channel_.remove();
+  ::close(idle_fd_);
 }
 
 void Acceptor::setNewConnectionCallback(const NewConnectionCallback &cb) {
-  newConnectionCallback_ = cb;
+  new_connection_callback_ = cb;
 }
 
 void Acceptor::listen() {
   loop_->assertInLoopThread();
   listening_ = true;
-  acceptSocket_.listen();
-  acceptChannel_.enableReading();
+  accept_socket_.listen();
+  accept_channel_.enableReading();
 }
 
-void Acceptor::handleRead() {
+void Acceptor::handleRead(time::Timestamp) {
   loop_->assertInLoopThread();
   InetAddress peerAddr;
-  int connfd = acceptSocket_.accept(&peerAddr);
+  int connfd = accept_socket_.accept(&peerAddr);
   if (connfd >= 0) {
-	LOG_TRACE << "Acceptor accept a new connection, fd = " << connfd;
-	if (newConnectionCallback_)
-	  // 调用TcpServer的newConnection()成员函数
-	  newConnectionCallback_(connfd, peerAddr);
-	else
-	  ::close(connfd);
+    LOG_TRACE << "Acceptor accept a new connection, fd = " << connfd;
+    if (new_connection_callback_)
+      // 调用TcpServer的newConnection()成员函数
+      new_connection_callback_(connfd, peerAddr);
+    else
+      ::close(connfd);
   } else {
-	LOG_SYSERR << "in Acceptor::handleRead";
-	if (errno == EMFILE) {
-	  ::close(idleFd_);
-	  idleFd_ = ::accept(acceptSocket_.fd(), nullptr, nullptr);
-	  ::close(idleFd_);
-	  idleFd_ = ::open("/dev/null", O_RDONLY | O_CLOEXEC);
-	}
+    LOG_SYSERR << "in Acceptor::handleRead";
+    if (errno == EMFILE) {
+      ::close(idle_fd_);
+      idle_fd_ = ::accept(accept_socket_.fd(), nullptr, nullptr);
+      ::close(idle_fd_);
+      idle_fd_ = ::open("/dev/null", O_RDONLY | O_CLOEXEC);
+    }
   }
 }

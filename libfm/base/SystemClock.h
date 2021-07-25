@@ -6,14 +6,14 @@
 #define LIBFM_BASE_SYSTEMCLOCK_H_
 
 #include <chrono>
-
 #include <libfm/base/Timestamp.h>
 
 namespace fm::time {
 
+// 系统时钟，主要用来生成当前时间戳
 struct SystemClock {
-  constexpr static uint64_t kSecondToNanoseconds = 1000 * 1000 * 1000;
-  constexpr static uint32_t kSecondToMicroseconds = 1000 * 1000;
+  constexpr static uint64_t kSecondToNanoseconds = 1'000'000'000;
+  constexpr static uint32_t kSecondToMicroseconds = 1'000'000;
 
   using duration = std::chrono::microseconds;
 

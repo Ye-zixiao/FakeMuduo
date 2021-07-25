@@ -7,10 +7,10 @@
 
 namespace fm {
 
-class copyable {
+class Copyable {
  protected:
-  copyable() = default;
-  ~copyable() = default;
+  Copyable() = default;
+  ~Copyable() = default;
 };
 
 } // namespace fm

@@ -8,8 +8,7 @@
 #include <sys/epoll.h>
 #include <unordered_map>
 #include <vector>
-
-#include "libfm/base/noncoapyable.h"
+#include "libfm/base/NonCopyable.h"
 #include "libfm/base/Timestamp.h"
 
 namespace fm::net {
@@ -17,7 +16,7 @@ namespace fm::net {
 class Channel;
 class EventLoop;
 
-class Epoller : private noncopyable {
+class Epoller : private NonCopyable {
  public:
   using ChannelList = std::vector<Channel *>;
 
@@ -44,9 +43,9 @@ class Epoller : private noncopyable {
   using ChannelMap = std::unordered_map<int, Channel *>;
   using EventList = std::vector<struct epoll_event>;
 
-  EventLoop *ownerLoop_;
+  EventLoop *owner_loop_;
   ChannelMap channels_;  // 保存文件描述符fd到频道Channel指针的映射
-  int epollFd_;
+  int epoll_fd_;
   EventList events_;
 };
 

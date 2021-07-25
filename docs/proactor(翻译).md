@@ -407,7 +407,7 @@ private:
     static void * thread_func(void*args);
     /* 每一个工作线程中调用run()方法，试图从请求队列中
     获取一个事件处理器指针Event_Handler*，然后进行处理 */
-    void run();
+    void submit();
     
 private:
 	std::queue<Handler*> _M_queue;    

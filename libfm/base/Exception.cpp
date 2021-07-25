@@ -3,7 +3,6 @@
 //
 
 #include "libfm/base/Exception.h"
-
 #include <execinfo.h>
 
 using namespace std;

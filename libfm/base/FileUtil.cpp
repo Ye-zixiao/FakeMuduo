@@ -2,20 +2,19 @@
 // Created by Ye-zixiao on 2021/4/7.
 //
 
+#include "libfm/base/FileUtil.h"
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/stat.h>
 #include <cassert>
 #include <algorithm>
-
-#include "libfm/base/FileUtil.h"
 #include "libfm/base/Logging.h"
 
 using namespace fm;
 
 AppendFile::AppendFile(const std::string &filename)
     : fp_(::fopen(filename.c_str(), "a")),
-      writenBytes_(0),
+      writen_bytes_(0),
       buffer_{} {
   // 重置文件流的用户写缓冲区
   ::setbuffer(fp_, buffer_, sizeof(buffer_));
@@ -39,7 +38,7 @@ void AppendFile::append(const char *logline, size_t len) {
     remain -= x;
   }
 
-  writenBytes_ += static_cast<off_t>(len);
+  writen_bytes_ += static_cast<off_t>(len);
 }
 
 void AppendFile::flush() {
@@ -53,7 +52,7 @@ size_t AppendFile::write(const char *logline, size_t len) {
 ReadSmallFile::ReadSmallFile(const std::string &filename)
     : fd_(::open(filename.c_str(), O_RDONLY | O_CLOEXEC)),
       err_(0),
-      fileSize_(0),
+      file_size_(0),
       mtime_(),
       ctime_() {
   if (fd_ < 0) err_ = errno;
@@ -62,7 +61,7 @@ ReadSmallFile::ReadSmallFile(const std::string &filename)
   struct stat statBuf{};
   if (::fstat(fd_, &statBuf) == 0) {
     if (S_ISREG(statBuf.st_mode)) {
-      fileSize_ = statBuf.st_size;
+      file_size_ = statBuf.st_size;
     } else if (S_ISDIR(statBuf.st_mode)) {
       err_ = errno;
     }
@@ -82,7 +81,7 @@ int ReadSmallFile::readToString(std::string *content, size_t maxContentSize) {
   int err = err_;
 
   if (fd_ >= 0) {
-    size_t contentSize = std::min(maxContentSize, fileSize_);
+    size_t contentSize = std::min(maxContentSize, file_size_);
     content->resize(contentSize);
     size_t readStart = 0;
 
