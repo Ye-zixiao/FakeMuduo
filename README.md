@@ -7,15 +7,31 @@
 - 更简洁的线程模型，基于C++11提供的线程库，而不再像muduo一样重复造轮子；
 - 更易用的时间库，类似于`std::chrono`时间库，且复用`std::chrono::duration`，并与`fm::time::Timetamp`、`fm::time::SystemClock`一起组成时长、时间戳、时钟三个概念；
 - 更简单的时间轮询器，只基于`epoll`而不再支持`poll`，减少了虚调用的性能开销；
-- 其他，一些小的代码优化，包括优化类结构、增加移动语义等。
+- 其他，一些小的代码优化，包括优化类结构、增加移动语义等；
+- 使用了改进的异步日志库[FmLog](https://gitee.com/yezixiao/FmLog)作为技术支撑，相比于原来muduo的日志实现更快更好用。
 
 至于该网络库的实现原理推荐看看我自己写的[项目解读](docs/项目解读.md)，更新后的网络库结构如下：
 
 <img src="docs/image/libfm.png" alt="libfm" style="zoom: 67%;" />
 
+## 二. 项目结构
+
+```bash
+$ tree . -L 1
+.
+├── CMakeLists.txt
+├── README.md
+├── build.sh
+├── docs      # 说明文档
+├── examples  # 代码示例
+├── include   # 安装头文件（用户可见）
+├── net       # 网络库实现目录
+└── util      # 基础库实现目录
+```
 
 
-## 二. 使用
+
+## 三. 使用
 
 在libfm中，所有的功能都是基于函数回调实现的。因此为了使用libfm，必须在自定义的服务器类中设置Tcp服务器TcpServer类对象的回调函数，这样当客户请求消息到来的时候libfm就会自动的调用你注册的回调函数。这些回调函数包括：
 
@@ -81,16 +97,19 @@ int main() {
 
 
 
-## 三. 编译安装
+## 四. 编译安装
 
 ```bash
 $> git clone https://github.com/Ye-zixiao/Libfm.git
 $> sh ./build.sh
+$> sudo make install
+$> sudo echo "/usr/local/lib" >> /etc/ld.so.conf
+$> sudo ldconfig
 ```
 
 
 
-## 四. 参考资料
+## 五. 参考资料
 
 1. [Linux多线程服务端编程](https://detail.tmall.com/item.htm?spm=a230r.1.14.14.6fa3597eib5rju&id=643242317479&ns=1&abbucket=6)
 2. [CMake Cookbook](https://github.com/xiaoweiChen/CMake-Cookbook)
