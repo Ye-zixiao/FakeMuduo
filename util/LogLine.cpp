@@ -145,7 +145,7 @@ void LogLine::stringify(std::ostream &os) {
   //       int64_t              pid_t uint8_t  string_view string_view uint32_t 后续的部分按照类型码+数据的组合进行编码
   // 但这种引入实时解析的方法可能会一定程度上降低日志输出的性能
   os << timestamp.toString(true) << ' ' << thread_id;
-  os << " [" << logLevelToString(log_level) << "] " << func << " | ";
+  os << " [" << logLevelToString(log_level) << "] " << func << " -> ";
   if (old_errno != 0) {
     os << "(" << strerror(old_errno) << ") ";
     errno = 0;
@@ -154,7 +154,7 @@ void LogLine::stringify(std::ostream &os) {
   // 不要使用std::endl来输出换行符，因为它会造成一次非必要的刷新操作
   os << " - " << basename(file.data()) << ':' << line << '\n';
 
-  if (log_level >= LogLevel::kFATAL) {
+  if (log_level == LogLevel::kFATAL) {
     os.flush();
     abort();
   }

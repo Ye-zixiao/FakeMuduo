@@ -11,7 +11,8 @@
 namespace fm::log {
 
 enum class LogLevel : uint8_t {
-  kINFO = 0, kWARN = 1, kERROR = 2, kDEBUG = 3, kFATAL = 4
+  // 照道理知名错误在任何时刻都应该得到输出显示
+  kFATAL = 0, kINFO = 1, kWARN = 2, kERROR = 3, kDEBUG = 4
 };
 
 enum class SupportedTypes : uint8_t;
