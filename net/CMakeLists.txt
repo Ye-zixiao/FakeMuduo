@@ -15,6 +15,8 @@ set(SOURCE_FILES
         TcpServer.cpp
         Timer.h Timer.cpp
         TimerQueue.h TimerQueue.cpp
+        Connector.h Connector.cpp
+        TcpClient.cpp
         http/HttpRequest.cpp http/HttpResponse.cpp
         http/HttpContext.h http/HttpContext.cpp
         http/HttpServer.cpp

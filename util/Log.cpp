@@ -4,7 +4,6 @@
 
 #include "libfm/fmutil/Log.h"
 #include <memory>
-#include <cassert>
 #include "util/BaseLogger.h"
 #include "util/StdLogger.h"
 #include "util/AsyncLogger.h"
@@ -42,9 +41,8 @@ bool isLowerThanOrEqualToCurr(LogLevel log_level) {
 }
 
 bool FmLog::operator==(LogLine &log_line) {
-  assert(atomic_logger.load(std::memory_order_relaxed));
-  atomic_logger.load(std::memory_order_acquire)->add(std::move(log_line));
-  return true;
+  BaseLogger *p_logger = atomic_logger.load(std::memory_order_consume);
+  return p_logger && (p_logger->add(std::move(log_line)), true);
 }
 
 } // namespace fm::log
